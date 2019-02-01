@@ -1,6 +1,6 @@
-Player = {}
+Players = {}
 
-function Player:Load()
+function Players:Load()
     self.P1 = {}
     self.P1.x = 4
     self.P1.y = 0
@@ -14,16 +14,16 @@ function Player:Load()
     self.P2.curUnit = 1
 end
 
-function Player:Update(dt)
+function Players:Update(dt)
 
 end
 
-function Player:Draw()
+function Players:Draw()
     love.graphics.draw(self.P1.img, self.P1.x*32, self.P1.y*32)
     love.graphics.draw(self.P2.img, self.P2.x*32, self.P2.y*32)
 end
 
-function Player:Key()
+function Players:Key()
 
 end
 
