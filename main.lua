@@ -18,12 +18,13 @@ function love.load()
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
     RequireFolder("lua")
+    Players:Load()
 end
 
 function love.update(dt)
-
+    Players:Update(dt)
 end
 
 function love.draw()
-
+    Players:Draw()
 end
