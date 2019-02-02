@@ -9,4 +9,4 @@ function Image:Load()
     end
 end
 
-Image;Load()
+Image:Load()

@@ -10,15 +10,20 @@ function RequireFolder(folder)
 end
 
 function love.load()
+    io.stdout:setvbuf("no")
+
     Game = {}
     Game.Width = 1280
-    Game.Height = 720
+    Game.Height = 704
+    Game.ImageSize = 32
     Game.Title = "ForOurKingdom"
 
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
+
+    love.graphics.setDefaultFilter("nearest")
+
     RequireFolder("lua")
-    Players:Load()
 end
 
 function love.update(dt)
@@ -26,5 +31,11 @@ function love.update(dt)
 end
 
 function love.draw()
+    Map:Draw()
+
     Players:Draw()
+end
+
+function love.keypressed(k)
+    Players:Key(k)
 end
