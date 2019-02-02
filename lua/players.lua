@@ -9,6 +9,7 @@ function Players:Load()
     self.P1.units = {1, 2, 3, 4, 5, 6, 7, 8}
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
+    self.P1.gold = 5
     
     self.P2 = {}
     self.P2.x = 35
@@ -16,6 +17,9 @@ function Players:Load()
     self.P2.units = {1, 2, 3, 4, 5, 6, 7, 8}
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
+    self.P2.gold = 5
+
+    love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
 end
 
 function Players:Update(dt)
@@ -38,11 +42,18 @@ function Players:Draw()
     love.graphics.setColor(self.P1.color.r, self.P1.color.g, self.P1.color.b)
     love.graphics.draw(self.img, self.P1.x*32, self.P1.y*32, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(Image["gold"], 6, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+    love.graphics.printf(self.P1.gold, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
     --[[-------------------------------------------------------------------------
         PLAYER 2 DRAW
     ---------------------------------------------------------------------------]]
     love.graphics.setColor(self.P2.color.r, self.P2.color.g, self.P2.color.b)
     love.graphics.draw(self.img, self.P2.x*32, math.floor(self.P2.y)*32, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
+
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+    love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 end
 
 function Players:Key(k)
