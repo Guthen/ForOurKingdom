@@ -28,11 +28,14 @@ end
 
 function love.update(dt)
     Players:Update(dt)
+	Units:Update(dt)
 end
 
 function love.draw()
     Map:Draw()
 
+	Units:Draw()
+	
     Players:Draw()
 	
 	Image:Draw()
@@ -40,4 +43,10 @@ end
 
 function love.keypressed(k)
     Players:Key(k)
+end
+
+function love.mousepressed(x, y, but)
+	if but == 1 then
+		Players:LeftClick()
+	end
 end

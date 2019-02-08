@@ -7,17 +7,19 @@ function Players:Load()
     self.P1.x = 4
     self.P1.y = 0
     self.P1.units = {1, 2, 3, 4, 5, 6, 7, 8}
-    self.P1.curUnit = 1
+    self.P1.curUnit = "Greu"
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 5
+	self.P1.scale = 1
     
     self.P2 = {}
     self.P2.x = 35
     self.P2.y = 0
     self.P2.units = {1, 2, 3, 4, 5, 6, 7, 8}
-    self.P2.curUnit = 1
+    self.P2.curUnit = "Norber"
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 5
+	self.P2.scale = -1
 
     love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
 end
@@ -64,7 +66,7 @@ function Players:Key(k)
     if k == 'z' and self.P1.y > 0 then
         self.P1.y = self.P1.y - 1
     end
-    if k == 's' and self.P1.y < 22 then
+    if k == 's' and self.P1.y < 21 then
         self.P1.y = self.P1.y + 1
     end
     if k == 'q' and self.P1.x > 0 then
@@ -73,6 +75,13 @@ function Players:Key(k)
     if k == 'd' and self.P1.x < 39 then
         self.P1.x = self.P1.x + 1
     end
+	if k == 'e' then
+		Units:Add(self.P1.curUnit, 3*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
+	end
+end
+
+function Players:LeftClick()
+	Units:Add(self.P2.curUnit, 36*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
 end
 
 Players:Load()
