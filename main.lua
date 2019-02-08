@@ -29,6 +29,8 @@ end
 function love.update(dt)
     Players:Update(dt)
 	Units:Update(dt)
+	
+	TimerUpdate(dt)
 end
 
 function love.draw()

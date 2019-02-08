@@ -1,5 +1,12 @@
 Players = {}
 
+function Players:StartCoin(s)
+	TimerAdd(s, true, function()
+		self.P1.gold = self.P1.gold + 1
+		self.P2.gold = self.P2.gold + 1
+	end)
+end
+
 function Players:Load()
     self.img = Image["cursor"]
 
@@ -22,6 +29,8 @@ function Players:Load()
 	self.P2.scale = -1
 
     love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
+	
+	self:StartCoin(1)
 end
 
 function Players:Update(dt)
@@ -75,13 +84,17 @@ function Players:Key(k)
     if k == 'd' and self.P1.x < 39 then
         self.P1.x = self.P1.x + 1
     end
-	if k == 'e' then
+	if k == 'e' and Units.units[self.P1.curUnit].cost <= self.P1.gold then
 		Units:Add(self.P1.curUnit, 3*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
+		self.P1.gold = self.P1.gold - Units.units[self.P1.curUnit].cost
 	end
 end
 
 function Players:LeftClick()
-	Units:Add(self.P2.curUnit, 36*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
+	if Units.units[self.P2.curUnit].cost <= self.P2.gold then
+		Units:Add(self.P2.curUnit, 36*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
+		self.P2.gold = self.P2.gold - Units.units[self.P2.curUnit].cost
+	end
 end
 
 Players:Load()

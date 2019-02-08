@@ -7,9 +7,10 @@ function Units:Load()
 		["Greu"] = 
 			{
 				img = Image["Greu"],
-				hp = 1000,
+				hp = 1500,
 				dmg = 55,
 				spd = .40,
+				cost = 22,
 				isFly = false,
 				targetFly = false,
 				targetGround = true,
@@ -17,9 +18,10 @@ function Units:Load()
 		["Norber"] = 
 			{
 				img = Image["Norber"],
-				hp = 1500,
+				hp = 2000,
 				dmg = 70,
 				spd = .25,
+				cost = 30,
 				isFly = false,
 				targetFly = false,
 				targetGround = true,
