@@ -44,3 +44,9 @@ end
 function love.keypressed(k)
     Players:Key(k)
 end
+
+function love.mousepressed(x, y, but)
+	if but == 1 then
+		Players:LeftClick()
+	end
+end
