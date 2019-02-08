@@ -34,6 +34,8 @@ function love.draw()
     Map:Draw()
 
     Players:Draw()
+	
+	Image:Draw()
 end
 
 function love.keypressed(k)

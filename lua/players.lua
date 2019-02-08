@@ -36,6 +36,7 @@ function Players:Update(dt)
 end
 
 function Players:Draw()
+	if not self.img then return end
     --[[-------------------------------------------------------------------------
         PLAYER 1 DRAW
     ---------------------------------------------------------------------------]]

@@ -31,7 +31,7 @@ function Map:Draw()
 	for ky, vy in pairs(self.Maps[self.CurrentMap]) do
 		if type(vy) == "table" then
 			for kx, vx in pairs(vy) do
-				if vx > 0 then
+				if vx > 0 and self.MapImages[vx] then
 					love.graphics.draw(self.MapImages[vx], (kx-1)*Game.ImageSize, (ky-1)*Game.ImageSize, 0, 2, 2)
 				end
 			end		
