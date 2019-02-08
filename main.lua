@@ -28,11 +28,14 @@ end
 
 function love.update(dt)
     Players:Update(dt)
+	Units:Update(dt)
 end
 
 function love.draw()
     Map:Draw()
 
+	Units:Draw()
+	
     Players:Draw()
 	
 	Image:Draw()

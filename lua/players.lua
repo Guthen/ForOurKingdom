@@ -10,6 +10,7 @@ function Players:Load()
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 5
+	self.P1.scale = 1
     
     self.P2 = {}
     self.P2.x = 35
@@ -18,6 +19,7 @@ function Players:Load()
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 5
+	self.P2.scale = -1
 
     love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
 end
@@ -73,6 +75,8 @@ function Players:Key(k)
     if k == 'd' and self.P1.x < 39 then
         self.P1.x = self.P1.x + 1
     end
-end
+	if k == 'e' then
+		Units:Add("Greu", 3, self.P1.y, self.P1.scale)
+	end
 
 Players:Load()
