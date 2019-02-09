@@ -14,7 +14,7 @@ function Players:Load()
     self.P1.x = 4
     self.P1.y = 0
     self.P1.units = {1, 2, 3, 4, 5, 6, 7, 8}
-    self.P1.curUnit = "Greu"
+    self.P1.curUnit = "Goblex"
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 5
 	self.P1.scale = 1
@@ -23,7 +23,7 @@ function Players:Load()
     self.P2.x = 35
     self.P2.y = 0
     self.P2.units = {1, 2, 3, 4, 5, 6, 7, 8}
-    self.P2.curUnit = "Norber"
+    self.P2.curUnit = "Rockpose"
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 5
 	self.P2.scale = -1

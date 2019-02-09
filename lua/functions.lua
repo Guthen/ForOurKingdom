@@ -21,12 +21,14 @@ function TimerUpdate(dt)
 	end
 end
 
-function IsCollide(a, b)
+function IsCollideX(a, b)
 	if not type(a) == "table" or not type(b) == "table" then return end
-	local aw, ah, ax, ay = a.w, a.h, a.x, a.y
-	local bw, bh, bx, by = b.w, b.h, b.x, b.y
-	return ax < (bx + bw) and 
-		   ay < (by + bh) and
-		   bx < (ax + aw) and
-		   by < (ay + ah)
+	return a.x < b.x + b.w and 
+		   b.x < a.x + a.w
+end
+
+function TakeDamage(ply, trg)
+	if not type(ply) == "table" or not type(trg) == "table" then return error("TakeDamage() : #1 or #2 argument(s) are not table.", 2) end
+	if not ply.info.dmg or not trg.info.hp then return error("TakeDamage() : The table(s) don't have damage/health info.", 2) end
+	trg.info.hp = trg.info.hp - ply.info.dmg
 end
