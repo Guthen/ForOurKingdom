@@ -20,3 +20,13 @@ function TimerUpdate(dt)
 		end
 	end
 end
+
+function IsCollide(a, b)
+	if not type(a) == "table" or not type(b) == "table" then return end
+	local aw, ah, ax, ay = a.w, a.h, a.x, a.y
+	local bw, bh, bx, by = b.w, b.h, b.x, b.y
+	return ax < (bx + bw) and 
+		   ay < (by + bh) and
+		   bx < (ax + aw) and
+		   by < (ay + ah)
+end

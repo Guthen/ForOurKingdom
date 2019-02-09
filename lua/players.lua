@@ -88,6 +88,10 @@ function Players:Key(k)
 		Units:Add(self.P1.curUnit, 3*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
 		self.P1.gold = self.P1.gold - Units.units[self.P1.curUnit].cost
 	end
+    if k == 'g' then
+        self.P1.gold = self.P1.gold + 100
+        self.P2.gold = self.P2.gold + 100
+    end
 end
 
 function Players:LeftClick()

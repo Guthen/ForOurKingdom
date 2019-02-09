@@ -13,7 +13,7 @@ function Image:Load()
 end
 
 function Image:Draw()
-	love.graphics.print("d = " .. (self.d or ""), 2, 2)
+	--love.graphics.print("d = " .. (self.d or ""), 2, 2)
 end
 
 Image:Load()
