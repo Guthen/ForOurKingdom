@@ -2,7 +2,13 @@ local timers = {}
 
 function TimerAdd(s, loop, func)
 	table.insert(timers, {s = s, startS = s, func = func, loop = loop})
-	print("TimerAdd() : New Timer with "..s.." seconds !")
+	print("TimerAdd() : New Timer with "..s.." seconds with id : "..#timers)
+	return #timers
+end
+
+function TimerDestroy(id)
+	table.remove(timers, id)
+	print("TimerDestory() : Destroy Timer with id : "..id.." !")
 end
 
 function TimerUpdate(dt)
