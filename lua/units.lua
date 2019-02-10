@@ -13,8 +13,9 @@ function Units:Load()
 				img = Image["Greu"],
 				name = "Greu",
 				hp = 1500,
-				dmg = 55,
+				dmg = 105,
 				spd = .65,
+				attackRate = 1.5,
 				cost = 12,
 				isFly = false,
 				targetFly = false,
@@ -28,6 +29,7 @@ function Units:Load()
 				hp = 1200,
 				dmg = 125,
 				spd = .60,
+				attackRate = 1.25,
 				cost = 15,
 				isFly = false,
 				targetFly = false,
@@ -41,6 +43,7 @@ function Units:Load()
 				hp = 2000,
 				dmg = 200,
 				spd = .40,
+				attackRate = 2,
 				cost = 19,
 				isFly = false,
 				targetFly = false,
@@ -54,6 +57,7 @@ function Units:Load()
 				hp = 140,
 				dmg = 35,
 				spd = 1,
+				attackRate = .5,
 				cost = 5,
 				isFly = true,
 				targetFly = true,
@@ -67,6 +71,7 @@ function Units:Load()
 				hp = 100,
 				dmg = 45,
 				spd = 2,
+				attackRate = .75,
 				cost = 10,
 				isFly = true,
 				targetFly = true,
@@ -87,10 +92,18 @@ function Units:Add(typeUnit, x, y, scale)
 		scale = scale, 
 		canMove = true,
 		attack = false,
-		target = {}
+		target = {},
+		hasTimerAttack = false,
+		yId = #self.yUnits+1,
+		id = #self.igUnits+1,
 	}
 	table.insert(self.igUnits, u)
 	table.insert(self.yUnits[y/32+1], u)
+end
+
+function Units:Destroy(e)
+	table.remove(self.igUnits, e.id)
+	table.remove(self.yUnits, e.yId)
 end
 
 function Units:Update(dt)
@@ -108,13 +121,31 @@ function Units:Update(dt)
 		for _, e in pairs(self.yUnits[v.y/32+1]) do -- collide
 			if e.scale ~= v.scale then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
-					if IsCollideX(v, e) then
+					if IsCollideX(v, e) and not v.attack then
 						--print(v.info.name, v.info.targetGround and not e.info.isFly, v.info.targetFly and e.info.isFly)
 						v.attack = true
 
 						v.target = e
 
 						v.canMove = false
+
+						if not v.hasTimerAttack then
+							v.hasTimerAttack = true
+							v.tId = TimerAdd(v.info.attackRate, true, function()
+								if e.info.hp <= 0 then
+									v.attack = false
+									v.canMove = true
+									v.target = nil
+									v.hasTimerAttack = false
+									self:Destroy(e)
+									TimerDestroy(v.tId)
+									print(e.info.name.." has been killed by "..v.info.name)
+								else
+									print(v.info.name.." has attacked "..e.info.name.." ("..e.info.hp..">"..e.info.hp-v.info.dmg..").")
+									e.info.hp = e.info.hp - v.info.dmg
+								end
+							end)
+						end
 					else
 						v.attack = false
 

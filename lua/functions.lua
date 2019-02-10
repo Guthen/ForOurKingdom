@@ -7,8 +7,9 @@ function TimerAdd(s, loop, func)
 end
 
 function TimerDestroy(id)
+	if not id or type(id) ~= "number" then return error("TimerDestroy() : #1 argument must be a number !", 2) end
 	table.remove(timers, id)
-	print("TimerDestory() : Destroy Timer with id : "..id.." !")
+	print("TimerDestroy() : Destroy Timer with id : "..id.." !")
 end
 
 function TimerUpdate(dt)

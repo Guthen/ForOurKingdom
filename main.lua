@@ -3,7 +3,7 @@ function RequireFolder(folder)
         for k, v in pairs(love.filesystem.getDirectoryItems(folder)) do
             if string.find(v, ".lua") then
             local n = string.gsub(v, ".lua", "")
-         require(folder.."/"..n)
+            require(folder.."/"..n)
             end
         end
     end
