@@ -13,8 +13,8 @@ function Players:Load()
     self.P1 = {}
     self.P1.x = 4
     self.P1.y = 0
-    self.P1.units = {1, 2, 3, 4, 5, 6, 7, 8}
-    self.P1.curUnit = "Greu"
+    self.P1.units = {"Greu", "Goblex", "Rockpose", "Grea", "Norber"}
+    self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 5
 	self.P1.scale = 1
@@ -22,8 +22,8 @@ function Players:Load()
     self.P2 = {}
     self.P2.x = 35
     self.P2.y = 0
-    self.P2.units = {1, 2, 3, 4, 5, 6, 7, 8}
-    self.P2.curUnit = "Grea"
+    self.P2.units = {"Greu", "Goblex", "Rockpose", "Grea", "Norber"}
+    self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 5
 	self.P2.scale = -1
@@ -72,6 +72,7 @@ function Players:Key(k)
     --[[-------------------------------------------------------------------------
         PLAYER 1 CONTROL
     ---------------------------------------------------------------------------]]
+    -- DÉPLACEMENT
     if k == 'z' and self.P1.y > 0 then
         self.P1.y = self.P1.y - 1
     end
@@ -84,10 +85,22 @@ function Players:Key(k)
     if k == 'd' and self.P1.x < 39 then
         self.P1.x = self.P1.x + 1
     end
-	if k == 'e' and Units.units[self.P1.curUnit].cost <= self.P1.gold then
-		Units:Add(self.P1.curUnit, 3*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
-		self.P1.gold = self.P1.gold - Units.units[self.P1.curUnit].cost
+
+    -- DEPLOIEMENT ET CHANGEMENT D'UNITÉS
+	if k == 'f' and Units.units[self.P1.units[self.P1.curUnit]].cost <= self.P1.gold then
+		Units:Add(self.P1.units[self.P1.curUnit], 3*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
+		self.P1.gold = self.P1.gold - Units.units[self.P1.units[self.P1.curUnit]].cost
 	end
+    if k == 'e' then
+        self.P1.curUnit = self.P1.curUnit + 1
+        if self.P1.curUnit > #self.P1.units then self.P1.curUnit = 1 end
+    end
+    if k == 'a' then
+        self.P1.curUnit = self.P1.curUnit - 1
+        if self.P1.curUnit <= 0 then self.P1.curUnit = #self.P1.units end
+    end
+
+    -- CHEAT
     if k == 'g' then
         self.P1.gold = self.P1.gold + 100
         self.P2.gold = self.P2.gold + 100
@@ -95,10 +108,17 @@ function Players:Key(k)
 end
 
 function Players:LeftClick()
-	if Units.units[self.P2.curUnit].cost <= self.P2.gold then
-		Units:Add(self.P2.curUnit, 36*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
-		self.P2.gold = self.P2.gold - Units.units[self.P2.curUnit].cost
+    print(self.P2.units[self.P2.curUnit], self.P2.curUnit)
+	if Units.units[self.P2.units[self.P2.curUnit]].cost <= self.P2.gold then
+		Units:Add(self.P2.units[self.P2.curUnit], 36*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
+		self.P2.gold = self.P2.gold - Units.units[self.P2.units[self.P2.curUnit]].cost
 	end
+end
+
+function Players:WheelMoved(x, y)
+    self.P2.curUnit = self.P2.curUnit + y
+    if self.P2.curUnit <= 0 then self.P2.curUnit = #self.P2.units end
+    if self.P2.curUnit > #self.P2.units then self.P2.curUnit = 1 end
 end
 
 Players:Load()

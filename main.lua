@@ -52,3 +52,7 @@ function love.mousepressed(x, y, but)
 		Players:LeftClick()
 	end
 end
+
+function love.wheelmoved(x, y)
+    Players:WheelMoved(x, y)
+end
