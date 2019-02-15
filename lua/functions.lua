@@ -33,9 +33,3 @@ function IsCollideX(a, b)
 	return a.x < b.x + b.w and 
 		   b.x < a.x + a.w
 end
-
-function TakeDamage(ply, trg)
-	if not type(ply) == "table" or not type(trg) == "table" then return error("TakeDamage() : #1 or #2 argument(s) are not table.", 2) end
-	if not ply.info.dmg or not trg.info.hp then return error("TakeDamage() : The table(s) don't have damage/health info.", 2) end
-	trg.info.hp = trg.info.hp - ply.info.dmg
-end

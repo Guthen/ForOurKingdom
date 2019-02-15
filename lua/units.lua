@@ -97,65 +97,70 @@ function Units:Add(typeUnit, x, y, scale)
 		yId = #self.yUnits+1,
 		id = #self.igUnits+1,
 	}
+	function u:Destroy()
+		if self.hasTimerAttack then
+			TimerDestroy(self.tId)
+		end
+		print(self.info.name .. " has been destroyed !")
+		table.remove(Units.igUnits, self.id)
+		table.remove(Units.yUnits[self.y/32+1], self.yId)
+	end
+	function u:StartMove()
+		self.canMove = true
+	end
+	function u:StopMove()
+		self.canMove = false
+	end
 	table.insert(self.igUnits, u)
 	table.insert(self.yUnits[y/32+1], u)
-end
-
-function Units:Destroy(e)
-	table.remove(self.igUnits, e.id)
-	table.remove(self.yUnits, e.yId)
 end
 
 function Units:Update(dt)
 	if #self.igUnits == 0 then return end
 	for k, v in pairs(self.igUnits) do
-		if v.canMove and not v.attack then
+		if v.canMove then
 			v.x = v.x + v.info.spd * v.scale -- move
-		elseif v.attack and v.info.followTarget then
+		elseif v.attack and v.info.followTarget and v.target and not v.target.info.followTarget and v.target.canMove then -- follow enemy
 			if v.target.x < v.x then
 				v.x = v.x - v.info.spd
 			elseif v.target.x > v.x then
 				v.x = v.x + v.info.spd
 			end
 		end
-		for _, e in pairs(self.yUnits[v.y/32+1]) do -- collide
+		for _, e in pairs(self.yUnits[v.y/32+1]) do -- attack
 			if e.scale ~= v.scale then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
-					if IsCollideX(v, e) and not v.attack then
-						--print(v.info.name, v.info.targetGround and not e.info.isFly, v.info.targetFly and e.info.isFly)
+					if IsCollideX(v, e) then
+						v:StopMove()
+						v.target = e
 						v.attack = true
 
-						v.target = e
-
-						v.canMove = false
-
-						if not v.hasTimerAttack then
+						if not v.hasTimerAttack then -- timer for attack
 							v.hasTimerAttack = true
 							v.tId = TimerAdd(v.info.attackRate, true, function()
-								if e.info.hp <= 0 then
-									v.attack = false
-									v.canMove = true
-									v.target = nil
-									v.hasTimerAttack = false
-									self:Destroy(e)
-									TimerDestroy(v.tId)
-									print(e.info.name.." has been killed by "..v.info.name)
-								else
-									print(v.info.name.." has attacked "..e.info.name.." ("..e.info.hp..">"..e.info.hp-v.info.dmg..").")
-									e.info.hp = e.info.hp - v.info.dmg
+								if v.target then
+									v.target.info.hp = v.target.info.hp - v.info.dmg
+									if v.target.info.hp <= 0 then
+										e:Destroy()
+										v.target = nil
+										v.attack = false
+										v.hasTimerAttack = false
+										v:StartMove()
+										TimerDestroy(v.tId)
+									end
 								end
 							end)
 						end
-					else
-						v.attack = false
 
-						v.canMove = true
+					elseif not v.target then -- go away
+						v.attack = false
+						v:StartMove()
 					end
 				end
 			end
 		end
-		if v.x >= 35*32 and v.scale == 1 then v.attack = true v.target = Players.P2 v.canMove = false end -- stop to base 2
-		if v.x <= 4*32 and v.scale == -1 then v.attack = true v.target = Players.P1 v.canMove = false end -- stop to base 1
+		if v.x >= 35*32 and v.scale == 1 then v.attack = true v.target = Players.P2 v:StopMove() end -- stop to base 2
+		if v.x <= 4*32 and v.scale == -1 then v.attack = true v.target = Players.P1 v:StopMove() end -- stop to base 1
 	end
 end
 
