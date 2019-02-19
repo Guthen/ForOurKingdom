@@ -6,79 +6,17 @@ function Units:Load()
 	for i = 1, Game.Height/Game.ImageSize do
 		table.insert(self.yUnits, {})
 	end
-	self.units = 
-	{
-		["Greu"] = 
-			{
-				img = Image["Greu"],
-				name = "Greu",
-				hp = 1500,
-				dmg = 105,
-				spd = .65,
-				attackRate = 1.5,
-				cost = 12,
-				isFly = false,
-				targetFly = false,
-				targetGround = true,
-				followTarget = false,
-			},
-		["Grea"] = 
-			{
-				img = Image["Grea"],
-				name = "Grea",
-				hp = 1200,
-				dmg = 125,
-				spd = .60,
-				attackRate = 1.25,
-				cost = 15,
-				isFly = false,
-				targetFly = false,
-				targetGround = true,
-				followTarget = false,
-			},
-		["Norber"] = 
-			{
-				img = Image["Norber"],
-				name = "Norber",
-				hp = 2000,
-				dmg = 200,
-				spd = .40,
-				attackRate = 2,
-				cost = 19,
-				isFly = false,
-				targetFly = false,
-				targetGround = true,
-				followTarget = false,
-			},
-		["Rockpose"] = 
-			{
-				img = Image["Rockpose"],
-				name = "Rockpose",
-				hp = 140,
-				dmg = 35,
-				spd = 1,
-				attackRate = .5,
-				cost = 5,
-				isFly = true,
-				targetFly = true,
-				targetGround = true,
-				followTarget = true,
-			},
-		["Goblex"] = 
-			{
-				img = Image["Goblex"],
-				name = "Goblex",
-				hp = 100,
-				dmg = 45,
-				spd = 2,
-				attackRate = .75,
-				cost = 10,
-				isFly = true,
-				targetFly = true,
-				targetGround = true,
-				followTarget = true,
-			},
-	}
+	self:LoadUnits()
+end
+
+function Units:LoadUnits()
+	self.units = {}
+	for _, v in pairs(love.filesystem.getDirectoryItems("units")) do
+		if string.find(v, ".lua") then
+			local n = string.gsub(v, ".lua", "")
+			self.units[n] = require("units/"..n)
+		end
+	end
 end
 
 function Units:Add(typeUnit, x, y, scale)
