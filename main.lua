@@ -18,6 +18,8 @@ function love.load()
     Game.ImageSize = 32
     Game.Title = "ForOurKingdom"
 
+    Game.PlayersHealth = 10000
+
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
 
