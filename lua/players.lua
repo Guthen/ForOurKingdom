@@ -149,13 +149,13 @@ function Players:Key(k)
         if k == 'z' and self.P1.y > 0 then
             self.P1.y = self.P1.y - 1
         end
-        if k == 's' and self.P1.y < 21 then
+        if k == 's' and self.P1.y < 10 then
             self.P1.y = self.P1.y + 1
         end
         if k == 'q' and self.P1.x > 0 then
             self.P1.x = self.P1.x - 1
         end
-        if k == 'd' and self.P1.x < 39 then
+        if k == 'd' and self.P1.x < 19 then
             self.P1.x = self.P1.x + 1
         end
 
