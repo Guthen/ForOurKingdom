@@ -51,7 +51,7 @@ function Units:Add(typeUnit, x, y, scale)
 		end
 		print(self.info.name .. " has been destroyed !")
 		RemoveValueFromTable(Units.igUnits, self)
-		RemoveValueFromTable(Units.yUnits[self.y/32+1], self)
+		RemoveValueFromTable(Units.yUnits[self.y/Game.ImageSize+1], self)
 	end
 	function u:StartMove()
 		self.canMove = true
@@ -83,7 +83,7 @@ function Units:Add(typeUnit, x, y, scale)
 		end)
 	end
 	table.insert(self.igUnits, u)
-	table.insert(self.yUnits[y/32+1], u)
+	table.insert(self.yUnits[y/Game.ImageSize+1], u)
 end
 
 function Units:Update(dt)
@@ -98,7 +98,7 @@ function Units:Update(dt)
 				v.x = v.x + v.info.spd
 			end
 		end
-		for _, e in pairs(self.yUnits[v.y/32+1]) do -- attack
+		for _, e in pairs(self.yUnits[v.y/Game.ImageSize+1]) do -- attack
 			if e.scale ~= v.scale and not v.target then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
 					if IsCollideX(v, e) then
@@ -118,13 +118,13 @@ function Units:Update(dt)
 				end
 			end
 		end
-		if v.x >= 35*32 and v.scale == 1 then 
+		if v.x >= 16*Game.ImageSize and v.scale == 1 then 
 			v.attack = true 
 			v.target = Players.P2 
 			v:StopMove() 
 			if not v.hasTimerAttack then v:CreateTimerAttack() end
 		end -- stop to base 2
-		if v.x <= 4*32 and v.scale == -1 then 
+		if v.x <= 3*Game.ImageSize and v.scale == -1 then 
 			v.attack = true 
 			v.target = Players.P1 
 			v:StopMove()  
@@ -147,7 +147,7 @@ function Units:Draw()
 		local offX = 0
 		if v.scale == P2.scale then offX = 32 end
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale, 1, offX)
+		love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale*Game.ImageSize/v.info.img:getHeight(), Game.ImageSize/v.info.img:getWidth(), offX)
 	end
 end
 

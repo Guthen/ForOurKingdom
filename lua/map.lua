@@ -3,7 +3,7 @@ Map = {}
 function Map:Load()
 	self.Maps = {}
 
-	self.CurrentMap = "arena_01"
+	self.CurrentMap = "arena_02"
 
 	self.MapImages = 
 	{
@@ -32,7 +32,7 @@ function Map:Draw()
 		if type(vy) == "table" then
 			for kx, vx in pairs(vy) do
 				if vx > 0 and self.MapImages[vx] then
-					love.graphics.draw(self.MapImages[vx], (kx-1)*Game.ImageSize, (ky-1)*Game.ImageSize, 0, 2, 2)
+					love.graphics.draw(self.MapImages[vx], (kx-1)*Game.ImageSize, (ky-1)*Game.ImageSize, 0, Game.ImageSize/self.MapImages[vx]:getWidth(), Game.ImageSize/self.MapImages[vx]:getHeight())
 				end
 			end		
 		end

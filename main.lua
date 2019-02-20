@@ -15,7 +15,7 @@ function love.load()
     Game = {}
     Game.Width = 1280
     Game.Height = 704
-    Game.ImageSize = 32
+    Game.ImageSize = 64
     Game.Title = "For Our Kingdom"
 
     Game.PlayersHealth = 10000

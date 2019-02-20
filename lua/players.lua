@@ -71,7 +71,7 @@ function Players:Draw()
     ---------------------------------------------------------------------------]]
     -- cursor
     love.graphics.setColor(self.P1.color.r, self.P1.color.g, self.P1.color.b)
-    love.graphics.draw(self.img, self.P1.x*32, self.P1.y*32, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
+    love.graphics.draw(self.img, self.P1.x*Game.ImageSize, self.P1.y*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
     love.graphics.setColor(1, 1, 1)
 
@@ -107,7 +107,7 @@ function Players:Draw()
     ---------------------------------------------------------------------------]]
     -- cursor
     love.graphics.setColor(self.P2.color.r, self.P2.color.g, self.P2.color.b)
-    love.graphics.draw(self.img, self.P2.x*32, math.floor(self.P2.y)*32, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
+    love.graphics.draw(self.img, self.P2.x*Game.ImageSize, math.floor(self.P2.y)*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
     love.graphics.setColor(1, 1, 1)
 
@@ -133,8 +133,8 @@ function Players:Draw()
         nextUnit = self.P2.units[1]
     end
     love.graphics.setColor(1, 1, 1, .5)
-    love.graphics.draw(Units.units[lastUnit].img, Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
-    love.graphics.draw(Units.units[nextUnit].img, Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
+    love.graphics.draw(Units.units[lastUnit].img, Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
+    love.graphics.draw(Units.units[nextUnit].img, Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
     love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
@@ -161,7 +161,7 @@ function Players:Key(k)
 
         -- DEPLOIEMENT ET CHANGEMENT D'UNITÉS
     	if k == 'f' and Units.units[self.P1.units[self.P1.curUnit]].cost <= self.P1.gold then
-    		Units:Add(self.P1.units[self.P1.curUnit], 3*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
+    		Units:Add(self.P1.units[self.P1.curUnit], 2*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
     		self.P1.gold = self.P1.gold - Units.units[self.P1.units[self.P1.curUnit]].cost
     	end
         if k == 'e' then
@@ -184,7 +184,7 @@ end
 function Players:LeftClick()
     if self.P2.isDestroyed then return end
 	if Units.units[self.P2.units[self.P2.curUnit]].cost <= self.P2.gold then
-		Units:Add(self.P2.units[self.P2.curUnit], 36*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
+		Units:Add(self.P2.units[self.P2.curUnit], 17*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
 		self.P2.gold = self.P2.gold - Units.units[self.P2.units[self.P2.curUnit]].cost
 	end
 end
