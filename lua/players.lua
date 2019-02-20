@@ -1,7 +1,7 @@
 Players = {}
 
 function Players:StartCoin(s)
-	TimerAdd(s, true, function()
+	self.coinTimer = TimerAdd(s, true, function()
 		self.P1.gold = self.P1.gold + 1
 		self.P2.gold = self.P2.gold + 1
 	end)

@@ -92,9 +92,9 @@ function Units:Update(dt)
 		if v.canMove then
 			v.x = v.x + v.info.spd * v.scale -- move
 		elseif v.attack and v.info.followTarget and v.target and not v.target.info.followTarget and v.target.canMove then -- follow enemy
-			if v.target.x < v.x then
+			if not IsCollideX(v, v.target) and v.target.x < v.x then
 				v.x = v.x - v.info.spd
-			elseif v.target.x > v.x then
+			elseif not IsCollideX(v, v.target) and v.target.x > v.x then
 				v.x = v.x + v.info.spd
 			end
 		end
@@ -144,8 +144,10 @@ function Units:Draw()
 			love.graphics.setColor(P2.color.r, P2.color.g, P2.color.b)
 		end
 		love.graphics.printf(v.info.name.." ["..v.info.hp.."hp]", v.x-86, v.y-16, 200, "center")
+		local offX = 0
+		if v.scale == P2.scale then offX = 32 end
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.draw(v.info.img, v.x, v.y)
+		love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale, 1, offX)
 	end
 end
 
