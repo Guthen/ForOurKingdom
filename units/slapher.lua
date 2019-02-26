@@ -1,14 +1,14 @@
 return
 {
-	img = Image["Slapher"],
-	name = "Slapher",
-	hp = 20,
-	dmg = 10,
-	spd = 1.80,
-	attackRate = .25,
-	cost = 3,
-	isFly = true,
-	targetFly = true,
-	targetGround = true,
-	followTarget = true,
+	img = Image["Slapher"], -- son nom d'image (sans l'extension)
+	name = "Slapher", -- son nom dans le jeu
+	hp = 20, -- ses points de vie
+	dmg = 10, -- ses points de dégats infligés
+	spd = 1.80, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
+	attackRate = .25, -- en combien de secondes attaque t'il
+	cost = 3, -- combien l'unité coûte
+	isFly = true, -- s'il vole 
+	targetFly = true, -- s'il peut attaquer les unités volantes
+	targetGround = true, -- s'il peut attaquer les unités terrestres
+	followTarget = true, -- s'il peut suivre sa cible
 }
