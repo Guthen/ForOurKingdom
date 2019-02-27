@@ -12,4 +12,5 @@ return
 	targetGround = true, -- s'il peut attaquer les unités terrestres
 	followTarget = false, -- s'il peut suivre sa cible
 	attackBase = false, -- s'il peut attaquer la base
+	canBeTarget = false -- s'il peut être pris pour cible
 }

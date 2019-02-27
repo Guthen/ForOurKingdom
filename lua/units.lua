@@ -38,6 +38,7 @@ function Units:Add(typeUnit, x, y, scale)
 			targetGround = self.units[typeUnit].targetGround,
 			followTarget = self.units[typeUnit].followTarget,
 			attackBase = self.units[typeUnit].attackBase,
+			canBeTarget = self.units[typeUnit].canBeTarget,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -48,7 +49,8 @@ function Units:Add(typeUnit, x, y, scale)
 		hasTimerAttack = false,
 		anim = NewAnim( self.units[typeUnit].img, 32, 32 ),
 	}
-	if u.info.attackBase == nil then u.info.attackBase = true print(u.info.name) end
+	if u.info.attackBase == nil then u.info.attackBase = true end
+	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
 	function u:Destroy()
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
@@ -103,7 +105,7 @@ function Units:Update(dt)
 			end
 		end
 		for _, e in pairs(self.yUnits[v.y/Game.ImageSize+1]) do -- attack
-			if e.scale ~= v.scale and not v.target then 
+			if e.info.canBeTarget and e.scale ~= v.scale and not v.target then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
 					if IsCollideX(v, e) then
 						v:StopMove()
