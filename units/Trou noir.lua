@@ -11,6 +11,7 @@ return
 	targetFly = true, -- s'il peut attaquer les unités volantes
 	targetGround = true, -- s'il peut attaquer les unités terrestres
 	followTarget = false, -- s'il peut suivre sa cible
-	attackBase = false, -- s'il peut attaquer la base
-	canBeTarget = false -- s'il peut être pris pour cible
+	attackBase = false, -- s'il peut attaquer la base (optionnel)
+	canBeTarget = false, -- s'il peut être pris pour cible (optionnel)
+	animSpd = .06, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 }

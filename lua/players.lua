@@ -80,8 +80,14 @@ function Players:Draw()
     love.graphics.printf(self.P1.gold, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
     
     -- hp
+    if self.P1.info.hp <= Game.PlayersHealth/5 then
+        love.graphics.setColor(1, .1, .1)
+    else
+        love.graphics.setColor(1, 1, 1)
+    end
     love.graphics.printf(self.P1.info.hp, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    
+    love.graphics.setColor(1, 1, 1)
+
     -- units
     local lastUnit
     if self.P1.units[self.P1.curUnit-1] then
@@ -132,7 +138,13 @@ function Players:Draw()
     love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
     -- hp
+    if self.P2.info.hp <= Game.PlayersHealth/5 then
+        love.graphics.setColor(1, .1, .1)
+    else
+        love.graphics.setColor(1, 1, 1)
+    end
     love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-100, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
+    love.graphics.setColor(1, 1, 1)
 
     -- units
     local lastUnit

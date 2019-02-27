@@ -15,13 +15,13 @@ function Units:LoadUnits()
 		if string.find(v, ".lua") then
 			local n = string.gsub(v, ".lua", "")
 			self.units[n] = require("units/"..n)
-			self.units[n].anim = NewAnim( self.units[n].img, 32, 32 )
+			self.units[n].anim = NewAnim( self.units[n].img, 32, 32, self.units[n].animSpd )
 		end
 	end
 end
 
 function Units:Add(typeUnit, x, y, scale)
-	if not self.units[typeUnit] then return error("Units:Add() : #1 argument is wrong !") end
+	if not self.units[typeUnit] then return print("Units:Add() : #1 argument is wrong !") end
 	local u = 
 	{
 		info = 
@@ -39,6 +39,7 @@ function Units:Add(typeUnit, x, y, scale)
 			followTarget = self.units[typeUnit].followTarget,
 			attackBase = self.units[typeUnit].attackBase,
 			canBeTarget = self.units[typeUnit].canBeTarget,
+			animSpd = self.units[typeUnit].animSpd,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -47,7 +48,7 @@ function Units:Add(typeUnit, x, y, scale)
 		canMove = true,
 		attack = false,
 		hasTimerAttack = false,
-		anim = NewAnim( self.units[typeUnit].img, 32, 32 ),
+		anim = NewAnim( self.units[typeUnit].img, 32, 32, self.units[typeUnit].animSpd ),
 	}
 	if u.info.attackBase == nil then u.info.attackBase = true end
 	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
