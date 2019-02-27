@@ -18,7 +18,7 @@ function Players:Load()
     }
     self.P1.x = 4
     self.P1.y = 0
-    self.P1.units = {"greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
+    self.P1.units = {"Trou Noir", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 10
@@ -36,7 +36,7 @@ function Players:Load()
     }
     self.P2.x = 35
     self.P2.y = 0
-    self.P2.units = {"greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
+    self.P2.units = {"Trou Noir", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 10
@@ -96,11 +96,27 @@ function Players:Draw()
     else
         nextUnit = self.P1.units[1]
     end
+
     love.graphics.setColor(1, 1, 1, .5)
-    love.graphics.draw(Units.units[lastUnit].img, 6, Game.Height-205, 0, 2, 2)
-    love.graphics.draw(Units.units[nextUnit].img, 6+48, Game.Height-205, 0, 2, 2)
+
+    if Units.units[lastUnit].anim then
+        love.graphics.draw(Units.units[lastUnit].img, Units.units[lastUnit].anim.quads[Units.units[lastUnit].anim.quad], 6, Game.Height-205, 0, 2, 2)
+    else
+        love.graphics.draw(Units.units[lastUnit].img, 6, Game.Height-205, 0, 2, 2)
+    end
+
+    if Units.units[nextUnit].anim then
+        love.graphics.draw(Units.units[nextUnit].img, Units.units[nextUnit].anim.quads[Units.units[nextUnit].anim.quad], 6+48, Game.Height-205, 0, 2, 2)
+    else
+        love.graphics.draw(Units.units[nextUnit].img, 6+48, Game.Height-205, 0, 2, 2)
+    end
+
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(Units.units[curUnit].img, 6+24, Game.Height-200, 0, 2, 2)
+    if Units.units[curUnit].anim then
+        love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], 6+24, Game.Height-200, 0, 2, 2)
+    else
+        love.graphics.draw(Units.units[curUnit].img, 6+24, Game.Height-200, 0, 2, 2)
+    end
     love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
     --[[-------------------------------------------------------------------------
         PLAYER 2 DRAW
@@ -132,11 +148,28 @@ function Players:Draw()
     else
         nextUnit = self.P2.units[1]
     end
+
     love.graphics.setColor(1, 1, 1, .5)
-    love.graphics.draw(Units.units[lastUnit].img, Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
-    love.graphics.draw(Units.units[nextUnit].img, Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
+
+    if Units.units[lastUnit].anim then
+        love.graphics.draw(Units.units[lastUnit].img, Units.units[lastUnit].anim.quads[Units.units[lastUnit].anim.quad], Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
+    else
+        love.graphics.draw(Units.units[lastUnit].img, Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
+    end
+
+    if Units.units[nextUnit].anim then
+        love.graphics.draw(Units.units[nextUnit].img, Units.units[nextUnit].anim.quads[Units.units[nextUnit].anim.quad], Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
+    else
+        love.graphics.draw(Units.units[nextUnit].img, Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
+    end
+
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
+
+    if Units.units[curUnit].anim then
+        love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
+    else
+        love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
+    end
     love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
 end
 
@@ -190,7 +223,7 @@ function Players:LeftClick()
 end
 
 function Players:WheelMoved(x, y)
-    self.P2.curUnit = self.P2.curUnit + y
+    self.P2.curUnit = self.P2.curUnit - y
     if self.P2.curUnit <= 0 then self.P2.curUnit = #self.P2.units end
     if self.P2.curUnit > #self.P2.units then self.P2.curUnit = 1 end
 end

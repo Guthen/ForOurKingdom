@@ -15,6 +15,7 @@ function Units:LoadUnits()
 		if string.find(v, ".lua") then
 			local n = string.gsub(v, ".lua", "")
 			self.units[n] = require("units/"..n)
+			self.units[n].anim = NewAnim( self.units[n].img, 32, 32 )
 		end
 	end
 end
@@ -36,6 +37,7 @@ function Units:Add(typeUnit, x, y, scale)
 			targetFly = self.units[typeUnit].targetFly,
 			targetGround = self.units[typeUnit].targetGround,
 			followTarget = self.units[typeUnit].followTarget,
+			attackBase = self.units[typeUnit].attackBase,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -44,7 +46,9 @@ function Units:Add(typeUnit, x, y, scale)
 		canMove = true,
 		attack = false,
 		hasTimerAttack = false,
+		anim = NewAnim( self.units[typeUnit].img, 32, 32 ),
 	}
+	if u.info.attackBase == nil then u.info.attackBase = true print(u.info.name) end
 	function u:Destroy()
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
@@ -118,24 +122,31 @@ function Units:Update(dt)
 				end
 			end
 		end
-		if v.x >= 16*Game.ImageSize and v.scale == 1 then 
-			v.attack = true 
-			v.target = Players.P2 
-			v:StopMove() 
-			if not v.hasTimerAttack then v:CreateTimerAttack() end
-		end -- stop to base 2
-		if v.x <= 3*Game.ImageSize and v.scale == -1 then 
-			v.attack = true 
-			v.target = Players.P1 
-			v:StopMove()  
-			if not v.hasTimerAttack then v:CreateTimerAttack() end
-		end -- stop to base 1
+		if v.info.attackBase then
+			if v.x >= 16*Game.ImageSize and v.scale == 1 then 
+				v.attack = true 
+				v.target = Players.P2 
+				v:StopMove() 
+				if not v.hasTimerAttack then v:CreateTimerAttack() end
+			end -- stop to base 2
+			if v.x <= 3*Game.ImageSize and v.scale == -1 then 
+				v.attack = true 
+				v.target = Players.P1 
+				v:StopMove()  
+				if not v.hasTimerAttack then v:CreateTimerAttack() end
+			end -- stop to base 1
+		else
+			if v.x < -1*Game.ImageSize or v.x > 20*Game.ImageSize then
+				v:Destroy()
+			end
+		end
 	end
 end
 
 function Units:Draw()
 	if #self.igUnits == 0 then return end
 	for k, v in pairs(self.igUnits) do
+
 		local P1 = Players.P1
 		local P2 = Players.P2
 		if v.scale == P1.scale then
@@ -143,11 +154,19 @@ function Units:Draw()
 		elseif v.scale == P2.scale then
 			love.graphics.setColor(P2.color.r, P2.color.g, P2.color.b)
 		end
-		love.graphics.printf(v.info.name.." ["..v.info.hp.."hp]", v.x-86, v.y-16, 200, "center")
+		love.graphics.printf(v.info.name.." ["..v.info.hp.."hp]", v.x-70, v.y-16, 200, "center")
+
 		local offX = 0
 		if v.scale == P2.scale then offX = 32 end
+
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale*Game.ImageSize/v.info.img:getHeight(), Game.ImageSize/v.info.img:getWidth(), offX)
+
+		if v.anim then
+			love.graphics.draw(v.info.img, v.anim.quads[v.anim.quad], v.x, v.y, 0, v.scale*Game.ImageSize/32, Game.ImageSize/32, offX)
+		else
+			love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale*Game.ImageSize/v.info.img:getHeight(), Game.ImageSize/v.info.img:getWidth(), offX)
+		end
+
 	end
 end
 
