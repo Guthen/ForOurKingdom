@@ -28,7 +28,7 @@ function TimerUpdate(dt)
 			if v.loop then
 				v.s = v.startS
 			else
-				TimerDestroy(k)
+				TimerDestroy(v)
 			end
 		else
 			v.s = v.s - dt
@@ -73,6 +73,16 @@ function GetPositive(n)
 	if n < 0 then
 		return -n
 	end 
+	return n
+end
+
+function Clamp(n, min, max)
+	if not type(n) == "number" then return end
+	if n > max then
+		n = max
+	elseif n < min then
+		n = min
+	end
 	return n
 end
 

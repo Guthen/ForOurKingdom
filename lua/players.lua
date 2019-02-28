@@ -2,8 +2,8 @@ Players = {}
 
 function Players:StartCoin(s, g)
 	self.coinTimer = TimerAdd(s, true, function()
-		self.P1.gold = self.P1.gold + g
-		self.P2.gold = self.P2.gold + g
+		self.P1.gold = Clamp(self.P1.gold + g, 0, Game.GoldLimit)
+		self.P2.gold = Clamp(self.P2.gold + g, 0, Game.GoldLimit)
 	end)
 end
 
@@ -21,7 +21,7 @@ function Players:Load()
     self.P1.units = {"Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
-    self.P1.gold = 10
+    self.P1.gold = 1
 	self.P1.scale = 1
     self.P1.isDestroyed = false
     function self.P1:Destroy()
@@ -39,7 +39,7 @@ function Players:Load()
     self.P2.units = {"Trou noir", "Demonplante", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
-    self.P2.gold = 10
+    self.P2.gold = 1
 	self.P2.scale = -1
     self.P2.isDestroyed = false
     function self.P2:Destroy()
@@ -48,7 +48,7 @@ function Players:Load()
 
     love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
 	
-	self:StartCoin(1, 3)
+	self:StartCoin(1, Game.GoldSecond)
 end
 
 function Players:Update(dt)
