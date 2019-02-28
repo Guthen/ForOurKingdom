@@ -11,4 +11,5 @@ return
 	targetFly = false,
 	targetGround = true,
 	followTarget = false,
+	range = 6,
 }

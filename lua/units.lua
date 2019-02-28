@@ -50,10 +50,13 @@ function Units:Add(typeUnit, x, y, scale)
 		attack = false,
 		hasTimerAttack = false,
 		anim = NewAnim( self.units[typeUnit].img, 32, 32, self.units[typeUnit].animSpd ),
+		colx = (self.units[typeUnit].range or 0)*Game.ImageSize*scale,
 	}
 	if u.info.attackBase == nil then u.info.attackBase = true end
 	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
-	if u.info.range == nil then u.info.range = 1 end
+	if u.info.range == nil then u.info.range = 0 end
+	if u.colx == 0 then u.colx = Game.ImageSize end
+	print(u.colx)
 	function u:Destroy()
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
@@ -101,16 +104,16 @@ function Units:Update(dt)
 		if v.canMove then
 			v.x = v.x + v.info.spd * v.scale -- move
 		elseif v.attack and v.info.followTarget and v.target and not v.target.info.followTarget and v.target.canMove then -- follow enemy
-			if not IsCollideX(v, v.target) and v.target.x < v.x then
+			if not IsCollideX(v.x, v.target.x, v.w, v.target.w) and v.target.x < v.x then
 				v.x = v.x - v.info.spd
-			elseif not IsCollideX(v, v.target) and v.target.x > v.x then
+			elseif not IsCollideX(v.x, v.target.x, v.w, v.target.w) and v.target.x > v.x then
 				v.x = v.x + v.info.spd
 			end
 		end
 		for _, e in pairs(self.yUnits[v.y/Game.ImageSize+1]) do -- attack
 			if e.info.canBeTarget and e.scale ~= v.scale and not v.target then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
-					if IsCollideX(v, e, v.info.range) then
+					if IsCollideX(v.x, e.x, v.colx, e.w) then
 						v:StopMove()
 						v.target = e
 						v.attack = true
@@ -170,6 +173,10 @@ function Units:Draw()
 			love.graphics.draw(v.info.img, v.anim.quads[v.anim.quad], v.x, v.y, 0, v.scale*Game.ImageSize/32, Game.ImageSize/32, offX)
 		else
 			love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale*Game.ImageSize/v.info.img:getHeight(), Game.ImageSize/v.info.img:getWidth(), offX)
+		end
+
+		if v.info.range > 0 then
+			love.graphics.rectangle("line", v.x, v.y, v.info.range*Game.ImageSize*v.scale, 64)
 		end
 
 	end

@@ -40,11 +40,16 @@ end
 	COLLISION
 ---------------------------------------------------------------------------]]
 
-function IsCollideX(a, b, range)
-	range = range or 0
-	if not type(a) == "table" or not type(b) == "table" then return end
-	return a.x+range*Game.ImageSize*a.scale < b.x + b.w and 
-		   b.x < a.x + a.w
+function IsCollideX(ax, bx, aw, bw)
+	if not type(a) == "number" or not type(b) == "number" then return end
+	if not IsPositive(aw) then
+		aw = -aw
+		ax = ax - aw
+	else
+		aw = aw + Game.ImageSize
+	end
+	return ax < bx + bw and 
+		   bx < ax + aw
 end
 
 --[[-------------------------------------------------------------------------
@@ -58,4 +63,25 @@ function RemoveValueFromTable(_table, _value)
 			table.remove(_table, k)
 		end
 	end
+end
+
+function IsPositive(n)
+	return n > 0
+end
+
+function GetPositive(n)
+	if n < 0 then
+		return -n
+	end 
+	return n
+end
+
+--[[-------------------------------------------------------------------------
+	GAME CONTROL
+---------------------------------------------------------------------------]]
+
+function Reset()
+	timers = {}
+	Units:Load()
+	Players:Load()
 end
