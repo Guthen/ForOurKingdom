@@ -18,7 +18,7 @@ function Players:Load()
     }
     self.P1.x = 4
     self.P1.y = 0
-    self.P1.units = {"Trou Noir", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
+    self.P1.units = {"Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 10
@@ -36,7 +36,7 @@ function Players:Load()
     }
     self.P2.x = 35
     self.P2.y = 0
-    self.P2.units = {"Trou Noir", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
+    self.P2.units = {"Trou noir", "Demonplante", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 10

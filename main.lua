@@ -48,6 +48,11 @@ end
 
 function love.keypressed(k)
     Players:Key(k)
+	if k == "right" then
+		Map.CurrentMap = "arena_01"
+	elseif k == "left" then
+		Map.CurrentMap = "arena_02"
+	end
 end
 
 function love.mousepressed(x, y, but)
