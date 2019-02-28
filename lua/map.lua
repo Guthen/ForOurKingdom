@@ -15,6 +15,10 @@ function Map:Load()
 		[6] = {img = Image["terrain_aquatique 2"]},
 		[7] = {img = Image["terrain_aquatique 3"]},
 		[8] = {img = Image["terrain_aquatique 4"]},
+		[100] = {img = Image["terrain_demon 1"]},
+		[101] = {img = Image["terrain_demon 2"]},
+		[102] = {img = Image["terrain_demon 3"]},
+		[103] = {img = Image["terrain_demon 4"]},
 	}
 
 	for k,v in pairs(self.MapImages) do

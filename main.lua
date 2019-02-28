@@ -50,12 +50,15 @@ end
 
 function love.keypressed(k)
     Players:Key(k)
-	if k == "right" then
+	if k == "kp0" then
         Reset()
 		Map.CurrentMap = "arena_01"
-	elseif k == "left" then
+	elseif k == "kp1" then
         Reset()
 		Map.CurrentMap = "arena_02"
+	elseif k == "kp2" then
+		Reset()
+		Map.CurrentMap = "arena_03"
 	end
 end
 
