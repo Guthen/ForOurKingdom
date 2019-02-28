@@ -11,6 +11,10 @@ function Map:Load()
 		[2] = Image["concrete_grass_left"],
 		[3] = Image["concrete_grass_right"],
 		[4] = Image["concrete"],
+		[5] = Image["terrain_aquatique1"],
+		[6] = Image["terrain_aquatique 2"],
+		[7] = Image["terrain_aquatique 3"],
+		[8] = Image["terrain_aquatique 4"],
 	}
 
 	Map:LoadMaps()
