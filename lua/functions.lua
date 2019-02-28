@@ -40,12 +40,12 @@ end
 	COLLISION
 ---------------------------------------------------------------------------]]
 
-function IsCollideX(ax, bx, aw, bw)
+function IsCollideX(ax, bx, aw, bw, isDist)
 	if not type(a) == "number" or not type(b) == "number" then return end
-	if not IsPositive(aw) then
+	if not IsPositive(aw) and isDist then
 		aw = -aw
 		ax = ax - aw
-	else
+	elseif IsPositive(aw) and isDist then
 		aw = aw + Game.ImageSize
 	end
 	return ax < bx + bw and 

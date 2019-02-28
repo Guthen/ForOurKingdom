@@ -113,7 +113,7 @@ function Units:Update(dt)
 		for _, e in pairs(self.yUnits[v.y/Game.ImageSize+1]) do -- attack
 			if e.info.canBeTarget and e.scale ~= v.scale and not v.target then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
-					if IsCollideX(v.x, e.x, v.colx, e.w) then
+					if IsCollideX(v.x, e.x, v.colx, e.w, v.info.range > 0) then
 						v:StopMove()
 						v.target = e
 						v.attack = true
@@ -173,10 +173,6 @@ function Units:Draw()
 			love.graphics.draw(v.info.img, v.anim.quads[v.anim.quad], v.x, v.y, 0, v.scale*Game.ImageSize/32, Game.ImageSize/32, offX)
 		else
 			love.graphics.draw(v.info.img, v.x, v.y, 0, v.scale*Game.ImageSize/v.info.img:getHeight(), Game.ImageSize/v.info.img:getWidth(), offX)
-		end
-
-		if v.info.range > 0 then
-			love.graphics.rectangle("line", v.x, v.y, v.info.range*Game.ImageSize*v.scale, 64)
 		end
 
 	end
