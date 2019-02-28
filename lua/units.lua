@@ -56,7 +56,7 @@ function Units:Add(typeUnit, x, y, scale)
 	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
 	if u.info.range == nil then u.info.range = 0 end
 	if u.colx == 0 then u.colx = Game.ImageSize end
-	print(u.colx)
+	--print(u.colx)
 	function u:Destroy()
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
