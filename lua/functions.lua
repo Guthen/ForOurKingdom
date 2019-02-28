@@ -40,9 +40,10 @@ end
 	COLLISION
 ---------------------------------------------------------------------------]]
 
-function IsCollideX(a, b)
+function IsCollideX(a, b, range)
+	range = range or 0
 	if not type(a) == "table" or not type(b) == "table" then return end
-	return a.x < b.x + b.w and 
+	return a.x+range*Game.ImageSize*a.scale < b.x + b.w and 
 		   b.x < a.x + a.w
 end
 
