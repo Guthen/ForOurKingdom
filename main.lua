@@ -43,9 +43,11 @@ function love.draw()
 
 	Units:Draw()
 	
+    DrawFX()
+
     Players:Draw()
 	
-	Image:Draw()
+	--Image:Draw()
 end
 
 function love.keypressed(k)

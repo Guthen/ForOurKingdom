@@ -1,4 +1,9 @@
 Anims = {}
+FX = {}
+
+--[[-------------------------------------------------------------------------
+	ANIMS
+---------------------------------------------------------------------------]]
 
 function NewAnim( img, w, h, t )
 	if not img or (img:getWidth() == w and img:getHeight() == h) then return end
@@ -29,6 +34,35 @@ function UpdateAnims( dt )
 				v.quad = v.quad + 1
 			end
 			--print(v.quad)
+		end
+	end
+end
+
+--[[-------------------------------------------------------------------------
+	FX
+---------------------------------------------------------------------------]]
+
+function NewFX( img, x, y, s, animSpd )
+	local fx = 
+	{
+		img = img,
+		x = x,
+		y = y,
+		anim = NewAnim( img, img:getHeight(), img:getHeight(), animSpd )
+	}
+
+	TimerAdd( s, false, function()
+		RemoveValueFromTable( FX, fx )
+	end)
+
+	table.insert( FX, fx )
+	return fx
+end
+
+function DrawFX()
+	for _,v in pairs(FX) do
+		if v.anim then
+			love.graphics.draw( v.img, v.anim.quads[v.anim.quad], v.x, v.y, 0, 2, 2 )
 		end
 	end
 end

@@ -61,6 +61,7 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
 		end
+		NewFX( Image["fx_dust_explosion"], u.x, u.y, .5, .125 )
 		print(self.info.name .. " has been destroyed !")
 		RemoveValueFromTable(Units.igUnits, self)
 		RemoveValueFromTable(Units.yUnits[self.y/Game.ImageSize+1], self)
