@@ -5,13 +5,14 @@ FX = {}
 	ANIMS
 ---------------------------------------------------------------------------]]
 
-function NewAnim( img, w, h, t )
+function NewAnim( img, w, h, t, func)
 	if not img or (img:getWidth() == w and img:getHeight() == h) then return end
 	local a = {}
 	a.quads = {}
 	a.quad = 1
 	a.t = t or .1
 	a.curT = 0
+	a.func = func
 
 	for y = 0, img:getHeight()-h, h do
 		for x = 0, img:getWidth()-w, w do
@@ -30,10 +31,14 @@ function UpdateAnims( dt )
 			v.curT = v.t
 			if v.quad + 1 > #v.quads then
 				v.quad = 1
+				if v.func then
+					if v.func() == true then
+						table.remove(Anims, k)
+					end
+				end
 			else
 				v.quad = v.quad + 1
 			end
-			--print(v.quad)
 		end
 	end
 end

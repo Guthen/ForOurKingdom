@@ -3,7 +3,7 @@ return
 	img = Image["Goblattack"],
 	name = "Goblattack",
 	hp = 35,
-	dmg = 25,
+	dmg = 8,
 	spd = 1.75,
 	attackRate = .5,
 	cost = 4,

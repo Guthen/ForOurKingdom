@@ -15,7 +15,7 @@ function Units:LoadUnits()
 		if string.find(v, ".lua") then
 			local n = string.gsub(v, ".lua", "")
 			self.units[n] = require("units/"..n)
-			self.units[n].anim = NewAnim( self.units[n].img, 32, 32, self.units[n].animSpd )
+			self.units[n].anim = NewAnim( self.units[n].img, 32, 32, self.units[n].animSpd, self.units[n].animActive )
 		end
 	end
 end
@@ -40,7 +40,11 @@ function Units:Add(typeUnit, x, y, scale)
 			attackBase = self.units[typeUnit].attackBase,
 			canBeTarget = self.units[typeUnit].canBeTarget,
 			animSpd = self.units[typeUnit].animSpd,
+			animActive = self.units[typeUnit].animActive,
 			range = self.units[typeUnit].range,
+			onSpawn = self.units[typeUnit].onSpawn,
+			onDestroyed = self.units[typeUnit].onDestroyed,
+			onEnemyKilled = self.units[typeUnit].onEnemyKilled,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -52,6 +56,31 @@ function Units:Add(typeUnit, x, y, scale)
 		anim = NewAnim( self.units[typeUnit].img, 32, 32, self.units[typeUnit].animSpd ),
 		colx = (self.units[typeUnit].range or 0)*Game.ImageSize*scale,
 	}
+	function u:getInfo()
+		self.info =
+		{
+			img = Units.units[typeUnit].img,
+			deadImg = Units.units[typeUnit].deadImg,
+			name = Units.units[typeUnit].name,
+			hp = Units.units[typeUnit].hp,
+			dmg = Units.units[typeUnit].dmg,
+			spd = Units.units[typeUnit].spd,
+			attackRate = Units.units[typeUnit].attackRate,
+			cost = Units.units[typeUnit].cost,
+			isFly = Units.units[typeUnit].isFly,
+			targetFly = Units.units[typeUnit].targetFly,
+			targetGround = Units.units[typeUnit].targetGround,
+			followTarget = Units.units[typeUnit].followTarget,
+			attackBase = Units.units[typeUnit].attackBase,
+			canBeTarget = Units.units[typeUnit].canBeTarget,
+			animSpd = Units.units[typeUnit].animSpd,
+			dieToFirstKill = Units.units[typeUnit].dieToFirstKill,
+			range = Units.units[typeUnit].range,
+			onSpawn = Units.units[typeUnit].onSpawn,
+			onDestroyed = Units.units[typeUnit].onDestroyed,
+			onEnemyKilled = Units.units[typeUnit].onEnemyKilled,
+		}
+	end
 	if u.info.attackBase == nil then u.info.attackBase = true end
 	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
 	if u.info.range == nil then u.info.range = 0 end
@@ -61,8 +90,17 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
 		end
-		NewFX( Image["fx_dust_explosion"], u.x, u.y, .5, .125 )
+		NewFX( Image["fx_dust_explosion"], self.x, self.y, .5, .125 )
 		print(self.info.name .. " has been destroyed !")
+
+		if self.info.onDestroyed then
+			self.info.onDestroyed()
+			self:getInfo()
+		end
+
+		if self.anim then
+			RemoveValueFromTable(Anims, self.anim)
+		end
 		RemoveValueFromTable(Units.igUnits, self)
 		RemoveValueFromTable(Units.yUnits[self.y/Game.ImageSize+1], self)
 	end
@@ -85,6 +123,19 @@ function Units:Add(typeUnit, x, y, scale)
 						self.attack = false
 						self.hasTimerAttack = false
 						self:StartMove()
+						if self.info.onEnemyKilled then
+							self.info.onEnemyKilled()
+							self:getInfo()
+						end
+						if self.info.dieToFirstKill then
+							if self.info.deadImg then
+								self.info.img = self.info.deadImg
+								self.anim = NewAnim( self.info.img, 32, 32, self.info.animSpd, function() self:Destroy() return true end)
+								self.info.spd = 0
+							else
+								self:Destroy()
+							end
+						end
 					end
 					TimerDestroy(self.timer)
 				end
@@ -95,6 +146,14 @@ function Units:Add(typeUnit, x, y, scale)
 			end
 		end)
 	end
+
+	if u.info.onSpawn then
+		u.info.onSpawn()
+		u:getInfo()
+	end
+
+	u.info.Destroy = u.Destroy
+
 	table.insert(self.igUnits, u)
 	table.insert(self.yUnits[y/Game.ImageSize+1], u)
 end
@@ -114,7 +173,7 @@ function Units:Update(dt)
 		for _, e in pairs(self.yUnits[v.y/Game.ImageSize+1]) do -- attack
 			if e.info.canBeTarget and e.scale ~= v.scale and not v.target then 
 				if (v.info.targetGround and not e.info.isFly) or (v.info.targetFly and e.info.isFly) then
-					if IsCollideX(v.x, e.x, v.colx, e.w, v.info.range > 0) then
+					if IsCollideX(v.x, e.x, v.colx, e.w, (v.info.range or 0) > 0) then
 						v:StopMove()
 						v.target = e
 						v.attack = true

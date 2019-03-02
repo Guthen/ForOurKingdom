@@ -24,10 +24,11 @@ function TimerUpdate(dt)
 	if #timers == 0 then return end
 	for k, v in pairs(timers) do
 		if v.s <= 0 then
-			v.func()
+			local f = v.func()
 			if v.loop then
 				v.s = v.startS
-			else
+			end
+			if not v.loop or f == true then
 				TimerDestroy(v)
 			end
 		else

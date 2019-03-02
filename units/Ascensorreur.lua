@@ -1,0 +1,31 @@
+return
+{
+	img = Image["Ascensorreur"], -- son nom d'image (sans l'extension)
+	deadImg = Image["Ascensorreur_dead"], -- son image à la mort de celui-ci (fonctionne seulement si dieToFirstKill = true)
+	name = "Ascensorreur", -- son nom dans le jeu
+	hp = 10000, -- ses points de vie
+	dmg = 10000, -- ses points de dégats infligés
+	spd = 1.4, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
+	attackRate = 0, -- en combien de secondes attaque t'il
+	cost = 29, -- combien l'unité coûte
+	isFly = true, -- s'il vole 
+	targetFly = true, -- s'il peut attaquer les unités volantes
+	targetGround = true, -- s'il peut attaquer les unités terrestres
+	followTarget = false, -- s'il peut suivre sa cible
+	attackBase = false, -- s'il peut attaquer la base (optionnel)
+	canBeTarget = false, -- s'il peut être pris pour cible (optionnel)
+	dieToFirstKill = true, -- s'il meurt à son premier "kill"
+	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
+	onSpawn = function() -- fonction exécuté à l'appariton de l'unité
+		local snd = Sound["elevator_spawn_Jay_You"]
+		snd:setVolume(.5)
+		snd:play()
+	end,
+	onDestroyed = function() -- fonction exécuté à la mort de l'unité
+		local snd = Sound["elevator_spawn_Jay_You"]
+		snd:stop()
+	end,
+}
+
+-- Unit by Guthen (Image, Animation & Script) --
+-- Sound : 'elevator_spawn_Jay_You.wav' was made by Jay_You and modified by Guthen, available here : https://freesound.org/people/Jay_You/sounds/460432/ --
