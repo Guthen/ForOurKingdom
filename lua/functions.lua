@@ -95,4 +95,8 @@ function Reset()
 	timers = {}
 	Units:Load()
 	Players:Load()
+
+	for _,v in pairs(Sound) do
+		if type(v) == "userdata" and v:isPlaying() then v:stop() end
+	end
 end

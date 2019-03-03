@@ -55,6 +55,7 @@ function Units:Add(typeUnit, x, y, scale)
 		hasTimerAttack = false,
 		anim = NewAnim( self.units[typeUnit].img, 32, 32, self.units[typeUnit].animSpd ),
 		colx = (self.units[typeUnit].range or 0)*Game.ImageSize*scale,
+		canChangeToDeadImg = true,
 	}
 	function u:getInfo()
 		self.info =
@@ -79,9 +80,11 @@ function Units:Add(typeUnit, x, y, scale)
 			onSpawn = Units.units[typeUnit].onSpawn,
 			onDestroyed = Units.units[typeUnit].onDestroyed,
 			onEnemyKilled = Units.units[typeUnit].onEnemyKilled,
+			fxOnDead = Units.units[typeUnit].fxOnDead,
 		}
 	end
 	if u.info.attackBase == nil then u.info.attackBase = true end
+	if u.info.fxOnDead == nil then u.info.fxOnDead = true end
 	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
 	if u.info.range == nil then u.info.range = 0 end
 	if u.colx == 0 then u.colx = Game.ImageSize end
@@ -90,7 +93,9 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.hasTimerAttack then
 			TimerDestroy(self.timer)
 		end
-		NewFX( Image["fx_dust_explosion"], self.x, self.y, .5, .125 )
+		if self.info.fxOnDead == true then
+			NewFX( Image["fx_dust_explosion"], self.x, self.y, .5, .125 )
+		end
 		print(self.info.name .. " has been destroyed !")
 
 		if self.info.onDestroyed then
@@ -111,6 +116,7 @@ function Units:Add(typeUnit, x, y, scale)
 		self.canMove = false
 	end
 	function u:CreateTimerAttack()
+		if self.info.deadImg == self.info.img then return end
 		self.hasTimerAttack = true
 		self.timer = TimerAdd(self.info.attackRate, true, function()
 			if self.target then
@@ -128,11 +134,12 @@ function Units:Add(typeUnit, x, y, scale)
 							self:getInfo()
 						end
 						if self.info.dieToFirstKill then
-							if self.info.deadImg then
+							if self.info.deadImg and self.canChangeToDeadImg then
+								self.canChangeToDeadImg = false
 								self.info.img = self.info.deadImg
 								self.anim = NewAnim( self.info.img, 32, 32, self.info.animSpd, function() self:Destroy() return true end)
 								self.info.spd = 0
-							else
+							elseif self.canChangeToDeadImg then
 								self:Destroy()
 							end
 						end

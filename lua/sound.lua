@@ -11,9 +11,4 @@ function Sound:Load()
     end
 end
 
-function FadeOut(snd, s)
-	if not type(snd) == "Source" then return print("FadeOut() : #1 argument must be a source value.") end 
-	snd:stop(s)
-end
-
 Sound:Load()

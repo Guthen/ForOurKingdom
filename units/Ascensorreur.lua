@@ -15,6 +15,7 @@ return
 	attackBase = false, -- s'il peut attaquer la base (optionnel)
 	canBeTarget = false, -- s'il peut être pris pour cible (optionnel)
 	dieToFirstKill = true, -- s'il meurt à son premier "kill"
+	fxOnDead = false,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 	onSpawn = function() -- fonction exécuté à l'appariton de l'unité
 		local snd = Sound["elevator_spawn_Jay_You"]
