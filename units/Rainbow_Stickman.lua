@@ -2,11 +2,11 @@ return
 {
 	img = Image["Rainbow Stickman"], -- son nom d'image (sans l'extension)
 	name = "Rainbow Stikman", -- son nom dans le jeu
-	hp = 10000, -- ses points de vie
+	hp = 1000, -- ses points de vie
 	dmg = 1000, -- ses points de dégats infligés
-	spd = 10, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
+	spd = 3, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0, -- en combien de secondes attaque t'il
-	cost = 0, -- combien l'unité coûte
+	cost = 30, -- combien l'unité coûte
 	isFly = true, -- s'il vole 
 	targetFly = true, -- s'il peut attaquer les unités volantes
 	targetGround = true, -- s'il peut attaquer les unités terrestres
