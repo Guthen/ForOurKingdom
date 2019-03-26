@@ -16,6 +16,7 @@ function love.load()
     Game.Width = 1280
     Game.Height = 704
     Game.ImageSize = 64
+	Game.MenuState = 1
     Game.Title = "For Our Kingdom"
 
     Game.PlayersHealth = 10000
@@ -39,37 +40,54 @@ function love.update(dt)
 end
 
 function love.draw()
-    Map:Draw()
+	if Game.MenuState == 0 then
+		Map:Draw()
 
-	Units:Draw()
-	
-    DrawFX()
+		Units:Draw()
+		
+		DrawFX()
 
-    Players:Draw()
+		Players:Draw()
+	else
+		Menu:Draw()
+	end
 	
 	--Image:Draw()
 end
 
 function love.keypressed(k)
-    Players:Key(k)
-	if k == "kp0" then
-        Reset()
-		Map.CurrentMap = "arena_01"
-	elseif k == "kp1" then
-        Reset()
-		Map.CurrentMap = "arena_02"
-	elseif k == "kp2" then
-		Reset()
-		Map.CurrentMap = "arena_03"
+	if Game.MenuState == 0 then
+		Players:Key(k)
+		if k == "kp0" then
+			Reset()
+			Map.CurrentMap = "arena_01"
+		elseif k == "kp1" then
+			Reset()
+			Map.CurrentMap = "arena_02"
+		elseif k == "kp2" then
+			Reset()
+			Map.CurrentMap = "arena_03"
+		end
+		
+		if k == "escape" then
+			Reset()
+			Game.MenuState = 1
+		end
+	else
+		Menu:Key(k)
 	end
 end
 
 function love.mousepressed(x, y, but)
-	if but == 1 then
-		Players:LeftClick()
+	if Game.MenuState == 0 then
+		if but == 1 then
+			Players:LeftClick()
+		end
 	end
 end
 
 function love.wheelmoved(x, y)
-    Players:WheelMoved(x, y)
+	if Game.MenuState == 0 then
+		Players:WheelMoved(x, y)
+	end
 end
