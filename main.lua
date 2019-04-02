@@ -1,9 +1,24 @@
-function RequireFolder(folder)
+function RequireFolder(folder, _table)
     if love.filesystem.getDirectoryItems(folder) then 
-        for k, v in pairs(love.filesystem.getDirectoryItems(folder)) do
+        for _, v in pairs(love.filesystem.getDirectoryItems(folder)) do
             if string.find(v, ".lua") then
             local n = string.gsub(v, ".lua", "")
-            require(folder.."/"..n)
+               if _table then 
+                   _table[n] = require(folder.."/"..n) 
+               else
+                   require(folder.."/"..n)
+               end
+            else
+                for _, f in pairs(love.filesystem.getDirectoryItems(folder.."/"..v) do
+                   if string.find(f, ".lua") then
+                       local n = string.gsub(f, ".lua", "")
+                      if _table then 
+                         _table[n] = require(folder.."/"..n) 
+                      else
+                         require(folder.."/"..n)
+                      end
+                   end
+               end
             end
         end
     end
@@ -29,6 +44,7 @@ function love.load()
     love.graphics.setDefaultFilter("nearest")
 
     RequireFolder("lua")
+    RequireFolder("libs")
 end
 
 function love.update(dt)
