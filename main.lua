@@ -13,9 +13,9 @@ function RequireFolder(folder, _table)
                    if string.find(f, ".lua") then
                        local n = string.gsub(f, ".lua", "")
                       if _table then 
-                         _table[n] = require(folder.."/"..n) 
+                         _table[n] = require(folder.."/"..v.."/"..n) 
                       else
-                         require(folder.."/"..n)
+                         require(folder.."/"..v.."/"..n)
                       end
                    end
                end
