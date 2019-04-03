@@ -26,6 +26,7 @@ function Players:Load()
     self.P1.isDestroyed = false
     function self.P1:Destroy()
         self.isDestroyed = true
+        DestroyBase( Players.P1 )
     end
     
     self.P2 = {}
@@ -44,9 +45,8 @@ function Players:Load()
     self.P2.isDestroyed = false
     function self.P2:Destroy()
         self.isDestroyed = true
+        DestroyBase( Players.P2 )
     end
-
-    love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
 	
 	self:StartCoin(1, Game.GoldSecond)
 end
@@ -217,6 +217,8 @@ function Players:Key(k)
             self.P1.curUnit = self.P1.curUnit - 1
             if self.P1.curUnit <= 0 then self.P1.curUnit = #self.P1.units end
         end
+
+        --if k == "m" then DestroyBase( self.P1 ) end
     end
 
     -- CHEAT

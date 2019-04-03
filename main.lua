@@ -9,7 +9,7 @@ function RequireFolder(folder, _table)
                    require(folder.."/"..n)
                end
             else
-                for _, f in pairs(love.filesystem.getDirectoryItems(folder.."/"..v) do
+                for _, f in pairs(love.filesystem.getDirectoryItems(folder.."/"..v)) do
                    if string.find(f, ".lua") then
                        local n = string.gsub(f, ".lua", "")
                       if _table then 
@@ -43,8 +43,14 @@ function love.load()
 
     love.graphics.setDefaultFilter("nearest")
 
+    Libs = {}
+
+    love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
+
+    math.randomseed( os.time() )
+
     RequireFolder("lua")
-    RequireFolder("libs")
+    RequireFolder("libs", Libs)
 end
 
 function love.update(dt)
@@ -53,9 +59,13 @@ function love.update(dt)
 	
 	TimerUpdate( dt )
     UpdateAnims( dt )
+
+    Libs.shack:update( dt )
 end
 
 function love.draw()
+	Libs.shack:apply()
+
 	if Game.MenuState == 0 then
 		Map:Draw()
 

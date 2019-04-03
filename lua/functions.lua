@@ -100,3 +100,22 @@ function Reset()
 		if type(v) == "userdata" and v:isPlaying() then v:stop() end
 	end
 end
+
+function DestroyBase( ply )
+	if not ply.info.type == "Player" then return end
+	local minX, minY, maxX, maxY
+	if ply == Players.P1 then
+		minX = 0
+		maxX = 4
+		minY = 0
+		maxY = #Map.Maps[Map.CurrentMap]
+	else
+		minX = 18
+		maxX = #Map.Maps[Map.CurrentMap][1]
+		minY = 0
+		maxY = #Map.Maps[Map.CurrentMap]
+	end
+	TimerAdd( .1, true, function()
+		NewFX( Image["fx_dust_explosion"], math.random( minX, maxX )*Game.ImageSize, math.random( minY, maxY )*Game.ImageSize, .5, .125 )
+	end)
+end

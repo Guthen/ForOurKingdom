@@ -3,7 +3,7 @@ return
 	img = Image["Trou noir"], -- son nom d'image (sans l'extension)
 	name = "Trou Noir", -- son nom dans le jeu
 	hp = 10000, -- ses points de vie
-	dmg = 10000, -- ses points de dégats infligés
+	dmg = 500, -- ses points de dégats infligés
 	spd = 1.2, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0, -- en combien de secondes attaque t'il
 	cost = 50, -- combien l'unité coûte

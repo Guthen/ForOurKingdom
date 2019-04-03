@@ -30,9 +30,9 @@ function Menu:Load()
 end
 
 function Menu:Key(k)
-	if k == "down" then
+	if k == "down" or k == "s" then
 		self.cursor.id = self.cursor.id == #self.firstMenu and 0 or self.cursor.id + 1
-	elseif k == "up" then
+	elseif k == "up" or k == "z" then
 		self.cursor.id = self.cursor.id == 0 and #self.firstMenu or self.cursor.id - 1
 	elseif k == "return" then
 		self.firstMenu[self.cursor.id].func()

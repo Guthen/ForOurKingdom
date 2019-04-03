@@ -143,6 +143,9 @@ function Units:Add(typeUnit, x, y, scale)
 								self:Destroy()
 							end
 						end
+						Libs.shack:shake(Libs.shack:getShake()+self.info.dmg/5)
+					else
+						Libs.shack:shake(Libs.shack:getShake()+self.info.dmg/2)
 					end
 					TimerDestroy(self.timer)
 				end
@@ -229,7 +232,9 @@ function Units:Draw()
 		elseif v.scale == P2.scale then
 			love.graphics.setColor(P2.color.r, P2.color.g, P2.color.b)
 		end
-		love.graphics.printf(v.info.name.." ["..v.info.hp.."hp]", v.x-70, v.y-16, 200, "center")
+		local hp = " ["..v.info.hp.."hp]"
+		if v.info.hp >= 5000 then hp = "" end
+		love.graphics.printf(v.info.name..hp, v.x-70, v.y-16, 200, "center")
 
 		local offX = 0
 		if v.scale == P2.scale then offX = 32 end
