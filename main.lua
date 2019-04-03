@@ -32,7 +32,7 @@ function love.load()
     Game.Height = 704
     Game.ImageSize = 64
 	Game.MenuState = 1
-    Game.Title = "For Our Kingdom"
+    Game.Title = "ForOurKingdom"
 
     Game.PlayersHealth = 10000
     Game.GoldLimit = 50

@@ -26,6 +26,11 @@ function Map:Load()
 	end
 
 	Map:LoadMaps()
+
+	self.MapsID = {}
+	for k, _ in pairs(Map.Maps) do
+		table.insert( self.MapsID, k )
+	end
 end
 
 function Map:LoadMaps()
@@ -35,6 +40,10 @@ function Map:LoadMaps()
 			self.Maps[n] = require("maps/"..n)
 		end
 	end
+end
+
+function Map:RandomCurMap()
+	self.CurrentMap = self.MapsID[ math.random( #self.MapsID ) ]
 end
 
 function Map:Draw()

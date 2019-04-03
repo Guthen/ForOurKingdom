@@ -217,8 +217,6 @@ function Players:Key(k)
             self.P1.curUnit = self.P1.curUnit - 1
             if self.P1.curUnit <= 0 then self.P1.curUnit = #self.P1.units end
         end
-
-        --if k == "m" then DestroyBase( self.P1 ) end
     end
 
     -- CHEAT

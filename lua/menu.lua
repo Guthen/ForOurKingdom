@@ -34,7 +34,7 @@ function Menu:Load()
 		i = i + 1
 	end
 	self.MapX = 0
-	self.MapSpd = 15
+	self.MapSpd = 50
 end
 
 function Menu:Key(k)
@@ -45,6 +45,7 @@ function Menu:Key(k)
 	elseif k == "return" then
 		self.firstMenu[self.cursor.id].func()
 		Reset()
+		Map:RandomCurMap()
 	end
 end
 
