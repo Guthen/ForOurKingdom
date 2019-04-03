@@ -54,11 +54,15 @@ function love.load()
 end
 
 function love.update(dt)
-    Players:Update( dt )
-	Units:Update( dt )
+    if Game.MenuState == 0 then
+    	Players:Update( dt )
+		Units:Update( dt )
 	
-	TimerUpdate( dt )
-    UpdateAnims( dt )
+		TimerUpdate( dt )
+    	UpdateAnims( dt )
+    else
+    	Menu:Update( dt )
+    end
 
     Libs.shack:update( dt )
 end
