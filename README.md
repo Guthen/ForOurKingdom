@@ -1,9 +1,9 @@
 # ForOurKingdom
 
 This game is made by three of us :
-• Guthen (me :p)
-• AdrienLerhit 
-• Thefallen59 (please change this name)
++ Guthen (me :p)
++ AdrienLerhit 
++ Thefallen59 (please change this name)
 
 The game has been coded in Lua with the framework Löve2D.
 
