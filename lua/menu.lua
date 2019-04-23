@@ -37,6 +37,18 @@ function Menu:Load()
 	self.MapSpd = 50
 end
 
+function Menu:Create()
+	Game.MenuState = 1
+	
+	local pvp = UI:CreateButton( self.defX, self.defY, _, _, true )
+		  pvp.doClick = function()
+				Game.MenuState = 0
+				Reset()
+				Map:RandomCurMap()		
+				pvp:Remove()
+		  end
+end
+
 function Menu:Key(k)
 	if k == "down" or k == "s" then
 		self.cursor.id = self.cursor.id == #self.firstMenu and 0 or self.cursor.id + 1
@@ -69,9 +81,9 @@ function Menu:Draw()
 		end
 
 	end
-	for k, v in pairs(self.firstMenu) do
-		love.graphics.draw( v.img, self.defX, self.defY+90*k, 0, 1, 1, v.img:getWidth()/2, v.img:getHeight()/2 )
-	end
+	--for k, v in pairs(self.firstMenu) do
+	--	love.graphics.draw( v.img, self.defX, self.defY+90*k, 0, 1, 1, v.img:getWidth()/2, v.img:getHeight()/2 )
+	--end
 	love.graphics.rectangle( "fill", self.cursor.x, self.cursor.y+self.cursor.id*90, 25, 25 )
 end 
 

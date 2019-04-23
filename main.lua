@@ -31,7 +31,7 @@ function love.load()
     Game.Width = 1280
     Game.Height = 704
     Game.ImageSize = 64
-	Game.MenuState = 1
+	Game.MenuState = 0
     Game.Title = "ForOurKingdom"
 
     Game.PlayersHealth = 10000
@@ -51,6 +51,8 @@ function love.load()
 
     RequireFolder("lua")
     RequireFolder("libs", Libs)
+	
+	Menu:Create()
 end
 
 function love.update(dt)
@@ -82,6 +84,7 @@ function love.draw()
 		Menu:Draw()
 	end
 	
+	UI:Draw()	
 	--Image:Draw()
 end
 
@@ -101,7 +104,7 @@ function love.keypressed(k)
 		
 		if k == "escape" then
 			Reset()
-			Game.MenuState = 1
+			Menu:Create()
 		end
 	else
 		Menu:Key(k)
@@ -109,15 +112,9 @@ function love.keypressed(k)
 end
 
 function love.mousepressed(x, y, but)
-	--if Game.MenuState == 0 then
-	--	if but == 1 then
-	--		Players:LeftClick()
-	--	end
-	--end
+	UI:OnClick(x, y, but)
 end
 
 function love.wheelmoved(x, y)
-	--if Game.MenuState == 0 then
-	--	Players:WheelMoved(x, y)
-	--end
+
 end

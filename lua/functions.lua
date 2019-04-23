@@ -42,7 +42,6 @@ end
 ---------------------------------------------------------------------------]]
 
 function IsCollideX(ax, bx, aw, bw, isDist)
-	if not type(a) == "number" or not type(b) == "number" then return end
 	if not IsPositive(aw) and isDist then
 		aw = -aw
 		ax = ax - aw
@@ -51,6 +50,13 @@ function IsCollideX(ax, bx, aw, bw, isDist)
 	end
 	return ax < bx + bw and 
 		   bx < ax + aw
+end
+
+function IsCollide(ax, ay, bx, by, aw, ah, bw, bh)
+	return ax < bx + bw and 
+		   bx < ax + aw and
+		   ay < by + bh and
+		   by < ay + ah
 end
 
 --[[-------------------------------------------------------------------------
@@ -71,20 +77,12 @@ function IsPositive(n)
 end
 
 function GetPositive(n)
-	if n < 0 then
-		return -n
-	end 
-	return n
+	return n < 0 and -n or n
 end
 
 function Clamp(n, min, max)
 	if not type(n) == "number" then return end
-	if n > max then
-		n = max
-	elseif n < min then
-		n = min
-	end
-	return n
+	return n > max and max or n < min and min or n
 end
 
 --[[-------------------------------------------------------------------------
