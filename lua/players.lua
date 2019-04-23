@@ -35,7 +35,7 @@ function Players:Load()
         type = "Player",
         hp = Game.PlayersHealth,
     }
-    self.P2.x = 35
+    self.P2.x = 18
     self.P2.y = 0
     self.P2.units = {"Ascensorreur", "Trou noir", "Demonplante", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P2.curUnit = 1
@@ -60,8 +60,8 @@ function Players:Update(dt)
     --[[-------------------------------------------------------------------------
         PLAYER 2 CONTROL
     ---------------------------------------------------------------------------]]
-    self.P2.x = math.floor(love.mouse.getX()/Game.ImageSize)
-    self.P2.y = math.floor(love.mouse.getY()/Game.ImageSize)
+    --self.P2.x = math.floor(love.mouse.getX()/Game.ImageSize)
+    --self.P2.y = math.floor(love.mouse.getY()/Game.ImageSize)
 end
 
 function Players:Draw()
@@ -129,7 +129,7 @@ function Players:Draw()
     ---------------------------------------------------------------------------]]
     -- cursor
     love.graphics.setColor(self.P2.color.r, self.P2.color.g, self.P2.color.b)
-    love.graphics.draw(self.img, self.P2.x*Game.ImageSize, math.floor(self.P2.y)*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
+    love.graphics.draw(self.img, self.P2.x*Game.ImageSize, self.P2.y*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
     love.graphics.setColor(1, 1, 1)
 
@@ -219,25 +219,44 @@ function Players:Key(k)
         end
     end
 
+    --[[-------------------------------------------------------------------------
+        PLAYER 2 CONTROL
+    ---------------------------------------------------------------------------]]
+    -- DÉPLACEMENT
+    if not self.P2.isDestroyed then
+        if k == 'up' and self.P2.y > 0 then
+            self.P2.y = self.P2.y - 1
+        end
+        if k == 'down' and self.P2.y < 10 then
+            self.P2.y = self.P2.y + 1
+        end
+        if k == 'left' and self.P2.x > 0 then
+            self.P2.x = self.P2.x - 1
+        end
+        if k == 'right' and self.P2.x < 19 then
+            self.P2.x = self.P2.x + 1
+        end
+
+        -- DEPLOIEMENT ET CHANGEMENT D'UNITÉS
+    	if k == 'return' and Units.units[self.P2.units[self.P2.curUnit]].cost <= self.P2.gold then
+    		Units:Add(self.P2.units[self.P2.curUnit], 17*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
+    		self.P2.gold = self.P2.gold - Units.units[self.P2.units[self.P2.curUnit]].cost
+    	end
+        if k == '^' then
+            self.P2.curUnit = self.P2.curUnit + 1
+            if self.P2.curUnit > #self.P2.units then self.P2.curUnit = 1 end
+        end
+        if k == '$' then
+            self.P2.curUnit = self.P2.curUnit - 1
+            if self.P2.curUnit <= 0 then self.P2.curUnit = #self.P2.units end
+        end
+    end
+
     -- CHEAT
     if k == 'g' then
         self.P1.gold = self.P1.gold + 100
         self.P2.gold = self.P2.gold + 100
     end
-end
-
-function Players:LeftClick()
-    if self.P2.isDestroyed then return end
-	if Units.units[self.P2.units[self.P2.curUnit]].cost <= self.P2.gold then
-		Units:Add(self.P2.units[self.P2.curUnit], 17*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
-		self.P2.gold = self.P2.gold - Units.units[self.P2.units[self.P2.curUnit]].cost
-	end
-end
-
-function Players:WheelMoved(x, y)
-    self.P2.curUnit = self.P2.curUnit - y
-    if self.P2.curUnit <= 0 then self.P2.curUnit = #self.P2.units end
-    if self.P2.curUnit > #self.P2.units then self.P2.curUnit = 1 end
 end
 
 Players:Load()

@@ -109,15 +109,15 @@ function love.keypressed(k)
 end
 
 function love.mousepressed(x, y, but)
-	if Game.MenuState == 0 then
-		if but == 1 then
-			Players:LeftClick()
-		end
-	end
+	--if Game.MenuState == 0 then
+	--	if but == 1 then
+	--		Players:LeftClick()
+	--	end
+	--end
 end
 
 function love.wheelmoved(x, y)
-	if Game.MenuState == 0 then
-		Players:WheelMoved(x, y)
-	end
+	--if Game.MenuState == 0 then
+	--	Players:WheelMoved(x, y)
+	--end
 end

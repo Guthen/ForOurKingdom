@@ -93,6 +93,7 @@ end
 
 function Reset()
 	timers = {}
+	FX = {}
 	Units:Load()
 	Players:Load()
 
