@@ -6,7 +6,7 @@ return
 	dmg = 200,
 	spd = .40,
 	attackRate = 2,
-	cost = 19,
+	cost = 25,
 	isFly = false,
 	targetFly = false,
 	targetGround = true,
