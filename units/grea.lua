@@ -2,7 +2,7 @@ return
 {
 	img = Image["Grea"],
 	name = "Grea",
-	hp = 1200,
+	hp = 1500,
 	dmg = 125,
 	spd = .60,
 	attackRate = 1.25,
@@ -10,5 +10,5 @@ return
 	isFly = false,
 	targetFly = false,
 	targetGround = true,
-	followTarget = false,
+	followTarget = true,
 }
