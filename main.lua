@@ -66,6 +66,7 @@ function love.update(dt)
     	Menu:Update( dt )
     end
 
+    UI:Update( dt )
     Libs.shack:update( dt )
 end
 
