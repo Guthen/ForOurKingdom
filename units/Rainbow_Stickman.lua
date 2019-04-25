@@ -14,4 +14,7 @@ return
 	attackBase = true, -- s'il peut attaquer la base (optionnel)
 	canBeTarget = true, -- s'il peut être pris pour cible (optionnel)
 	animSpd = .06, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
+	beforeDraw = function()
+		love.graphics.setColor( math.random(), math.random(), math.random() )
+	end
 }
