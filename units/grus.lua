@@ -8,7 +8,7 @@ return
 	attackRate = 1.5,
 	cost = 12,
 	isFly = false,
-	targetFly = false,
+	targetFly = true,
 	targetGround = true,
 	followTarget = false,
 	range = 6,
