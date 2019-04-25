@@ -24,7 +24,7 @@ function Menu:Create()
 				Game.MenuState = 0
 				Reset()
 				Map:RandomCurMap()		
-				UI:ResetObject("Button")
+				UI:ResetObject()
 		  end
 
 	local pve = UI:CreateButton( self.defX-125, self.defY-37.5+90, 1, 1, true )
@@ -34,7 +34,7 @@ function Menu:Create()
 				Game.MenuState = 0
 				Reset()
 				Map:RandomCurMap()		
-				UI:ResetObject("Button")
+				UI:ResetObject()
 		  end
 
 	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1, true )

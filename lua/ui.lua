@@ -13,6 +13,8 @@ function UI:CreateButton(x, y, w, h, center)
 		y = y or 0,
 		w = w or 1,
 		h = h or 1,
+		sx = w or 1,
+		sy = h or 1,
 		doClick = print("UI: No function"),
 		removeOnClick = false,
 	}
@@ -23,7 +25,7 @@ function UI:CreateButton(x, y, w, h, center)
 	return but
 end
 
-function UI:CreateImage(x, y, w, h, img)
+function UI:CreateImage(x, y, sx, sy, img)
 	local _img = 
 	{
 		type = "Image",
@@ -31,8 +33,8 @@ function UI:CreateImage(x, y, w, h, img)
 		img = img,
 		x = x or 0,
 		y = y or 0,
-		w = w or 1,
-		h = h or 1,
+		sx = sx or 1,
+		sy = sy or 1
 	}
 	function _img:Remove()
 		table.remove( UI.Objects, id )
@@ -43,10 +45,14 @@ end
 
 -- > Object <  --
 
-function UI:ResetObject(id)
-	for k, v in pairs( self.Objects ) do
-		if v.type == id then table.remove( self.Objects, k ) end
+function UI:ResetObject(id) 
+	if id then
+		for k, v in pairs( self.Objects ) do
+			if id and v.type == id then table.remove( self.Objects, k ) end
+		end
+		return
 	end
+	self.Objects = {}
 end
 
 --	> Essential <  --
@@ -54,7 +60,7 @@ end
 function UI:Update(dt)
 	for _, v in pairs( self.Objects ) do
 		if v.type == "Button" then
-			--if v.img then v.w = v.img:getWidth() v.h = v.img:getHeight() end
+			if v.img then v.w = v.img:getWidth() v.h = v.img:getHeight() end
 		end
 	end
 end
@@ -73,8 +79,7 @@ end
 function UI:Draw()
 	for _, v in pairs( self.Objects ) do
 		if v.img then
-			print( v.w )
-			love.graphics.draw( v.img, v.x, v.y, 0, v.w, v.h )
+			love.graphics.draw( v.img, v.x, v.y, 0, v.sx, v.sy )
 		else
 			love.graphics.rectangle( "fill", v.x, v.y, v.w, v.h )
 		end

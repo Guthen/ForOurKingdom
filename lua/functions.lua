@@ -53,6 +53,7 @@ function IsCollideX(ax, bx, aw, bw, isDist)
 end
 
 function IsCollide(ax, ay, bx, by, aw, ah, bw, bh)
+	if not ax or not ay or not bx or not by or not aw or not ah or not bw or not bh then return end
 	return ax < bx + bw and 
 		   bx < ax + aw and
 		   ay < by + bh and
