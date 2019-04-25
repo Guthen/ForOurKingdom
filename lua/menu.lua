@@ -17,7 +17,7 @@ end
 function Menu:Create()
 	Game.MenuState = 1
 	
-	local pvp = UI:CreateButton( self.defX-125, self.defY-37.5, 0, 0, true )
+	local pvp = UI:CreateButton( self.defX-125, self.defY-37.5, 1, 1, true )
 		  pvp.removeOnClick = true
 		  pvp.img = Image[ "but_pvp" ]
 		  pvp.doClick = function( self )
@@ -27,7 +27,7 @@ function Menu:Create()
 				UI:ResetObject("Button")
 		  end
 
-	local pve = UI:CreateButton( self.defX-125, self.defY-37.5+90, 0, 0, true )
+	local pve = UI:CreateButton( self.defX-125, self.defY-37.5+90, 1, 1, true )
 		  pve.removeOnClick = true
 		  pve.img = Image[ "but_pve" ]
 		  pve.doClick = function( self )
@@ -37,12 +37,14 @@ function Menu:Create()
 				UI:ResetObject("Button")
 		  end
 
-	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+180, 0, 0, true )
+	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1, true )
 		  quit.removeOnClick = true
 		  quit.img = Image[ "but_quit" ]
 		  quit.doClick = function( self )
 				love.event.quit()
 		  end
+
+	local icon = UI:CreateImage( self.defX-175, self.defY-150, 1.2, 1.2, Image[ "fok" ] )
 end
 
 function Menu:Key(k)
