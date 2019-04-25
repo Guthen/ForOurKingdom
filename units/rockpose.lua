@@ -2,7 +2,7 @@ return
 {
 	img = Image["Rockpose"],
 	name = "Rockpose",
-	hp = 140,
+	hp = 150,
 	dmg = 35,
 	spd = 1,
 	attackRate = .5,

@@ -10,6 +10,6 @@ return
 	isFly = false,
 	targetFly = false,
 	targetGround = true,
-	followTarget = false,
+	followTarget = true,
 	animSpd = .12,
 }

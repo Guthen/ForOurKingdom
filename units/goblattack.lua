@@ -2,14 +2,14 @@ return
 {
 	img = Image["Goblattack"],
 	name = "Goblattack",
-	hp = 35,
-	dmg = 8,
+	hp = 50,
+	dmg = 15,
 	spd = 1.75,
 	attackRate = .5,
-	cost = 4,
+	cost = 5,
 	isFly = false,
 	targetFly = true,
 	targetGround = true,
 	followTarget = false,
-	range = 2
+	range = 3
 }
