@@ -3,7 +3,7 @@ return
 	img = Image["Grus"],
 	name = "Grus",
 	hp = 750,
-	dmg = 150,
+	dmg = 100,
 	spd = .5,
 	attackRate = 1.5,
 	cost = 12,
