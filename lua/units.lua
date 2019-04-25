@@ -45,6 +45,7 @@ function Units:Add(typeUnit, x, y, scale)
 			onSpawn = self.units[typeUnit].onSpawn,
 			onDestroyed = self.units[typeUnit].onDestroyed,
 			onEnemyKilled = self.units[typeUnit].onEnemyKilled,
+			beforeDraw = self.units[typeUnit].beforeDraw,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -240,6 +241,8 @@ function Units:Draw()
 		if v.scale == P2.scale then offX = 32 end
 
 		love.graphics.setColor(1, 1, 1)
+		
+		if v.info.beforeDraw then v.info.beforeDraw() end
 
 		if v.anim then
 			love.graphics.draw(v.info.img, v.anim.quads[v.anim.quad], v.x, v.y, 0, v.scale*Game.ImageSize/32, Game.ImageSize/32, offX)
