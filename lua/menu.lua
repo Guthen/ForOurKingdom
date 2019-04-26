@@ -41,7 +41,7 @@ function Menu:Create()
 				Map:RandomCurMap()		
 				UI:ResetObject()
 		  end
-	
+
 	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1 )
 		  inv.removeOnClick = false
 		  inv.img = Image[ "but_inv" ]
