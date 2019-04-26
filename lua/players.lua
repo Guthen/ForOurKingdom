@@ -18,16 +18,7 @@ function Players:Load()
     }
     self.P1.x = 4
     self.P1.y = 0
-    self.P1.units = 
-    {
-        "greu",
-        "grus",
-        "goblex",
-        "goblattack",
-        "rockpose",
-        "roco",
-        "slapher",
-    }
+    self.P1.units = {"Devoggs","Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 1
@@ -46,16 +37,7 @@ function Players:Load()
     }
     self.P2.x = 18
     self.P2.y = 0
-    self.P2.units = 
-    {
-        "greu",
-        "grus",
-        "goblex",
-        "goblattack",
-        "rockpose",
-        "roco",
-        "slapher",
-    }
+    self.P2.units = {"Devoggs","Stickman" , "Rainbow_Stickman", "Ascensorreur", "Trou noir", "Demonplante", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 1
@@ -201,18 +183,7 @@ function Players:Draw()
         love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
     end
     love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
-
-    r, g, b, a = love.graphics.getColor( )
-
-    love.graphics.rectangle("line", 100 , 570 , 100 , 25)
-    love.graphics.setColor(255,0,0)
-    love.graphics.rectangle("fill", 100 , 570 , self.P1.info.hp / Game.PlayersHealth *100 , 25)
-    love.graphics.setColor(255,255,255)
-    love.graphics.rectangle("line", 1150 , 570 , 100 , 25)
-    love.graphics.setColor(255,0,0)
-    love.graphics.rectangle("fill", 1150 , 570 , self.P1.info.hp / Game.PlayersHealth *100 , 25)
 end
-
 
 function Players:Key(k)
     --[[-------------------------------------------------------------------------
