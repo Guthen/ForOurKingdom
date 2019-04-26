@@ -183,6 +183,24 @@ function Players:Draw()
         love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
     end
     love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
+
+    love.graphics.rectangle("line", 100, 570, 100, 25)
+
+love.graphics.setColor(255,0,0)
+
+    love.graphics.rectangle("fill", 100, 570, 100, 25)
+
+love.graphics.setColor(255,255,255)
+
+    love.graphics.rectangle("line", 1150, 570, 100, 25)
+
+love.graphics.setColor(255,0,0)
+
+    love.graphics.rectangle("fill", 1150, 570, 100, 25)
+
+
+
+
 end
 
 function Players:Key(k)
@@ -254,8 +272,8 @@ function Players:Key(k)
 
     -- CHEAT
     if k == 'g' then
-        self.P1.gold = self.P1.gold + 100
-        self.P2.gold = self.P2.gold + 100
+        self.P1.gold = self.P1.gold + 75
+        self.P2.gold = self.P2.gold + 75
     end
 end
 
