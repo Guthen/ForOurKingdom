@@ -1,7 +1,7 @@
 return
 {
-	img = Image["Trou noir"], -- son nom d'image (sans l'extension)
-	name = "Trou Noir", -- son nom dans le jeu
+	img = Image["devoggs"], -- son nom d'image (sans l'extension)
+	name = "Devoggs", -- son nom dans le jeu
 	hp = 100000, -- ses points de vie
 	dmg = 50000, -- ses points de dégats infligés
 	spd = 1.5, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)

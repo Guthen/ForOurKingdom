@@ -10,8 +10,9 @@ function Menu:Load()
 		self.Maps[i] = v
 		i = i + 1
 	end
+	table.insert( self.Maps, Map.Maps[1] )
 	self.MapX = 0
-	self.MapSpd = 50
+	self.MapSpd = 100
 end
 
 function Menu:Create()
@@ -87,6 +88,7 @@ function Menu:CreatePlayerInventory()
 end
 
 function Menu:CreateInventory( ply )
+	if not ply then return end
 	UI:ResetObject()
 
 	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
@@ -96,18 +98,48 @@ function Menu:CreateInventory( ply )
 		  	   	Menu:CreatePlayerInventory()
 		  end
 
+	local Buts = {}
+		  Buts.units = {}
+		  Buts.inv = {}
+
+	local _id = 1
+
 	local _x, _y = 0, 0
+	for i = 0, 6 do
+		local slot = UI:CreateImage( self.defX*.58+72*i-2, self.defY*.5-2, 1, 1, Image[ "slot" ] )
+			  slot.color = ply.color
+	end
+	for k, v in pairs( ply.units ) do
+
+		Buts.units[_id] = UI:CreateButton( self.defX*.58+72*_x, self.defY*.5+72*_y, 2, 2 )
+		Buts.units[_id].img = Units.units[v].img
+		Buts.units[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, Units.units[v].img:getWidth(), Units.units[v].img:getHeight() )
+		Buts.units[_id].removeOnClick = true
+		Buts.units[_id].doClick = function()
+			ply.units[k] = nil
+		end
+
+		_x = _x + 1
+		_id = _id + 1
+
+	end
+
+	local _offX, _offY = 0, 100
+	_x, _y = 0, 0
 	for k, v in pairs( Units.units ) do
 
-		local slot = UI:CreateImage( self.defX*.35+72*_x-2, self.defY*.5+72*_y-2, 1, 1, Image[ "slot" ] )
+		local slot = UI:CreateImage( self.defX*.35+72*_x-2+_offX, self.defY*.5+72*_y-2+_offY, 1, 1, Image[ "slot" ] )
 			  slot.color = ply.color
 
-		local unit = UI:CreateButton( self.defX*.35+72*_x, self.defY*.5+72*_y, 2, 2 )
-			  unit.img = v.img
-			  unit.quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
-			  unit.doClick = function()
+		Buts.inv[_id] = UI:CreateButton( self.defX*.35+72*_x+_offX, self.defY*.5+72*_y+_offY, 2, 2 )
+		Buts.inv[_id].img = v.img
+		Buts.inv[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+		Buts.inv[_id].doClick = function()
+			if #ply.units >= 7 or ply.units[k] then return end
+			table.insert( ply.units, k )
+		end
 
-			  end
+		_id = _id + 1
 
 		_x = _x + 1
 		if _x > 10 then _y = _y + 1 _x = 0 end
