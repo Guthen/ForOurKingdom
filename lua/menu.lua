@@ -22,6 +22,8 @@ function Menu:Create()
 	Game.MenuState = 1
 	
 	local icon = UI:CreateImage( self.defX-175, self.defY-150, 1.2, 1.2, Image[ "fok" ] )
+	local P1control = UI:CreateImage( self.defX-465, self.defY-37.5+90, 1, 1, Image[ "P1control" ] )
+	local P2control = UI:CreateImage( self.defX+335, self.defY-37.5+90, 1, 1, Image[ "P2control" ] )
 
 	local pvp = UI:CreateButton( self.defX-125, self.defY-37.5, 1, 1 )
 		  pvp.removeOnClick = true
