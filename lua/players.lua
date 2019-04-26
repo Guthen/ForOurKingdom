@@ -283,8 +283,8 @@ function Players:Key(k)
 
     -- CHEAT
     if k == 'g' then
-        self.P1.gold = self.P1.gold + 100
-        self.P2.gold = self.P2.gold + 100
+        self.P1.gold = self.P1.gold + 75
+        self.P2.gold = self.P2.gold + 75
     end
 end
 
