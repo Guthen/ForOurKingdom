@@ -38,10 +38,10 @@ function Menu:Create()
 		  end
 	
 	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1, true )
-		  pvp.removeOnClick = true
-		  pvp.img = Image[ "but_inventaire" ]
-		  pvp.doClick = function( self )
-				Game.MenuState = -1	
+		  inv.removeOnClick = true
+		  inv.img = Image[ "but_inventaire" ]
+		  inv.doClick = function( self )
+				Game.MenuState = -1			
 				UI:ResetObject()
 		  end
 	
