@@ -188,7 +188,7 @@ function Players:Draw()
 
 love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 100, 570, 100, 25)
+    love.graphics.rectangle("fill", 100, 570, self.P1.info.hp/Game.PlayersHealth*100, 25)
 
 love.graphics.setColor(255,255,255)
 
@@ -196,7 +196,7 @@ love.graphics.setColor(255,255,255)
 
 love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 1150, 570, 100, 25)
+    love.graphics.rectangle("fill", 1150, 570, self.P2.info.hp/Game.PlayersHealth*100, 25)
 
 
 
