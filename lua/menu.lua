@@ -36,8 +36,17 @@ function Menu:Create()
 				Map:RandomCurMap()		
 				UI:ResetObject()
 		  end
+	
+	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1, true )
+		  pvp.removeOnClick = true
+		  pvp.img = Image[ "but_inventaire" ]
+		  pvp.doClick = function( self )
+				Game.MenuState = -1	
+				UI:ResetObject()
+		  end
+	
 
-	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1, true )
+	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+270, 1, 1, true )
 		  quit.removeOnClick = true
 		  quit.img = Image[ "but_quit" ]
 		  quit.doClick = function( self )
