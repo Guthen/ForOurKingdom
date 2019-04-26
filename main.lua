@@ -36,7 +36,7 @@ function love.load()
 
     Game.PlayersHealth = 10000
     Game.GoldLimit = 75
-    Game.GoldSecond = 3
+    Game.GoldSecond = 4
 
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
