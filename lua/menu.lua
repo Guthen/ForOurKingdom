@@ -15,9 +15,14 @@ function Menu:Load()
 end
 
 function Menu:Create()
+	UI:ResetObject()
+	self.MapX = 0
+
 	Game.MenuState = 1
 	
-	local pvp = UI:CreateButton( self.defX-125, self.defY-37.5, 1, 1, true )
+	local icon = UI:CreateImage( self.defX-175, self.defY-150, 1.2, 1.2, Image[ "fok" ] )
+
+	local pvp = UI:CreateButton( self.defX-125, self.defY-37.5, 1, 1 )
 		  pvp.removeOnClick = true
 		  pvp.img = Image[ "but_pvp" ]
 		  pvp.doClick = function( self )
@@ -27,7 +32,7 @@ function Menu:Create()
 				UI:ResetObject()
 		  end
 
-	local pve = UI:CreateButton( self.defX-125, self.defY-37.5+90, 1, 1, true )
+	local pve = UI:CreateButton( self.defX-125, self.defY-37.5+90, 1, 1 )
 		  pve.removeOnClick = true
 		  pve.img = Image[ "but_pve" ]
 		  pve.doClick = function( self )
@@ -37,23 +42,78 @@ function Menu:Create()
 				UI:ResetObject()
 		  end
 	
-	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1, true )
-		  pvp.removeOnClick = true
-		  pvp.img = Image[ "but_inventaire" ]
-		  pvp.doClick = function( self )
+	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1 )
+		  inv.removeOnClick = false
+		  inv.img = Image[ "but_inv" ]
+		  inv.doClick = function( self )
 				Game.MenuState = -1	
-				UI:ResetObject()
+				Menu:CreatePlayerInventory()
 		  end
 	
 
-	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+270, 1, 1, true )
+	local quit = UI:CreateButton( self.defX-125, self.defY-37.5+270, 1, 1 )
 		  quit.removeOnClick = true
 		  quit.img = Image[ "but_quit" ]
 		  quit.doClick = function( self )
 				love.event.quit()
 		  end
 
-	local icon = UI:CreateImage( self.defX-175, self.defY-150, 1.2, 1.2, Image[ "fok" ] )
+end
+
+function Menu:CreatePlayerInventory()
+	UI:ResetObject()
+
+	local ply1 = UI:CreateButton( self.defX-125, self.defY-37.5, 1, 1 )
+		  ply1.removeOnClick = false
+		  ply1.img = Image[ "but_p1" ]
+		  ply1.doClick = function( self )
+		  	   	Menu:CreateInventory( Players.P1 )
+		  end
+
+	local ply2 = UI:CreateButton( self.defX-125, self.defY-37.5+90, 1, 1 )
+		  ply2.removeOnClick = false
+		  ply2.img = Image[ "but_p2" ]
+		  ply2.doClick = function( self )
+		  	   	Menu:CreateInventory( Players.P2 )
+		  end
+
+	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
+		  back.removeOnClick = false
+		  back.img = Image[ "but_back" ]
+		  back.doClick = function( self )
+		  	   	Menu:Create()
+		  end
+
+end
+
+function Menu:CreateInventory( ply )
+	UI:ResetObject()
+
+	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
+		  back.removeOnClick = false
+		  back.img = Image[ "but_back" ]
+		  back.doClick = function( self )
+		  	   	Menu:CreatePlayerInventory()
+		  end
+
+	local _x, _y = 0, 0
+	for k, v in pairs( Units.units ) do
+
+		local slot = UI:CreateImage( self.defX*.35+72*_x-2, self.defY*.5+72*_y-2, 1, 1, Image[ "slot" ] )
+			  slot.color = ply.color
+
+		local unit = UI:CreateButton( self.defX*.35+72*_x, self.defY*.5+72*_y, 2, 2 )
+			  unit.img = v.img
+			  unit.quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+			  unit.doClick = function()
+
+			  end
+
+		_x = _x + 1
+		if _x > 10 then _y = _y + 1 _x = 0 end
+
+	end
+
 end
 
 function Menu:Key(k)
