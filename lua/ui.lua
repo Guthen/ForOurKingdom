@@ -3,43 +3,46 @@ UI.Objects = {}
 
 --	> Create <  --
 
-function UI:CreateButton(x, y, w, h, center)
-	local but = 
+function UI:CreateButton(x, y, w, h)
+	local _but = 
 	{
 		type = "Button",
-		id = #self.Objects,
+		id = #self.Objects+1,
 		img = nil,
+		quad = nil,
 		x = x or 0,
 		y = y or 0,
 		w = w or 1,
 		h = h or 1,
 		sx = w or 1,
 		sy = h or 1,
-		doClick = print("UI: No function"),
+		doClick = function() print("UI: No function") end,
 		removeOnClick = false,
+		color = {r = 1, g = 1, b = 1, a = 1},
 	}
-	function but:Remove()
-		table.remove( UI.Objects, id )
+	function _but:Remove()
+		RemoveValueFromTable( UI.Objects, self )
 	end
-	table.insert( self.Objects, but )
-	return but
+	self.Objects[_but.id] = _but
+	return _but
 end
 
 function UI:CreateImage(x, y, sx, sy, img)
 	local _img = 
 	{
 		type = "Image",
-		id = #self.Objects,
+		id = #self.Objects+1,
 		img = img,
 		x = x or 0,
 		y = y or 0,
 		sx = sx or 1,
-		sy = sy or 1
+		sy = sy or 1,
+		color = {r = 1, g = 1, b = 1, a = 1},
 	}
 	function _img:Remove()
-		table.remove( UI.Objects, id )
+		RemoveValueFromTable( UI.Objects, self )
 	end
-	table.insert( self.Objects, _img )
+	self.Objects[_img.id] = _img
 	return _img
 end
 
@@ -60,7 +63,7 @@ end
 function UI:Update(dt)
 	for _, v in pairs( self.Objects ) do
 		if v.type == "Button" then
-			if v.img then v.w = v.img:getWidth() v.h = v.img:getHeight() end
+			if v.img then v.w = v.img:getWidth()*v.sx v.h = v.img:getHeight()*v.sy end
 		end
 	end
 end
@@ -78,10 +81,15 @@ end
 
 function UI:Draw()
 	for _, v in pairs( self.Objects ) do
+		love.graphics.setColor( v.color.r or 1, v.color.g or 1, v.color.b or 1, v.color.a or .5 )
 		if v.img then
-			love.graphics.draw( v.img, v.x, v.y, 0, v.sx, v.sy )
+			if v.quad then
+				love.graphics.draw( v.img, v.quad, v.x, v.y, 0, v.sx, v.sy )
+			else
+				love.graphics.draw( v.img, v.x, v.y, 0, v.sx, v.sy )
+			end
 		else
-			love.graphics.rectangle( "fill", v.x, v.y, v.w, v.h )
+			love.graphics.rectangle( "fill", v.x or 0, v.y or 0, v.w or 100, v.h or 25 )
 		end
 	end
 end

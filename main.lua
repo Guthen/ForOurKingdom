@@ -35,8 +35,9 @@ function love.load()
     Game.Title = "ForOurKingdom"
 
     Game.PlayersHealth = 10000
-    Game.GoldLimit = 50
-    Game.GoldSecond = 3
+    Game.GoldLimit = 75
+    Game.GoldSecond = 4
+    Game.UnitsLimit = 7
 
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
