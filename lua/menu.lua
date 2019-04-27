@@ -22,8 +22,8 @@ function Menu:Create()
 	Game.MenuState = 1
 	
 	local icon = UI:CreateImage( self.defX-175, self.defY-150, 1.2, 1.2, Image[ "fok" ] )
-	local P1control = UI:CreateImage( self.defX-465, self.defY-37.5+90, 1, 1, Image[ "P1control" ] )
-	local P2control = UI:CreateImage( self.defX+335, self.defY-37.5+90, 1, 1, Image[ "P2control" ] )
+	local P1control = UI:CreateImage( self.defX*.02, self.defY*2.4, 2, 2, Image[ "P1control" ] )
+	local P2control = UI:CreateImage( self.defX*1.6, self.defY*2.4, 2, 2, Image[ "P2control" ] )
 
 	local pvp = UI:CreateButton( self.defX-125, self.defY-37.5, 1, 1 )
 		  pvp.removeOnClick = true
@@ -107,18 +107,21 @@ function Menu:CreateInventory( ply )
 	local _id = 1
 
 	local _x, _y = 0, 0
+	-- show deck slot
 	for i = 0, 6 do
 		local slot = UI:CreateImage( self.defX*.58+72*i-2, self.defY*.5-2, 1, 1, Image[ "slot" ] )
 			  slot.color = ply.color
 	end
+	-- show deck units
 	for k, v in pairs( ply.units ) do
 
 		Buts.units[_id] = UI:CreateButton( self.defX*.58+72*_x, self.defY*.5+72*_y, 2, 2 )
 		Buts.units[_id].img = Units.units[v].img
 		Buts.units[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, Units.units[v].img:getWidth(), Units.units[v].img:getHeight() )
-		Buts.units[_id].removeOnClick = true
-		Buts.units[_id].doClick = function()
+		Buts.units[_id].removeOnClick = false
+		Buts.units[_id].doClick = function( self )
 			ply.units[k] = nil
+			self.draw = false
 		end
 
 		_x = _x + 1
@@ -128,6 +131,7 @@ function Menu:CreateInventory( ply )
 
 	local _offX, _offY = 0, 100
 	_x, _y = 0, 0
+	-- show every units
 	for k, v in pairs( Units.units ) do
 
 		local slot = UI:CreateImage( self.defX*.35+72*_x-2+_offX, self.defY*.5+72*_y-2+_offY, 1, 1, Image[ "slot" ] )

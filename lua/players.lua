@@ -48,6 +48,13 @@ function Players:Load()
         DestroyBase( Players.P2 )
     end
 	
+    while #self.P1.units > Game.UnitsLimit do
+        table.remove( self.P1.units, Game.UnitsLimit+1 )
+    end
+    while #self.P2.units > Game.UnitsLimit do
+        table.remove( self.P2.units, Game.UnitsLimit+1 )
+    end
+
 	self:StartCoin(1, Game.GoldSecond)
 end
 
@@ -184,19 +191,21 @@ function Players:Draw()
     end
     love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
 
+    -- Health Bar
+
     love.graphics.rectangle("line", 100, 570, 100, 25)
 
-love.graphics.setColor(255,0,0)
+    love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 100, 570, self.P1.info.hp/Game.PlayersHealth*100, 25)
+    love.graphics.rectangle("fill", 100, 570, Clamp(self.P1.info.hp/Game.PlayersHealth*100, 0, 100), 25)
 
-love.graphics.setColor(255,255,255)
+    love.graphics.setColor(255,255,255)
 
     love.graphics.rectangle("line", 1150, 570, 100, 25)
 
-love.graphics.setColor(255,0,0)
+    love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 1150, 570, self.P2.info.hp/Game.PlayersHealth*100, 25)
+    love.graphics.rectangle("fill", 1150, 570, Clamp(self.P2.info.hp/Game.PlayersHealth*100, 0, 100), 25)
 
 
 
@@ -272,8 +281,8 @@ function Players:Key(k)
 
     -- CHEAT
     if k == 'g' then
-        self.P1.gold = self.P1.gold + 75
-        self.P2.gold = self.P2.gold + 75
+        self.P1.gold = Clamp(self.P1.gold + 75, 0, Game.GoldLimit)
+        self.P2.gold = Clamp(self.P2.gold + 75, 0, Game.GoldLimit)
     end
 end
 
