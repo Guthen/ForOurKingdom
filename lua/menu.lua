@@ -62,6 +62,20 @@ function Menu:Create()
 				love.event.quit()
 		  end
 
+	--  > Social Network <  --
+
+	local discord = UI:CreateButton( self.defX+4, self.defY-32*-14, 1, 1 )
+		  discord.img = Image[ "discord" ]
+		  discord.doClick = function( self )
+				love.system.openURL( "https://discord.gg/KmTNjvn" )
+		  end
+
+	local github = UI:CreateButton( self.defX-68, self.defY-32*-14, 1, 1 )
+		  github.img = Image[ "github" ]
+		  github.doClick = function( self )
+				love.system.openURL( "https://github.com/Guthen/ForOurKingdom" )
+		  end
+
 end
 
 function Menu:CreatePlayerInventory()
