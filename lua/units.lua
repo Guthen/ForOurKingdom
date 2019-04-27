@@ -22,30 +22,33 @@ end
 
 function Units:Add(typeUnit, x, y, scale)
 	if not self.units[typeUnit] then return print("Units:Add() : #1 argument is wrong !") end
+	local unit = self.units[typeUnit]
 	local u = 
 	{
 		info = 
 		{
-			img = self.units[typeUnit].img,
-			name = self.units[typeUnit].name,
-			hp = self.units[typeUnit].hp,
-			dmg = self.units[typeUnit].dmg,
-			spd = self.units[typeUnit].spd,
-			attackRate = self.units[typeUnit].attackRate,
-			cost = self.units[typeUnit].cost,
-			isFly = self.units[typeUnit].isFly,
-			targetFly = self.units[typeUnit].targetFly,
-			targetGround = self.units[typeUnit].targetGround,
-			followTarget = self.units[typeUnit].followTarget,
-			attackBase = self.units[typeUnit].attackBase,
-			canBeTarget = self.units[typeUnit].canBeTarget,
-			animSpd = self.units[typeUnit].animSpd,
-			animActive = self.units[typeUnit].animActive,
-			range = self.units[typeUnit].range,
-			onSpawn = self.units[typeUnit].onSpawn,
-			onDestroyed = self.units[typeUnit].onDestroyed,
-			onEnemyKilled = self.units[typeUnit].onEnemyKilled,
-			beforeDraw = self.units[typeUnit].beforeDraw,
+			img = unit.img,
+			name = unit.name,
+			hp = unit.hp,
+			dmg = unit.dmg,
+			spd = unit.spd,
+			spdY = unit.spdY,
+			attackRate = unit.attackRate,
+			cost = unit.cost,
+			isFly = unit.isFly,
+			targetFly = unit.targetFly,
+			targetGround = unit.targetGround,
+			followTarget = unit.followTarget,
+			attackBase = unit.attackBase,
+			canBeTarget = unit.canBeTarget,
+			animSpd = unit.animSpd,
+			animActive = unit.animActive,
+			range = unit.range,
+			onSpawn = unit.onSpawn,
+			onDestroyed = unit.onDestroyed,
+			onEnemyKilled = unit.onEnemyKilled,
+			beforeDraw = unit.beforeDraw,
+			spawnAtCursor = unit.spawnAtCursor,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -174,6 +177,7 @@ function Units:Update(dt)
 	for k, v in pairs(self.igUnits) do
 		if v.canMove then
 			v.x = v.x + v.info.spd * v.scale -- move
+			--if v.info.spdY then v.y = v.y + v.info.spdY * v.scale end
 		elseif v.attack and v.info.followTarget and v.target and not v.target.info.followTarget and v.target.canMove then -- follow enemy
 			if not IsCollideX(v.x, v.target.x, v.w, v.target.w) and v.target.x < v.x then
 				v.x = v.x - v.info.spd

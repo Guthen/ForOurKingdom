@@ -233,7 +233,8 @@ function Players:Key(k)
 
         -- DEPLOIEMENT ET CHANGEMENT D'UNITÉS
     	if k == 'f' and Units.units[self.P1.units[self.P1.curUnit]].cost <= self.P1.gold then
-    		Units:Add(self.P1.units[self.P1.curUnit], 2*Game.ImageSize, self.P1.y*Game.ImageSize, self.P1.scale)
+            local x = Units.units[self.P1.units[self.P1.curUnit]].spawnAtCursor and self.P1.x*Game.ImageSize or 2*Game.ImageSize
+    		Units:Add(self.P1.units[self.P1.curUnit], x, self.P1.y*Game.ImageSize, self.P1.scale)
     		self.P1.gold = self.P1.gold - Units.units[self.P1.units[self.P1.curUnit]].cost
     	end
         if k == 'e' then
@@ -266,7 +267,8 @@ function Players:Key(k)
 
         -- DEPLOIEMENT ET CHANGEMENT D'UNITÉS
     	if k == 'return' and Units.units[self.P2.units[self.P2.curUnit]].cost <= self.P2.gold then
-    		Units:Add(self.P2.units[self.P2.curUnit], 17*Game.ImageSize, self.P2.y*Game.ImageSize, self.P2.scale)
+            local x = Units.units[self.P2.units[self.P2.curUnit]].spawnAtCursor and self.P2.x*Game.ImageSize or 17*Game.ImageSize
+    		Units:Add(self.P2.units[self.P2.curUnit], x, self.P2.y*Game.ImageSize, self.P2.scale)
     		self.P2.gold = self.P2.gold - Units.units[self.P2.units[self.P2.curUnit]].cost
     	end
         if k == '^' then
