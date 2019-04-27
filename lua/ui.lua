@@ -1,5 +1,6 @@
 UI = {}
 UI.Objects = {}
+UI.CanClick = true
 
 --	> Create <  --
 
@@ -12,13 +13,15 @@ function UI:CreateButton(x, y, w, h)
 		quad = nil,
 		x = x or 0,
 		y = y or 0,
-		w = w or 1,
-		h = h or 1,
+		w = w or 100,
+		h = h or 25,
 		sx = w or 1,
 		sy = h or 1,
 		doClick = function() print("UI: No function") end,
 		removeOnClick = false,
 		draw = true,
+		isUnit = false,
+		useCooldown = true,
 		color = {r = 1, g = 1, b = 1, a = 1},
 	}
 	function _but:Remove()
@@ -65,7 +68,10 @@ end
 function UI:Update(dt)
 	for _, v in pairs( self.Objects ) do
 		if v.type == "Button" then
-			if v.img then v.w = v.img:getWidth()*v.sx v.h = v.img:getHeight()*v.sy end
+			if v.img then 
+				v.w = v.isUnit and 32*v.sx or v.img:getWidth()*v.sx 
+				v.h = v.isUnit and 32*v.sy or v.img:getHeight()*v.sy 
+			end
 		end
 	end
 end
@@ -73,9 +79,11 @@ end
 function UI:OnClick(x, y, clk)
 	if clk == 1 then
 		for _, v in pairs( self.Objects ) do
-			if IsCollide( v.x, v.y, x, y, v.w, v.h, 1, 1 ) then
+			if self.CanClick and IsCollide( v.x, v.y, x, y, v.w, v.h, 1, 1 ) then
 				v.doClick( v )
 				if v.removeOnClick then v:Remove() end
+				UI.CanClick = false
+				TimerAdd( .2, false, function() self.CanClick = true end )
 			end
 		end
 	end

@@ -73,6 +73,21 @@ function RemoveValueFromTable(_table, _value)
 	end
 end
 
+function PrintTable(_table)
+	if not _table or not type(_table) == "table" then return end
+	for k, v in pairs(_table) do
+		print(k,v)
+	end
+end
+
+function table.HasValue(_table, _value)
+	if not _table or not type(_table) == "table" then return end
+	for _, v in pairs( _table ) do
+		if v == _value then return true end
+	end
+	return false
+end
+
 function IsPositive(n)
 	return n > 0
 end
@@ -93,6 +108,7 @@ end
 function Reset()
 	timers = {}
 	FX = {}
+	UI.CanClick = true
 	Units:Load()
 	Players:Load()
 

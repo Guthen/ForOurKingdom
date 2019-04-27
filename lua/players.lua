@@ -1,4 +1,8 @@
 Players = {}
+Players.P1 = {}
+Players.P2 = {}
+Players.P1.units = {"Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
+Players.P2.units = {"Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
 
 function Players:StartCoin(s, g)
 	self.coinTimer = TimerAdd(s, true, function()
@@ -10,7 +14,6 @@ end
 function Players:Load()
     self.img = Image["cursor"]
 
-    self.P1 = {}
     self.P1.info = 
     {
         type = "Player",
@@ -18,7 +21,6 @@ function Players:Load()
     }
     self.P1.x = 4
     self.P1.y = 0
-    self.P1.units = {"Devoggs" , "Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P1.curUnit = 1
     self.P1.color = {r = .1, g = .1, b = .75}
     self.P1.gold = 1
@@ -28,8 +30,7 @@ function Players:Load()
         self.isDestroyed = true
         DestroyBase( Players.P1 )
     end
-    
-    self.P2 = {}
+
     self.P2.info = 
     {
         type = "Player",
@@ -37,7 +38,6 @@ function Players:Load()
     }
     self.P2.x = 18
     self.P2.y = 0
-    self.P2.units = {"Devoggs" , "Stickman" , "Rainbow_Stickman", "Ascensorreur", "Trou noir", "Demonplante", "greu", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
     self.P2.curUnit = 1
     self.P2.color = {r = .75, g = .1, b = .1}
     self.P2.gold = 1

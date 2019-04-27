@@ -10,9 +10,10 @@ function Menu:Load()
 		self.Maps[i] = v
 		i = i + 1
 	end
-	table.insert( self.Maps, Map.Maps[1] )
+	table.insert( self.Maps, self.Maps[0] )
+	self.MapLimit = #self.Maps*Game.Width
 	self.MapX = 0
-	self.MapSpd = 100
+	self.MapSpd = 75
 end
 
 function Menu:Create()
@@ -103,25 +104,28 @@ function Menu:CreateInventory( ply )
 	local Buts = {}
 		  Buts.units = {}
 		  Buts.inv = {}
+		  Buts.void = {}
 
 	local _id = 1
 
 	local _x, _y = 0, 0
 	-- show deck slot
 	for i = 0, 6 do
-		local slot = UI:CreateImage( self.defX*.58+72*i-2, self.defY*.5-2, 1, 1, Image[ "slot" ] )
+		local slot = UI:CreateImage( self.defX*.58+76*i-2, self.defY*.5-2, 1, 1, Image[ "slot" ] )
 			  slot.color = ply.color
 	end
 	-- show deck units
 	for k, v in pairs( ply.units ) do
 
-		Buts.units[_id] = UI:CreateButton( self.defX*.58+72*_x, self.defY*.5+72*_y, 2, 2 )
+		Buts.units[_id] = UI:CreateButton( self.defX*.58+76*_x, self.defY*.5+76*_y, 2, 2 )
 		Buts.units[_id].img = Units.units[v].img
 		Buts.units[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, Units.units[v].img:getWidth(), Units.units[v].img:getHeight() )
-		Buts.units[_id].removeOnClick = false
+		Buts.units[_id].isUnit = true
 		Buts.units[_id].doClick = function( self )
-			ply.units[k] = nil
+			if not self.draw then return end
+			RemoveValueFromTable( ply.units, v )
 			self.draw = false
+			table.insert( Buts.void, k )
 		end
 
 		_x = _x + 1
@@ -134,15 +138,22 @@ function Menu:CreateInventory( ply )
 	-- show every units
 	for k, v in pairs( Units.units ) do
 
-		local slot = UI:CreateImage( self.defX*.35+72*_x-2+_offX, self.defY*.5+72*_y-2+_offY, 1, 1, Image[ "slot" ] )
+		local slot = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 1, 1, Image[ "slot" ] )
 			  slot.color = ply.color
 
-		Buts.inv[_id] = UI:CreateButton( self.defX*.35+72*_x+_offX, self.defY*.5+72*_y+_offY, 2, 2 )
+		Buts.inv[_id] = UI:CreateButton( self.defX*.35+76*_x+_offX, self.defY*.5+76*_y+_offY, 2, 2 )
 		Buts.inv[_id].img = v.img
 		Buts.inv[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+		Buts.inv[_id].isUnit = true
 		Buts.inv[_id].doClick = function()
-			if #ply.units >= 7 or ply.units[k] then return end
+			if #ply.units >= 7 or table.HasValue(ply.units, k) then return end
 			table.insert( ply.units, k )
+
+			Buts.units[ Buts.void[1] ].img = v.img
+			Buts.units[ Buts.void[1] ].draw = true
+			Buts.units[ Buts.void[1] ].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+
+			table.remove( Buts.void, 1 )
 		end
 
 		_id = _id + 1
@@ -158,6 +169,7 @@ function Menu:Key(k)
 end
 
 function Menu:Update(dt)
+	if math.floor(self.MapX) >= self.MapLimit-1 and math.floor(self.MapX) <= self.MapLimit+1 then self.MapX = 0 end
 	self.MapX = self.MapX + self.MapSpd * dt
 end
 

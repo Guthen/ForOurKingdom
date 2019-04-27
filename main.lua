@@ -61,12 +61,12 @@ function love.update(dt)
     	Players:Update( dt )
 		Units:Update( dt )
 	
-		TimerUpdate( dt )
     	UpdateAnims( dt )
     else
     	Menu:Update( dt )
     end
 
+	TimerUpdate( dt )
     UI:Update( dt )
     Libs.shack:update( dt )
 end
