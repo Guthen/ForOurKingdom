@@ -7,14 +7,22 @@ function Map:Load()
 
 	self.MapImages = 
 	{
+		--  > Plaine <  --
 		[1] = {img = Image["grass"]},
 		[2] = {img = Image["concrete_grass_left"]},
 		[3] = {img = Image["concrete_grass_right"]},
 		[4] = {img = Image["concrete"]},
+		--  > Aqua <  --
 		[5] = {img = Image["terrain_aquatique1"]},
 		[6] = {img = Image["terrain_aquatique 2"]},
 		[7] = {img = Image["terrain_aquatique 3"]},
 		[8] = {img = Image["terrain_aquatique 4"]},
+		--  > Neige <  --
+		[9] = {img = Image["snow"]},
+		[10] = {img = Image["bad_snow"]},
+		[11] = {img = Image["bad_snow_snow_left"]},
+		[12] = {img = Image["bad_snow_snow_right"]},
+		--  > Démon <  --
 		[100] = {img = Image["terrain_demon 1"]},
 		[101] = {img = Image["terrain_demon 2"]},
 		[102] = {img = Image["terrain_demon 3"]},
