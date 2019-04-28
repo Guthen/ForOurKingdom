@@ -41,21 +41,25 @@ function love.load()
 
     Game.ShowFPS = false
 
-    love.window.setMode(Game.Width, Game.Height)
-    love.window.setTitle(Game.Title)
+    love.window.setMode( Game.Width, Game.Height )
+    love.window.setTitle( Game.Title )
 
-    love.graphics.setDefaultFilter("nearest")
+    love.graphics.setDefaultFilter( "nearest" )
 
     Libs = {}
 
-    love.graphics.setFont(love.graphics.newFont("fonts/blacc.TTF"))
+    love.graphics.setFont( love.graphics.newFont("fonts/blacc.TTF") )
 
     math.randomseed( os.time() )
 
     RequireFolder("lua")
     RequireFolder("libs", Libs)
 	
+	LoadPreferences()
+
 	Menu:Create()
+
+	print( love.filesystem.getSaveDirectory() )
 end
 
 function love.update(dt)
@@ -125,4 +129,8 @@ end
 
 function love.wheelmoved(x, y)
 
+end
+
+function love.quit()
+	SavePreferences()
 end
