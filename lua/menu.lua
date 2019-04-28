@@ -63,6 +63,15 @@ function Menu:Create()
 				love.event.quit()
 		  end
 
+	--  > Check Box <  --
+
+	local fps = UI:CreateCheckBox( Game.Width-100, 10, 1, 1 )
+	 	  fps.text = "Show FPS"
+	 	  fps.activated = Game.ShowFPS
+		  fps.doClick = function( self )
+		  		Game.ShowFPS = self.activated
+		  end
+
 	--  > Social Network <  --
 
 	local discord = UI:CreateButton( self.defX+4, self.defY-32*-14, 1, 1 )

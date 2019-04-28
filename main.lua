@@ -39,7 +39,7 @@ function love.load()
     Game.GoldSecond = 4
     Game.UnitsLimit = 7
 
-    Game.ShowFPS = true
+    Game.ShowFPS = false
 
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
