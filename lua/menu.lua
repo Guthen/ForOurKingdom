@@ -13,6 +13,7 @@ function Menu:Load()
 	table.insert( self.Maps, self.Maps[0] )
 	self.MapLimit = #self.Maps*Game.Width
 	self.MapX = 0
+	self.MapY = 0
 	self.MapSpd = 75
 end
 
@@ -183,8 +184,9 @@ function Menu:Key(k)
 end
 
 function Menu:Update(dt)
-	if math.floor(self.MapX) >= self.MapLimit-1 and math.floor(self.MapX) <= self.MapLimit+1 then self.MapX = 0 end
+	if math.floor(self.MapX) >= self.MapLimit-5 and math.floor(self.MapX) <= self.MapLimit+5 then self.MapX = 0 end
 	self.MapX = self.MapX + self.MapSpd * dt
+	self.MapY = math.cos( love.timer.getTime() ) * 25 -- fait une vague dans le menu ~~~~~~~~
 end
 
 function Menu:Draw() 
@@ -194,9 +196,9 @@ function Menu:Draw()
 			for kx,vx in pairs(vy) do
 				if vx > 0 and Map.MapImages[vx] then
 					if not Map.MapImages[vx].anim then
-						love.graphics.draw(Map.MapImages[vx].img, (kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX, (ky-1)*Game.ImageSize, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth(), Game.ImageSize/Map.MapImages[vx].img:getHeight())
+						love.graphics.draw(Map.MapImages[vx].img, (kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX, (ky-1)*Game.ImageSize-self.MapY, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth(), Game.ImageSize/Map.MapImages[vx].img:getHeight())
 					else
-						love.graphics.draw(Map.MapImages[vx].img, Map.MapImages[vx].anim.quads[Map.MapImages[vx].anim.quad], (kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX, (ky-1)*Game.ImageSize, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth()*Game.ImageSize/Map.MapImages[vx].img:getWidth(), Game.ImageSize/Map.MapImages[vx].img:getHeight())
+						love.graphics.draw(Map.MapImages[vx].img, Map.MapImages[vx].anim.quads[Map.MapImages[vx].anim.quad], (kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX, (ky-1)*Game.ImageSize-self.MapY, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth()*Game.ImageSize/Map.MapImages[vx].img:getWidth(), Game.ImageSize/Map.MapImages[vx].img:getHeight())
 					end
 				end
 			end

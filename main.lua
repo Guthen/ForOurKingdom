@@ -39,6 +39,8 @@ function love.load()
     Game.GoldSecond = 4
     Game.UnitsLimit = 7
 
+    Game.ShowFPS = true
+
     love.window.setMode(Game.Width, Game.Height)
     love.window.setTitle(Game.Title)
 
@@ -72,6 +74,7 @@ function love.update(dt)
 end
 
 function love.draw()
+	love.graphics.setColor( 1, 1, 1 )
 	Libs.shack:apply()
 
 	if Game.MenuState == 0 then
@@ -88,6 +91,9 @@ function love.draw()
 	
 	UI:Draw()	
 	--Image:Draw()
+
+	love.graphics.setColor( .3, .8, .5 )
+	if Game.ShowFPS then love.graphics.print( "FPS: "..tostring( love.timer.getFPS() ), 10, 10 ) end
 end
 
 function love.keypressed(k)
