@@ -1,9 +1,9 @@
-return
+﻿return
 {
-	img = Image["Devoggs"], -- son nom d'image (sans l'extension)
+	img = Image["devoggs"], -- son nom d'image (sans l'extension)
 	name = "Devoggs", -- son nom dans le jeu
 	hp = 100000, -- ses points de vie
-	dmg = 50000, -- ses points de dégats infligés
+	dmg = 500, -- ses points de dégats infligés
 	spd = 1.5, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0, -- en combien de secondes attaque t'il
 	cost = 50, -- combien l'unité coûte
