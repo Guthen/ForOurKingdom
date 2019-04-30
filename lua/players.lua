@@ -1,4 +1,4 @@
-Players = {}
+﻿Players = {}
 Players.P1 = {}
 Players.P2 = {}
 Players.P1.units = {"Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
@@ -286,6 +286,18 @@ function Players:Key(k)
         self.P1.gold = Clamp(self.P1.gold + 75, 0, Game.GoldLimit)
         self.P2.gold = Clamp(self.P2.gold + 75, 0, Game.GoldLimit)
     end
+end
+
+function Players:Save( ply )
+	if not ply then return end
+
+	local dir = love.filesystem.getInfo( "users" )
+	if dir and dir.type == "directory" then
+	    love.filesystem.createDirectory( "DolphiLerhit" )
+	end
+
+	
+	
 end
 
 Players:Load()
