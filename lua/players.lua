@@ -138,12 +138,15 @@ function Players:Draw()
     love.graphics.setColor(self.P2.color.r, self.P2.color.g, self.P2.color.b)
     love.graphics.draw(self.img, self.P2.x*Game.ImageSize, self.P2.y*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
-    love.graphics.setColor(1, 1, 1)
+    if Map.currentMap == "arena_04" then
+        love.graphics.setColor( 0, 0, 0, .5 )
+    else 
+        love.graphics.setColor(1, 1, 1)
 
     -- gold
     love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
     love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
-
+end
     -- hp
     if self.P2.info.hp <= Game.PlayersHealth/5 then
         love.graphics.setColor(1, .1, .1)
