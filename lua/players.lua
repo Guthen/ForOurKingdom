@@ -80,20 +80,31 @@ function Players:Draw()
     love.graphics.setColor(self.P1.color.r, self.P1.color.g, self.P1.color.b)
     love.graphics.draw(self.img, self.P1.x*Game.ImageSize, self.P1.y*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
-    love.graphics.setColor(1, 1, 1)
+    
 
     -- gold
-    love.graphics.draw(Image["gold"], 6, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
-    love.graphics.printf(self.P1.gold, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
+    if Map.CurrentMap == "arena_04" then
+      love.graphics.setColor(255, 255, 255)
     
+      -- gold
+        love.graphics.draw(Image["gold"], 6, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.printf(self.P1.gold, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
+
+    else
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.draw(Image["gold"], 6, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+        love.graphics.printf(self.P1.gold, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
+
+    end 
     -- hp
     if self.P1.info.hp <= Game.PlayersHealth/5 then
         love.graphics.setColor(1, .1, .1)
     else
-        love.graphics.setColor(1, 1, 1)
+        
     end
     love.graphics.printf(self.P1.info.hp, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    love.graphics.setColor(1, 1, 1)
+    
 
     -- units
     local lastUnit
@@ -130,7 +141,13 @@ function Players:Draw()
     else
         love.graphics.draw(Units.units[curUnit].img, 6+24, Game.Height-200, 0, 2, 2)
     end
-    love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
+    if Map.CurrentMap == "arena_04" then
+        love.graphics.setColor(0, 0, 0) 
+        love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
+    else
+        love.graphics.setColor(255, 255, 255) 
+        love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
+    end
     --[[-------------------------------------------------------------------------
         PLAYER 2 DRAW
     ---------------------------------------------------------------------------]]
@@ -138,23 +155,30 @@ function Players:Draw()
     love.graphics.setColor(self.P2.color.r, self.P2.color.g, self.P2.color.b)
     love.graphics.draw(self.img, self.P2.x*Game.ImageSize, self.P2.y*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
-    if Map.currentMap == "arena_04" then
-        love.graphics.setColor( 0, 0, 0, .5 )
-    else 
-        love.graphics.setColor(1, 1, 1)
+  
 
-    -- gold
-    love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
-    love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
-end
+    if Map.CurrentMap == "arena_04" then
+      love.graphics.setColor(255, 255, 255)
+    
+      -- gold
+        love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
+
+    else
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+        love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
+
+    end
     -- hp
     if self.P2.info.hp <= Game.PlayersHealth/5 then
         love.graphics.setColor(1, .1, .1)
     else
-        love.graphics.setColor(1, 1, 1)
+        
     end
     love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-100, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    love.graphics.setColor(1, 1, 1)
+    
 
     -- units
     local lastUnit
@@ -192,7 +216,13 @@ end
     else
         love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
     end
-    love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
+    if Map.CurrentMap == "arena_04" then
+        love.graphics.setColor(0, 0, 0) 
+        love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
+    else 
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
+    end
 
     -- Health Bar
 
