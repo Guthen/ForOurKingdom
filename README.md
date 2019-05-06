@@ -3,7 +3,7 @@
 This game is made by three of us :
 + Guthen 
 + AdrienLerhit 
-+ Thefallen59 
++ Ayato Deathmask
 
 The game has been coded in Lua with the framework Löve2D.
 
