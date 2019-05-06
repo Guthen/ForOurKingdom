@@ -226,19 +226,19 @@ function Players:Draw()
 
     -- Health Bar
 
-    love.graphics.rectangle("line", 100, 570, 100, 25)
+    love.graphics.rectangle("line", 6, 570, 100, 25)
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 100, 570, Clamp(self.P1.info.hp/Game.PlayersHealth*100, 0, 100), 25)
+    love.graphics.rectangle("fill", 6, 570, Clamp(self.P1.info.hp/Game.PlayersHealth*100, 0, 100), 25)
 
     love.graphics.setColor(255,255,255)
 
-    love.graphics.rectangle("line", 1150, 570, 100, 25)
+    love.graphics.rectangle("line", 1174, 570, 100, 25)
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 1150, 570, Clamp(self.P2.info.hp/Game.PlayersHealth*100, 0, 100), 25)
+    love.graphics.rectangle("fill", 1174, 570, Clamp(self.P2.info.hp/Game.PlayersHealth*100, 0, 100), 25)
 
 
 
