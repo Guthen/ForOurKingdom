@@ -78,21 +78,37 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.setColor( 1, 1, 1 )
-	Libs.shack:apply()
+	if Map.currentMap == "arena_04" then
+		love.graphics.setColor( 0, 0, 0 )
+		Libs.shack:apply()
 
-	if Game.MenuState == 0 then
-		Map:Draw()
+		if Game.MenuState == 0 then
+			Map:Draw()
 
-		Units:Draw()
+			Units:Draw()
 		
-		DrawFX()
+			DrawFX()
 
-		Players:Draw()
+			Players:Draw()
+		else
+			Menu:Draw()
+		end
 	else
-		Menu:Draw()
+		love.graphics.setColor( 1, 1, 1 )
+		Libs.shack:apply()
+
+		if Game.MenuState == 0 then
+			Map:Draw()
+
+			Units:Draw()
+		
+			DrawFX()
+
+			Players:Draw()
+		else
+			Menu:Draw()
+		end
 	end
-	
 	UI:Draw()	
 	--Image:Draw()
 
@@ -115,6 +131,11 @@ function love.keypressed(k)
 		elseif k == "kp3" then
 			Reset()
 			Map.CurrentMap = "arena_04"
+		end
+		
+		if k == "escape" then
+			Reset()
+			Menu:Create()
 		end
 	else
 		Menu:Key(k)
