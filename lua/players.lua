@@ -294,8 +294,15 @@ function Players:Save( ply )
 	local dir = love.filesystem.getInfo( "users" )
 	if dir and dir.type == "directory" then
 	    love.filesystem.createDirectory( "DolphiLerhit" )
+		then
+	    love.filesystem.createDirectory( "Guthen" )
+		then
+	    love.filesystem.createDirectory( "TheFallen59" )
 	end
-
+	 
+	DolphiLerhit , users = love.filesystem.load (DolphiLerhit)
+	Guthen , users = love.filesystem.load (Guthen)
+	TheFallen59 , users = love.filesystem.load (TheFallen59)
 	
 	
 end
