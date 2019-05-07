@@ -166,16 +166,20 @@ function Menu:CreateInventory( ply )
 			  slot.color = ply.color
 
 		Buts.inv[_id] = UI:CreateButton( self.defX*.35+76*_x+_offX, self.defY*.5+76*_y+_offY, 2, 2 )
-		Buts.inv[_id].img = v.img
-		Buts.inv[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+		if v.img then
+			Buts.inv[_id].img = v.img
+			Buts.inv[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+		end
 		Buts.inv[_id].isUnit = true
 		Buts.inv[_id].doClick = function()
 			if #ply.units >= 7 or table.HasValue(ply.units, k) then return end
 			table.insert( ply.units, k )
 
-			Buts.units[ Buts.void[1] ].img = v.img
 			Buts.units[ Buts.void[1] ].draw = true
-			Buts.units[ Buts.void[1] ].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+			if v.img then
+				Buts.units[ Buts.void[1] ].img = v.img
+				Buts.units[ Buts.void[1] ].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
+			end
 
 			table.remove( Buts.void, 1 )
 		end
