@@ -1,6 +1,6 @@
 ﻿return
 {
-	img = Image["devoggs"], -- son nom d'image (sans l'extension)
+	img = Image["Devoggs"], -- son nom d'image (sans l'extension)
 	name = "Devoggs", -- son nom dans le jeu
 	hp = 100000, -- ses points de vie
 	dmg = 500, -- ses points de dégats infligés

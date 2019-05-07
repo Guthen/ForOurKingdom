@@ -78,23 +78,23 @@ function love.update(dt)
 end
 
 function love.draw()
-	if Map.currentMap == "arena_04" then
+  if Map.CurrentMap == "arena_04" then
 		love.graphics.setColor( 0, 0, 0 )
   else
-    love.graphics.setColor( 255, 255, 255 )
+    love.graphics.setColor( 1, 1, 1 )
+  end
     Libs.shack:apply()
 
-    if Game.MenuState == 0 then
-      Map:Draw()
+  if Game.MenuState == 0 then
+    Map:Draw()
 
-      Units:Draw()
+    Units:Draw()
 
-      DrawFX()
+    DrawFX()
 
-      Players:Draw()
-    else
-      Menu:Draw()
-    end
+    Players:Draw()
+  else
+    Menu:Draw()
   end
   UI:Draw() 
   --Image:Draw()

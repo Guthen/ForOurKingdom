@@ -19,5 +19,3 @@ return
 	animSpd = .2, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 }
 
--- Unit by Guthen (Image, Animation & Script) --
--- Sound : 'elevator_spawn_Jay_You.wav' was made by Jay_You and modified by Guthen, available here : https://freesound.org/people/Jay_You/sounds/460432/ --
