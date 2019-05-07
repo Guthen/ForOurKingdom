@@ -1,5 +1,6 @@
 return
 {
+	name = "Goblance",
 	img = Image["Goblance_anim(marche)"],
 	hp = 50,
 	dmg = 15,
