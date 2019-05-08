@@ -1,8 +1,8 @@
 return
 {
 	img = Image["Ninou"], -- son nom d'image (sans l'extension)
-
 	name = "Ninou", -- son nom dans le jeu
+	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	hp = 100, -- ses points de vie
 	dmg = 50, -- ses points de dégats infligés
 	spd = 1, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)

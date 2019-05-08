@@ -2,7 +2,8 @@ return
 {
 	img = Image["Bloby"], -- son nom d'image (sans l'extension)
 	name = "Bloby", -- son nom dans le jeu
-	hp = 3000, -- ses points de vie
+	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
+	hp = 2500, -- ses points de vie
 	dmg = 150, -- ses points de dégats infligés
 	spd = 1.5, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = .40, -- en combien de secondes attaque t'il

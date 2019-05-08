@@ -1,4 +1,47 @@
 Units = {}
+Units.Rarety = 
+{
+	[0] = 
+	{
+		name = "Commun",
+		color = 
+			{ 
+				r = .5,
+				g = .5,
+				b = .5,
+			}
+	},
+	[1] = 
+	{
+		name = "Rare",
+		color = 
+			{ 
+				r = .27,
+				g = .61,
+				b = 1,
+			}
+	},
+	[2] = 
+	{
+		name = "Épique",
+		color = 
+			{ 
+				r = .95,
+				g = .27,
+				b = 1,
+			}
+	},
+	[3] = 
+	{
+		name = "Mythique",
+		color = 
+			{ 
+				r = 1,
+				g = .61,
+				b = .27,
+			}
+	}
+}
 
 function Units:Load()
 	self.igUnits = {}
@@ -57,8 +100,8 @@ function Units:Add(typeUnit, x, y, scale)
 		canMove = true,
 		attack = false,
 		hasTimerAttack = false,
-		anim = NewAnim( self.units[typeUnit].img, 32, 32, self.units[typeUnit].animSpd ),
-		colx = (self.units[typeUnit].range or 0)*Game.ImageSize*scale,
+		anim = NewAnim( unit.img, 32, 32, unit.animSpd ),
+		colx = (unit.range or 0)*Game.ImageSize*scale,
 		canChangeToDeadImg = true,
 	}
 	function u:getInfo()

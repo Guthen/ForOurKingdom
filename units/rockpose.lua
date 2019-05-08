@@ -2,6 +2,7 @@ return
 {
 	img = Image["Rockpose"],
 	name = "Rockpose",
+	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	hp = 150,
 	dmg = 35,
 	spd = 1,

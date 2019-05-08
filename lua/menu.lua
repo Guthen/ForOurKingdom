@@ -163,7 +163,7 @@ function Menu:CreateInventory( ply )
 	for k, v in pairs( Units.units ) do
 
 		local slot = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 1, 1, Image[ "slot" ] )
-			  slot.color = ply.color
+			  slot.color = Units.Rarety[Units.units[k].rarety or 0].color
 
 		Buts.inv[_id] = UI:CreateButton( self.defX*.35+76*_x+_offX, self.defY*.5+76*_y+_offY, 2, 2 )
 		if v.img then
