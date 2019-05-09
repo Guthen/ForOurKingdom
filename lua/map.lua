@@ -27,6 +27,8 @@ function Map:Load()
 		[101] = {img = Image["terrain_demon 2"]},
 		[102] = {img = Image["terrain_demon 3"]},
 		[103] = {img = Image["terrain_demon 4"]},
+		-- > Nuage < -- 
+		[13] = {img = Image["terrain_nuage"]},
 	}
 
 	for k,v in pairs(self.MapImages) do

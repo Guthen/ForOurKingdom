@@ -118,7 +118,10 @@ function love.keypressed(k)
 		elseif k == "kp3" then
 			Reset()
 			Map.CurrentMap = "arena_04"
-		end
+		elseif k == "kp4" then
+      Reset()
+      Map.CurrentMap = "arena_05"
+    end
 		
 		if k == "escape" then
 			Reset()
