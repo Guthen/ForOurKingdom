@@ -31,6 +31,39 @@ function UI:CreateButton(x, y, w, h)
 	return _but
 end
 
+function UI:CreateTextEntry(x, y, w, h)
+	local _te = 
+	{
+		type = "TextEntry",
+		id = #self.Objects+1,
+		img = nil,
+		quad = nil,
+		x = x or 0,
+		y = y or 0,
+		w = w or 100,
+		h = h or 25,
+		sx = w or 1,
+		sy = h or 1,
+		doClick = function() end,
+		removeOnClick = false,
+		canWrite = false,
+		onEnter = function() print( "UI: No Function" ) end,
+		text = "",
+		draw = true,
+		useCooldown = true,
+		color = {r = 1, g = 1, b = 1, a = 1},
+	}
+	_te.doClick = function() _te.canWrite = true end
+	function _te:Remove()
+		RemoveValueFromTable( UI.Objects, self )
+	end
+	function _te:GetText()
+		return self.text
+	end
+	self.Objects[_te.id] = _te
+	return _te
+end
+
 function UI:CreateImage(x, y, sx, sy, img)
 	local _img = 
 	{
@@ -107,13 +140,31 @@ function UI:OnClick(x, y, clk)
 	if clk == 1 then
 		for _, v in pairs( self.Objects ) do
 			if v.doClick then
-				if self.CanClick and IsCollide( v.x, v.y, x, y, v.w, v.h, 1, 1 ) then
-					if v.type == "CheckBox" then v.activated = not v.activated end
-					v.doClick( v )
-					if v.removeOnClick then v:Remove() end
-					UI.CanClick = false
-					TimerAdd( .2, false, function() self.CanClick = true end )
+				if self.CanClick then
+					if IsCollide( v.x, v.y, x, y, v.w, v.h, 1, 1 ) then
+						if v.type == "CheckBox" then v.activated = not v.activated end
+						v.doClick( v )
+						if v.removeOnClick then v:Remove() end
+						UI.CanClick = false
+						TimerAdd( .2, false, function() self.CanClick = true end )
+					elseif v.type == "TextEntry" then -- si pas collision, on enlève la possibilité d'écrire 
+						v.canWrite = false
+					end
 				end
+			end
+		end
+	end
+end
+
+function UI:Key( k )
+	for _, v in pairs( self.Objects ) do
+		if v.type == "TextEntry" then
+			if k == "return" then
+				v.canWrite = false
+				v.onEnter( v )
+			else
+				if k == "espace" then k = " " end 
+				v.text = v.text .. k
 			end
 		end
 	end

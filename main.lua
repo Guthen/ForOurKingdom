@@ -119,20 +119,21 @@ function love.keypressed(k)
 			Reset()
 			Map.CurrentMap = "arena_04"
 		elseif k == "kp4" then
-      Reset()
-      Players.P1.units = {"Boule de feu" , "Trou noir"}
-      Players.P2.units = {"Boule de feu", "Trou noir"}
-      Map.CurrentMap = "arena_05"
-    end
+		    Reset()
+		    Players.P1.units = {"Boule de feu" , "Trou noir"}
+		    Players.P2.units = {"Boule de feu", "Trou noir"}
+		    Map.CurrentMap = "arena_05"
+    	end
 		
 		if k == "escape" then
 			Reset()
 			Menu:Create()
-    elseif k == "t" then
-      Players:Save()
+    	elseif k == "t" then
+      		Players:Save()
 		end
 	else
 		Menu:Key(k)
+		UI:Key(k)
 	end
 end
 
