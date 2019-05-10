@@ -1,6 +1,7 @@
 UI = {}
 UI.Objects = {}
 UI.CanClick = true
+UI.TEUpper = false
 
 --	> Create <  --
 
@@ -163,8 +164,13 @@ function UI:Key( k )
 				v.canWrite = false
 				v.onEnter( v )
 			else
-				if k == "espace" then k = " " end 
-				v.text = v.text .. k
+				if k == "space" then k = " " end
+				if string.find( k, "shift" ) then UI.TEUpper = true 
+				elseif string.find( k, "backspace" ) then v.text = string.RemoveLastChar( v.text ) 
+				else
+					if UI.TEUpper then k = k:upper() UI.TEUpper = false end
+					v.text = v.text .. k
+				end
 			end
 		end
 	end
@@ -188,8 +194,11 @@ function UI:Draw()
 				love.graphics.rectangle( "fill", v.x or 0, v.y or 0, v.w or 100, v.h or 25 )
 			end
 			if v.text then
-				love.graphics.setColor( 1, 1, 1 )
-				love.graphics.print( v.text, v.x+v.w+5, v.y+8 )
+				if v.type == "CheckBox" then love.graphics.setColor( 1, 1, 1 ) else
+				love.graphics.setColor( 0, 0, 0 ) end
+				local x = v.type == "CheckBox" and v.x+v.w+5 or v.x+5
+				local y = v.y+8
+				love.graphics.print( v.text, x, y )
 			end
 		end
 	end
