@@ -42,6 +42,7 @@ Units.Rarety =
 			}
 	}
 }
+local TowerTargets = 0
 
 function Units:Load()
 	self.igUnits = {}
@@ -226,6 +227,31 @@ function Units:Update(dt)
 				v.x = v.x - v.info.spd
 			elseif not IsCollideX(v.x, v.target.x, v.w, v.target.w) and v.target.x > v.x then
 				v.x = v.x + v.info.spd
+			end
+		end
+		if v.x >= 13*Game.ImageSize and v.scale == 1 then -- si atteint 3 case avant la base
+			if not v.isTargetByTower and TowerTargets < 3 then
+				v.isTargetByTower = true
+				TowerTargets = TowerTargets + 1
+				TimerAdd(1, false, function() 
+					v.info.hp = v.info.hp - 45
+					v.isTargetByTower = false
+					if v.info.hp <= 0 then v:Destroy() end
+					
+					TowerTargets = TowerTargets - 1
+				end )
+			end
+		elseif v.x <= 3*Game.ImageSize and v.scale == -1 then
+			if not v.isTargetByTower and TowerTargets < 3 then
+				v.isTargetByTower = true
+				TowerTargets = TowerTargets + 1
+				TimerAdd(1, false, function() 
+					v.info.hp = v.info.hp - 45
+					v.isTargetByTower = false
+					if v.info.hp <= 0 then v:Destroy() end
+					
+					TowerTargets = TowerTargets - 1
+				end )
 			end
 		end
 		for _, e in pairs(self.yUnits[v.y/Game.ImageSize+1]) do -- attack

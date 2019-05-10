@@ -227,7 +227,7 @@ function Players:Draw()
 
     love.graphics.setColor(1, 1, 1, 1)
 
-	if not Units.units[lastUnit] then
+	if Units.units[curUnit] then
 		if Units.units[curUnit].anim then
 			love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
 		else
