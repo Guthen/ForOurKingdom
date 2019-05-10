@@ -105,7 +105,7 @@ function Players:Draw()
         
     end
     love.graphics.printf(self.P1.info.hp, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    
+    love.graphics.draw(Image["heal"], 6, Game.Height-Image["heal"]:getHeight()*8.40, 0, 4, 4)
 
     -- units
     local lastUnit
@@ -162,13 +162,13 @@ function Players:Draw()
       love.graphics.setColor(255, 255, 255)
     
       -- gold
-        love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+        love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*8.40, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200)
         love.graphics.setColor(0, 0, 0)
         love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
     else
         love.graphics.setColor(255, 255, 255)
-        love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*4, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
+        love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*8.40, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
         love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
     end
@@ -178,7 +178,8 @@ function Players:Draw()
     else
         
     end
-    love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-100, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
+    love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-80, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
+    love.graphics.draw(Image["heal"], 1075, Game.Height-Image["heal"]:getHeight()*8.40, 0, 4, 4)
     
 
     -- units
@@ -227,11 +228,11 @@ function Players:Draw()
 
     -- Health Bar
 
-    love.graphics.rectangle("line", 6, 570, 100, 25)
+    love.graphics.rectangle("line", 85, 570, 100, 25)
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 6, 570, Clamp(self.P1.info.hp/Game.PlayersHealth*100, 0, 100), 25)
+    love.graphics.rectangle("fill", 85, 570, Clamp(self.P1.info.hp/Game.PlayersHealth*100, 0, 100), 25)
 
     love.graphics.setColor(255,255,255)
 
