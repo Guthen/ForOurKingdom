@@ -201,6 +201,9 @@ function Menu:CreateInventory( ply )
 		  userName.onEnter = function( self )
 		  		print( userName:GetText() )
 		  end
+		  
+	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
+		  save.img = Image["save"]
 
 end
 
