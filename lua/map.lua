@@ -32,6 +32,17 @@ function Map:Load()
 		[14] = {img = Image["terrain_nuage 2"]},
 		[15] = {img = Image["terrain_nuage 3"]},
 		[16] = {img = Image["terrain_nuage 4"]},
+		-- > jungle < --
+		[20] = {img = Image["terrain_jungle 10"]},
+		[17] = {img = Image["terrain_jungle 2"]},
+		[18] = {img = Image["terrain_jungle 3"]},
+		[19] = {img = Image["terrain_jungle 4"]},
+		[21] = {img = Image["terrain_jungle 5"]},
+		[22] = {img = Image["terrain_jungle 6"]},
+		[23] = {img = Image["terrain_jungle 7"]},
+		[24] = {img = Image["terrain_jungle 8"]},
+		[25] = {img = Image["terrain_jungle 9"]},
+		[26] = {img = Image["terrain_jungle 11"]},
 	}
 
 	for k,v in pairs(self.MapImages) do
