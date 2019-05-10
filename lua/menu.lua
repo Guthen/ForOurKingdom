@@ -23,11 +23,6 @@ function Menu:Create()
 
 	Game.MenuState = 1
 	
-	local icon = UI:CreateImage( self.defX-145, self.defY-90, 3, 3, Image[ "devoggs" ] )
-		  icon.isCenter = true
-		  icon.onDraw = function( self ) 
-				self.ang = math.sin( love.timer.getTime() ) * .2
-		  end 
 	local title = UI:CreateText( self.defX-90, self.defY-100, 2.5, 2.5, Game.Title )
 	local P1control = UI:CreateImage( self.defX*.02, self.defY*2.4, 2, 2, Image[ "P1control" ] )
 	local P2control = UI:CreateImage( self.defX*1.6, self.defY*2.4, 2, 2, Image[ "P2control" ] )
@@ -41,6 +36,13 @@ function Menu:Create()
 				Map:RandomCurMap()		
 				UI:ResetObject()
 		  end
+
+	-- l'icône est ici pour être vu au premier-plan
+	local icon = UI:CreateImage( self.defX-130, self.defY-70, 3, 3, Image[ "devoggs" ] )
+		  icon.isCenter = true
+		  icon.onDraw = function( self ) 
+				self.ang = math.sin( love.timer.getTime() ) * .2
+		  end 
 
 	local pve = UI:CreateButton( self.defX-125, self.defY-37.5+90, 1, 1 )
 		  pve.removeOnClick = true
@@ -199,7 +201,7 @@ function Menu:CreateInventory( ply )
 	-- text entry
 	local userName = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
 		  userName.onEnter = function( self )
-		  		print( userName:GetText() )
+		  		print( userName:GetText() ) -- print le texte écrit
 		  end
 		  
 	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
