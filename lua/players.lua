@@ -105,7 +105,7 @@ function Players:Draw()
         
     end
     love.graphics.printf(self.P1.info.hp, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    love.graphics.draw(Image["heal"], 6, Game.Height-Image["heal"]:getHeight()*8.40, 0, 4, 4)
+    love.graphics.draw(Image["heal"], 6, 6, 0, 4, 4)
 
     -- units
     local lastUnit
@@ -189,7 +189,7 @@ function Players:Draw()
         
     end
     love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-80, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    love.graphics.draw(Image["heal"], 1075, Game.Height-Image["heal"]:getHeight()*8.40, 0, 4, 4)
+    love.graphics.draw(Image["heal"], Game.Width-Image["heal"]:getWidth()*4-6, 6, 0, 4, 4)
     
 
     -- units
@@ -247,19 +247,25 @@ function Players:Draw()
 
     -- Health Bar
 
-    love.graphics.rectangle("line", 85, 570, 100, 25)
+    -- Player 1
+
+    love.graphics.rectangle("line", 18, 100, 34, 302)
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 85, 570, Clamp(self.P1.info.hp/Game.PlayersHealth*100, 0, 100), 25)
+    love.graphics.rectangle("fill", 19, 100, 32, Clamp(self.P1.info.hp/Game.PlayersHealth*301, 0, 301))
+
+
+
+    -- Player 2
 
     love.graphics.setColor(255,255,255)
 
-    love.graphics.rectangle("line", 1174, 570, 100, 25)
+    love.graphics.rectangle("line", Game.Width-Image["heal"]:getWidth()*4-4.5, 100, 34, 302)
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 1174, 570, Clamp(self.P2.info.hp/Game.PlayersHealth*100, 0, 100), 25)
+    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4.75, 100, 34, Clamp(self.P2.info.hp/Game.PlayersHealth*301, 0, 301))
 
 
 
