@@ -23,7 +23,12 @@ function Menu:Create()
 
 	Game.MenuState = 1
 	
-	local icon = UI:CreateImage( self.defX-175, self.defY-150, 1.2, 1.2, Image[ "fok" ] )
+	local icon = UI:CreateImage( self.defX-145, self.defY-90, 3, 3, Image[ "devoggs" ] )
+		  icon.isCenter = true
+		  icon.onDraw = function( self ) 
+				self.ang = math.sin( love.timer.getTime() ) * .2
+		  end 
+	local title = UI:CreateText( self.defX-90, self.defY-100, 2.5, 2.5, Game.Title )
 	local P1control = UI:CreateImage( self.defX*.02, self.defY*2.4, 2, 2, Image[ "P1control" ] )
 	local P2control = UI:CreateImage( self.defX*1.6, self.defY*2.4, 2, 2, Image[ "P2control" ] )
 
