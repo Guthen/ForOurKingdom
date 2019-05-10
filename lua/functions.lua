@@ -149,6 +149,10 @@ function PrintTable(_table)
 	end
 end
 
+function string.RemoveLastChar( _txt )
+	return type(_txt) == "string" and _txt:sub(1, -2)
+end
+
 function table.HasValue(_table, _value)
 	if not _table or not type(_table) == "table" then return end
 	for _, v in pairs( _table ) do

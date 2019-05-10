@@ -172,7 +172,7 @@ function Menu:CreateInventory( ply )
 		end
 		Buts.inv[_id].isUnit = true
 		Buts.inv[_id].doClick = function()
-			if #ply.units >= 7 or table.HasValue(ply.units, k) then return end
+			if #ply.units >= 7 or table.HasValue(ply.units, k) or not Buts.units[ Buts.void[1] ] then return end
 			table.insert( ply.units, k )
 
 			Buts.units[ Buts.void[1] ].draw = true

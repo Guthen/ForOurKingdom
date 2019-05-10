@@ -28,7 +28,7 @@ function Map:Load()
 		[102] = {img = Image["terrain_demon 3"]},
 		[103] = {img = Image["terrain_demon 4"]},
 		-- > Nuage < -- 
-		[13] = {img = Image["terrain_nuage"]},
+		[13] = {img = Image["terrain_nuage2"]},
 		[14] = {img = Image["terrain_nuage 2"]},
 		[15] = {img = Image["terrain_nuage 3"]},
 		[16] = {img = Image["terrain_nuage 4"]},
@@ -46,7 +46,8 @@ function Map:Load()
 	}
 
 	for k,v in pairs(self.MapImages) do
-		v.anim = NewAnim( v.img, 16, 16, k/2.5 )
+		local s = v.img:getHeight() == 32 and 32 or 16
+		v.anim = NewAnim( v.img, s, s, k/2.5 )
 	end
 
 	Map:LoadMaps()

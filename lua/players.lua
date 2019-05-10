@@ -123,32 +123,42 @@ function Players:Draw()
     end
 
     love.graphics.setColor(1, 1, 1, .5)
+	
+	if Units.units[lastUnit] then
+		if Units.units[lastUnit].anim then
+			love.graphics.draw(Units.units[lastUnit].img, Units.units[lastUnit].anim.quads[Units.units[lastUnit].anim.quad], 6, Game.Height-205, 0, 2, 2)
+		else
+			love.graphics.draw(Units.units[lastUnit].img, 6, Game.Height-205, 0, 2, 2)
+		end
+	end
+	
+	if Units.units[nextUnit] then
+		if Units.units[nextUnit].anim then
+			love.graphics.draw(Units.units[nextUnit].img, Units.units[nextUnit].anim.quads[Units.units[nextUnit].anim.quad], 6+48, Game.Height-205, 0, 2, 2)
+		else
+			love.graphics.draw(Units.units[nextUnit].img, 6+48, Game.Height-205, 0, 2, 2)
+		end
+	end
 
-    if Units.units[lastUnit].anim then
-        love.graphics.draw(Units.units[lastUnit].img, Units.units[lastUnit].anim.quads[Units.units[lastUnit].anim.quad], 6, Game.Height-205, 0, 2, 2)
-    else
-        love.graphics.draw(Units.units[lastUnit].img, 6, Game.Height-205, 0, 2, 2)
-    end
+		love.graphics.setColor(1, 1, 1, 1)
+	if Units.units[curUnit] then
+		if Units.units[curUnit].anim then
+			love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], 6+24, Game.Height-200, 0, 2, 2)
+		else
+			love.graphics.draw(Units.units[curUnit].img, 6+24, Game.Height-200, 0, 2, 2)
+		end
+	end
+	
 
-    if Units.units[nextUnit].anim then
-        love.graphics.draw(Units.units[nextUnit].img, Units.units[nextUnit].anim.quads[Units.units[nextUnit].anim.quad], 6+48, Game.Height-205, 0, 2, 2)
-    else
-        love.graphics.draw(Units.units[nextUnit].img, 6+48, Game.Height-205, 0, 2, 2)
-    end
-
-    love.graphics.setColor(1, 1, 1, 1)
-    if Units.units[curUnit].anim then
-        love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], 6+24, Game.Height-200, 0, 2, 2)
-    else
-        love.graphics.draw(Units.units[curUnit].img, 6+24, Game.Height-200, 0, 2, 2)
-    end
-    if Map.CurrentMap == "arena_04" then
-        love.graphics.setColor(0, 0, 0) 
-        love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
-    else
-        love.graphics.setColor(255, 255, 255) 
-        love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
-    end
+	if Units.units[curUnit] then
+		if Map.CurrentMap == "arena_04" then
+			love.graphics.setColor(0, 0, 0) 
+			love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
+		else
+			love.graphics.setColor(255, 255, 255) 
+			love.graphics.printf(Units.units[curUnit].cost, 6+25+5, Game.Height-230, 25, "center", 0, 2, 2)
+		end
+	end
     --[[-------------------------------------------------------------------------
         PLAYER 2 DRAW
     ---------------------------------------------------------------------------]]
@@ -199,32 +209,41 @@ function Players:Draw()
 
     love.graphics.setColor(1, 1, 1, .5)
 
-    if Units.units[lastUnit].anim then
-        love.graphics.draw(Units.units[lastUnit].img, Units.units[lastUnit].anim.quads[Units.units[lastUnit].anim.quad], Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
-    else
-        love.graphics.draw(Units.units[lastUnit].img, Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
-    end
-
-    if Units.units[nextUnit].anim then
-        love.graphics.draw(Units.units[nextUnit].img, Units.units[nextUnit].anim.quads[Units.units[nextUnit].anim.quad], Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
-    else
-        love.graphics.draw(Units.units[nextUnit].img, Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
-    end
+	if Units.units[lastUnit] then
+		if Units.units[lastUnit].anim then
+			love.graphics.draw(Units.units[lastUnit].img, Units.units[lastUnit].anim.quads[Units.units[lastUnit].anim.quad], Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
+		else
+			love.graphics.draw(Units.units[lastUnit].img, Game.Width-6, Game.Height-205, 0, 2, 2, 32, 0)
+		end
+	end
+		
+	if Units.units[nextUnit] then
+		if Units.units[nextUnit].anim then
+			love.graphics.draw(Units.units[nextUnit].img, Units.units[nextUnit].anim.quads[Units.units[nextUnit].anim.quad], Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
+		else
+			love.graphics.draw(Units.units[nextUnit].img, Game.Width-6-48, Game.Height-205, 0, 2, 2, 32, 0)
+		end
+	end
 
     love.graphics.setColor(1, 1, 1, 1)
 
-    if Units.units[curUnit].anim then
-        love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
-    else
-        love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
-    end
-    if Map.CurrentMap == "arena_04" then
-        love.graphics.setColor(0, 0, 0) 
-        love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
-    else 
-        love.graphics.setColor(255, 255, 255)
-        love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
-    end
+	if not Units.units[lastUnit] then
+		if Units.units[curUnit].anim then
+			love.graphics.draw(Units.units[curUnit].img, Units.units[curUnit].anim.quads[Units.units[curUnit].anim.quad], Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
+		else
+			love.graphics.draw(Units.units[curUnit].img, Game.Width-6-24, Game.Height-200, 0, 2, 2, 32, 0)
+		end
+	end
+	
+    if Units.units[curUnit] then
+		if Map.CurrentMap == "arena_04" then
+			love.graphics.setColor(0, 0, 0) 
+			love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
+		else 
+			love.graphics.setColor(255, 255, 255)
+			love.graphics.printf(Units.units[curUnit].cost, Game.Width-6-56-25, Game.Height-230, 25, "center", 0, 2, 2)
+		end
+	end
 
     -- Health Bar
 
