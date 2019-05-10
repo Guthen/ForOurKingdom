@@ -43,6 +43,7 @@ function Map:Load()
 		[24] = {img = Image["terrain_jungle 8"]},
 		[25] = {img = Image["terrain_jungle 9"]},
 		[26] = {img = Image["terrain_jungle 11"]},
+		[27] = {img = Image["Tour_d'archer"]},
 	}
 
 	for k,v in pairs(self.MapImages) do
