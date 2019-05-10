@@ -11,4 +11,11 @@ function Sound:Load()
     end
 end
 
+function Sound:Play(son)
+		local snd = Sound["son"]
+		snd:setVolume(.5)
+		snd:play()
+	end
+
+
 Sound:Load()
