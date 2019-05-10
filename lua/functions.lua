@@ -86,6 +86,10 @@ function Clamp(n, min, max)
 	return n > max and max or n < min and min or n
 end
 
+function Lerp(t, a, b) 
+	return (1 - t) * a + t * b
+end
+
 --[[-------------------------------------------------------------------------
 	GAME CONTROL
 ---------------------------------------------------------------------------]]

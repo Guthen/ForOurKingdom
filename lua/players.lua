@@ -72,6 +72,8 @@ function Players:Update(dt)
     --self.P2.y = math.floor(love.mouse.getY()/Game.ImageSize)
 end
 
+local hpP1 = 300
+local hpP2 = 300
 function Players:Draw()
 	if not self.img then return end
     --[[-------------------------------------------------------------------------
@@ -167,26 +169,22 @@ function Players:Draw()
     love.graphics.draw(self.img, self.P2.x*Game.ImageSize, self.P2.y*Game.ImageSize, 0, Game.ImageSize/self.img:getWidth(), Game.ImageSize/self.img:getHeight())
 
   
-
-    if Map.CurrentMap == "arena_04" then
-      love.graphics.setColor(255, 255, 255)
-    
-      -- gold
+	love.graphics.setColor(1, 1, 1)
+  
+    if Map.CurrentMap == "arena_04" then    
+		-- gold
         love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*8.40, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200)
         love.graphics.setColor(0, 0, 0)
         love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
     else
-        love.graphics.setColor(255, 255, 255)
         love.graphics.draw(Image["gold"], Game.Width-Image["gold"]:getWidth()*4-6-Image["gold"]:getWidth()*8.40, Game.Height-Image["gold"]:getHeight()*4-6, 0, 4, 4)
         love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
     end
     -- hp
     if self.P2.info.hp <= Game.PlayersHealth/5 then
-        love.graphics.setColor(1, .1, .1)
-    else
-        
+        love.graphics.setColor(1, .1, .1)  
     end
     love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-80, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
     love.graphics.draw(Image["heal"], Game.Width-Image["heal"]:getWidth()*4-6, 6, 0, 4, 4)
@@ -248,16 +246,18 @@ function Players:Draw()
     -- Health Bar
 
     -- Player 1
+	hpP1 = Lerp( love.timer.getDelta()*10, hpP1, self.P1.info.hp/Game.PlayersHealth*301 )
 
     love.graphics.rectangle("line", 18, 100, 34, 302)
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", 19, 100, 32, Clamp(self.P1.info.hp/Game.PlayersHealth*301, 0, 301))
+    love.graphics.rectangle("fill", 19, 100, 32, Clamp( hpP1, 0, 301 ))
 
 
 
     -- Player 2
+	hpP2 = Lerp( love.timer.getDelta()*10, hpP2, self.P2.info.hp/Game.PlayersHealth*301 )
 
     love.graphics.setColor(255,255,255)
 
@@ -265,7 +265,7 @@ function Players:Draw()
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4.75, 100, 34, Clamp(self.P2.info.hp/Game.PlayersHealth*301, 0, 301))
+    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4.75, 100, 34, Clamp( hpP2, 0, 301 ))
 
 
 
