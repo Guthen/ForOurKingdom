@@ -4,6 +4,7 @@ Players.P2 = {}
 Players.P1.units = {"Bloby" , "Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
 Players.P2.units = {"Bloby", "Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
 
+
 function Players:StartCoin(s, g)
 	self.coinTimer = TimerAdd(s, true, function()
 		self.P1.gold = Clamp(self.P1.gold + g, 0, Game.GoldLimit)
