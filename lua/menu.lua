@@ -131,6 +131,9 @@ function Menu:CreateInventory( ply )
 		  back.doClick = function( self )
 		  	   	Menu:CreatePlayerInventory()
 		  end
+ 
+	
+		  
 
 	local Buts = {}
 		  Buts.units = {}
@@ -207,6 +210,20 @@ function Menu:CreateInventory( ply )
 	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
 		  save.img = Image["save"]
 
+	local info = UI:CreateImage( self.defX+144, self.defY-22.5+194, 13.4, 10.4 )
+		  info.img = Image["black"]
+
+	local info = UI:CreateImage( self.defX+150, self.defY-22.5+200, 13, 10 )
+		  info.img = Image["blanc"]
+		  info.onDraw = function()
+     	  		love.graphics.setColor(.1, .1, .1)
+				end
+				UI:CreateText(self.defX+155, self.defY-22.5+220, 1.98, 1.98, "Name: Assensorreur")
+				UI:CreateText(self.defX+155, self.defY-22.5+250, 1.98, 1.98, "Heal: 10000")
+				UI:CreateText(self.defX+155, self.defY-22.5+280, 1.98, 1.98, "Domage: 10000")
+				UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "Speed: 1.4")
+				UI:CreateText(self.defX+155, self.defY-22.5+340, 1.98, 1.98, "Bio: ")
+				love.graphics.setColor(0, 0, 0)
 end
 
 function Menu:Key(k)
