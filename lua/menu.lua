@@ -191,6 +191,12 @@ function Menu:CreateInventory( ply )
 
 	end
 
+	-- text entry
+	local userName = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
+		  userName.onEnter = function( self )
+		  		print( userName:GetText() )
+		  end
+
 end
 
 function Menu:Key(k)
