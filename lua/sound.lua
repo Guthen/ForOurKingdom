@@ -11,10 +11,18 @@ function Sound:Load()
     end
 end
 
-function Sound:Play(son)
-		local snd = Sound["son"]
-		snd:setVolume(.5)
+function Sound:Play(son, vol, loop)
+		local snd = Sound[son]
+		snd:setVolume(vol)
+		snd:setLooping(loop)
 		snd:play()
+	end
+
+
+function Sound:Stop(son)
+		local snd = Sound[son]
+		snd:setLooping(loop)
+		snd:stop()
 	end
 
 
