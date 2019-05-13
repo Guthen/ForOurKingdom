@@ -19,12 +19,10 @@ return
 	fxOnDead = false,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 	onSpawn = function() -- fonction exécuté à l'appariton de l'unité
-		local snd = Sound["elevator_spawn_Jay_You"]
-		snd:setVolume(.5)
-		snd:play()
+		Sound:Play("elevator_spawn_Jay_You", 0.5, true)
 	end,
 	onDestroyed = function() -- fonction exécuté à la mort de l'unité
-		local snd = Sound["elevator_spawn_Jay_You"]
+		Sound:Stop("elevator_spawn_Jay_You", 0, false)
 		snd:stop()
 	end,
 }
