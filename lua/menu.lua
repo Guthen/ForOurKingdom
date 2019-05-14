@@ -125,15 +125,18 @@ function Menu:CreateInventory( ply )
 	if not ply then return end
 	UI:ResetObject()
 
+    local unit = Units.units["greu"]
+    local infoName
+    local infoHP
+    local infoDmg
+    local infoCost
+
 	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
 		  back.removeOnClick = false
 		  back.img = Image[ "but_back" ]
 		  back.doClick = function( self )
 		  	   	Menu:CreatePlayerInventory()
-		  end
- 
-	
-		  
+		  end	  
 
 	local Buts = {}
 		  Buts.units = {}
@@ -193,6 +196,13 @@ function Menu:CreateInventory( ply )
 
 			table.remove( Buts.void, 1 )
 		end
+		Buts.inv[_id].doRightClick = function()
+			unit = Units.units[k]
+			infoName.text = "Name: "..unit.name
+			infoHP.text = "Heal:: "..unit.hp
+			infoDmg.text = "Domage: "..unit.dmg
+			infoCost.text = "Cost: "..unit.cost
+		end
 
 		_id = _id + 1
 
@@ -216,16 +226,15 @@ function Menu:CreateInventory( ply )
 	local info = UI:CreateImage( self.defX+150, self.defY-22.5+200, 13, 10 )
 		  info.img = Image["blanc"]
 		  info.onDraw = function()
-     	  		love.graphics.setColor(.1, .1, .1)
-				end
-				UI:CreateText(self.defX+155, self.defY-22.5+220, 1.98, 1.98, "Name: Ascensorreur")
-				UI:CreateText(self.defX+155, self.defY-22.5+250, 1.98, 1.98, "Heal: 10000")
-				UI:CreateText(self.defX+155, self.defY-22.5+280, 1.98, 1.98, "Domage: 10000")
-				UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "Speed: 1.4")
-				UI:CreateText(self.defX+155, self.defY-22.5+340, 1.98, 1.98, "Bio: ")
-				love.graphics.setColor(0, 0, 0)
-end
+     	  	love.graphics.setColor(.1, .1, .1)
+		  end
 
+
+	infoName = UI:CreateText(self.defX+155, self.defY-22.5+220, 1.98, 1.98, "")
+	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+250, 1.98, 1.98, "")
+	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+280, 1.98, 1.98, "")
+	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "")g
+end
 
 function Menu:Key(k)
 end
