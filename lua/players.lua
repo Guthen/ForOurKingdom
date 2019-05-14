@@ -183,14 +183,9 @@ function Players:Draw()
 			love.graphics.printf(self.P2.gold, Game.Width-Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
 		end
-		-- hp
-		if self.P2.info.hp <= Game.PlayersHealth/5 then
-			love.graphics.setColor(1, .1, .1)  
-		end
-		love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-80, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-		love.graphics.draw(Image["heal"], Game.Width-Image["heal"]:getWidth()*4-6, 6, 0, 4, 4)
-		
 
+		love.graphics.printf(self.P2.info.hp, Game.Width-Image["gold"]:getWidth()*4+8-80, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
+		
 		-- units
 		local lastUnit
 		if self.P2.units[self.P2.curUnit-1] then
@@ -269,7 +264,12 @@ function Players:Draw()
 
     love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4.75, 100, 34, Clamp( hpP2, 0, 301 ))
 
-
+	-- hp
+	love.graphics.setColor( 1, 1, 1 )
+	if self.P2.info.hp <= Game.PlayersHealth/5 then
+		love.graphics.setColor(1, .1, .1)  
+	end
+	love.graphics.draw(Image["heal"], Game.Width-Image["heal"]:getWidth()*4-6, 6, 0, 4, 4)
 
 
 end
@@ -313,7 +313,7 @@ function Players:Key(k)
         PLAYER 2 CONTROL
     ---------------------------------------------------------------------------]]
     -- DÉPLACEMENT
-    if Game.MenuState and not self.P2.isDestroyed then
+    if not AI.isPlaying and not self.P2.isDestroyed then
         if k == 'up' and self.P2.y > 0 then
             self.P2.y = self.P2.y - 1
         end

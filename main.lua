@@ -66,6 +66,7 @@ function love.update(dt)
     if Game.MenuState == 0 then
     	Players:Update( dt )
 		Units:Update( dt )
+		AI:Update( dt )
 	
     	UpdateAnims( dt )
     else

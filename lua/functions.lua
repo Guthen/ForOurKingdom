@@ -98,8 +98,11 @@ function Reset()
 	timers = {}
 	FX = {}
 	UI.CanClick = true
+	
 	Units:Load()
 	Players:Load()
+	
+	AI:Load()
 
 	for _,v in pairs(Sound) do
 		if type(v) == "userdata" and v:isPlaying() then v:stop() end

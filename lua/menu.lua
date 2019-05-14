@@ -50,6 +50,7 @@ function Menu:Create()
 		  pve.doClick = function( self )
 				Game.MenuState = 0
 				Reset()
+				AI.isPlaying = true
 				Map:RandomCurMap()		
 				UI:ResetObject()
 		  end
