@@ -1,5 +1,6 @@
 return
 {
+	desc = "",
 	name = "Goblance",
 	img = Image["Goblance_anim(marche)"],
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

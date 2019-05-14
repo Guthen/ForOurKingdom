@@ -21,7 +21,6 @@ function Sound:Play(son, vol, loop)
 
 function Sound:Stop(son)
 		local snd = Sound[son]
-		snd:setLooping(loop)
 		snd:stop()
 	end
 

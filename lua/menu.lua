@@ -130,6 +130,7 @@ function Menu:CreateInventory( ply )
     local infoHP
     local infoDmg
     local infoCost
+    local infoDesc
 
 	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
 		  back.removeOnClick = false
@@ -202,6 +203,7 @@ function Menu:CreateInventory( ply )
 			infoHP.text = "Heal:: "..unit.hp
 			infoDmg.text = "Domage: "..unit.dmg
 			infoCost.text = "Cost: "..unit.cost
+			infoDesc.text = "Description: "..unit.desc
 		end
 
 		_id = _id + 1
@@ -234,6 +236,7 @@ function Menu:CreateInventory( ply )
 	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+250, 1.98, 1.98, "")
 	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+280, 1.98, 1.98, "")
 	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "")
+	infoDesc = UI:CreateText(self.defX+155, self.defY-22.5+340, 1.98, 1.98, "")
 end
 
 function Menu:Key(k)
