@@ -1,5 +1,6 @@
 return
 {
+	desc = "",
 	img = Image["Ascensorreur"], -- son nom d'image (sans l'extension)
 	deadImg = Image["Ascensorreur_dead"], -- son image à la mort de celui-ci (fonctionne seulement si dieToFirstKill = true)
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

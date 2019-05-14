@@ -1,5 +1,6 @@
 return
 {
+	desc = "",
 	img = Image["Goblattack"],
 	name = "Goblattack",
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
@@ -12,6 +13,5 @@ return
 	targetFly = true,
 	targetGround = true,
 	followTarget = false,
-	range = 3,
 	animSpd = .2,
 }

@@ -1,5 +1,6 @@
 return 
 {
+	desc = "",
 	img = Image["Greu"],
 	name = "Greu",
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

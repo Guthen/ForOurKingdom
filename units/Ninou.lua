@@ -1,5 +1,6 @@
 return
 {
+	desc = "",
 	img = Image["Ninou"], -- son nom d'image (sans l'extension)
 	name = "Ninou", -- son nom dans le jeu
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

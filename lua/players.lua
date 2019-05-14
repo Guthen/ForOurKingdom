@@ -1,4 +1,4 @@
-﻿Players = {}
+Players = {}
 Players.P1 = {}
 Players.P2 = {}
 Players.P1.units = {"Bloby" , "Stickman" , "Rainbow_Stickman" , "Ascensorreur", "Trou noir", "greu", "Demonplante", "Canniplante", "grus", "grea", "goblex", "goblattack", "rockpose", "roco", "slapher", "norber"}
@@ -262,7 +262,7 @@ function Players:Draw()
 
     love.graphics.setColor(255,0,0)
 
-    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4.75, 100, 34, Clamp( hpP2, 0, 301 ))
+    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4, 100, 33, Clamp( hpP2, 0, 301 ))
 
 	-- hp
 	love.graphics.setColor( 1, 1, 1 )

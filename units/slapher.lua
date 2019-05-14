@@ -1,5 +1,6 @@
 return
 {
+	desc = "",
 	img = Image["Slapher"], -- son nom d'image (sans l'extension)
 	name = "Slapher", -- son nom dans le jeu
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
