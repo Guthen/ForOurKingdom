@@ -1,10 +1,11 @@
 return
 {
-	desc = "",
+	desc = 
+		"Le Bouble de Feu est un sort créé\n par les plus incompétants Sorciers de Feu.\nIl servirait à brûler les autres créatures.",
 	img = Image["Boule de feu"], -- son nom d'image (sans l'extension)
 	deadImg = Image["Boule de feu attack"], -- son image à la mort de celui-ci (fonctionne seulement si dieToFirstKill = true)
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
-	name = "Bouble de feu", -- son nom dans le jeu
+	name = "Bouble de Feu", -- son nom dans le jeu
 	hp = 10, -- ses points de vie
 	dmg = 10000, -- ses points de dégats infligés
 	spd = 8, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
