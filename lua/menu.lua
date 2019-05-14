@@ -233,7 +233,7 @@ function Menu:CreateInventory( ply )
 	infoName = UI:CreateText(self.defX+155, self.defY-22.5+220, 1.98, 1.98, "")
 	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+250, 1.98, 1.98, "")
 	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+280, 1.98, 1.98, "")
-	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "")g
+	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "")
 end
 
 function Menu:Key(k)
