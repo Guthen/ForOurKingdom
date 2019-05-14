@@ -13,6 +13,5 @@ return
 	targetFly = true,
 	targetGround = true,
 	followTarget = false,
-	range = 3,
 	animSpd = .2,
 }
