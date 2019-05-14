@@ -121,8 +121,6 @@ function love.keypressed(k)
 			Map.CurrentMap = "arena_04"
 		elseif k == "kp4" then
 		    Reset()
-		    Players.P1.units = {"Boule de feu" , "Trou noir"}
-		    Players.P2.units = {"Boule de feu", "Trou noir"}
 		    Map.CurrentMap = "arena_05"
       	elseif k == "kp5" then
       		Reset()

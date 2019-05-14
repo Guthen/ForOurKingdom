@@ -6,8 +6,8 @@ function AI:Load()
 	
 	AI.typeUnits = 
 	{
-		["Tank"] = { "Norber", "Greu", "Devoggs" }
-		["Attack"] = { "Grea", "Stickman" }
+		["Tank"] = { "Norber", "Greu", "Devoggs" },
+		["Attack"] = { "Grea", "Stickman" },
 	}
 	
 	AI.units = {}
