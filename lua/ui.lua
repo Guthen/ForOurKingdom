@@ -179,6 +179,22 @@ function UI:OnClick(x, y, clk)
 				end
 			end
 		end
+	elseif clk == 2 then
+		for _, v in pairs( self.Objects ) do
+			if v.doRightClick then
+				if self.CanClick then
+					if IsCollide( v.x, v.y, x, y, v.w, v.h, 1, 1 ) then
+						if v.type == "CheckBox" then v.activated = not v.activated end
+						v.doRightClick( v )
+						if v.removeOnClick then v:Remove() end
+						UI.CanClick = false
+						TimerAdd( .2, false, function() self.CanClick = true end )
+					elseif v.type == "TextEntry" then -- si pas collision, on enlève la possibilité d'écrire 
+						v.canWrite = false
+					end
+				end
+			end
+		end
 	end
 end
 
