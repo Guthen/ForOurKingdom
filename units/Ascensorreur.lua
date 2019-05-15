@@ -1,6 +1,6 @@
-return
+﻿return
 {
-	desc = "",
+	desc = "Ascensorreur, est un ascenseur vers un monde inconnu toutes les personnes qui ont étaient dévorées et ne sont jamais revenues.",
 	img = Image["Ascensorreur"], -- son nom d'image (sans l'extension)
 	deadImg = Image["Ascensorreur_dead"], -- son image à la mort de celui-ci (fonctionne seulement si dieToFirstKill = true)
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

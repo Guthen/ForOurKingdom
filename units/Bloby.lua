@@ -1,6 +1,6 @@
-return
+﻿return
 {
-	desc = "",
+	desc = "Bloby est une expérience ratée, en essayant de fusionner un slim et de l'uranium, on obtient une créature apocalyptique.",
 	img = Image["Bloby"], -- son nom d'image (sans l'extension)
 	name = "Bloby", -- son nom dans le jeu
 	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

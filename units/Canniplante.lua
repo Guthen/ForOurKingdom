@@ -1,6 +1,6 @@
-return
+﻿return
 {
-	desc = "",
+	desc = "Canniplante est une plante cannibale, elle ne se nourrit que d'êtres vivants qui ont osés lui marcher dessus.",
 	img = Image["Canniplante"], -- son nom d'image (sans l'extension)
 	name = "Canniplante", -- son nom dans le jeu
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
