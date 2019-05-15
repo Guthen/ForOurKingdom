@@ -201,8 +201,8 @@ function Menu:CreateInventory( ply )
 		Buts.inv[_id].doRightClick = function()
 			unit = Units.units[k]
 			infoName.text = "Name: "..unit.name
-			infoHP.text = "Heal:: "..unit.hp
-			infoDmg.text = "Domage: "..unit.dmg
+			infoHP.text = "Health: "..unit.hp
+			infoDmg.text = "Damage: "..unit.dmg
 			infoCost.text = "Cost: "..unit.cost
 			infoDesc.text = "Description: "..unit.desc
 		end
@@ -233,11 +233,11 @@ function Menu:CreateInventory( ply )
 		  end
 
 
-	infoName = UI:CreateText(self.defX+155, self.defY-22.5+220, 1.98, 1.98, "")
-	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+250, 1.98, 1.98, "")
-	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+280, 1.98, 1.98, "")
-	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+310, 1.98, 1.98, "")
-	infoDesc = UI:CreateText(self.defX+155, self.defY-22.5+340, 1.98, 1.98, "")
+	infoName = UI:CreateText(self.defX+155, self.defY-22.5+210, 1.98, 1.98, "")
+	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+240, 1.98, 1.98, "")
+	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+270, 1.98, 1.98, "")
+	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+300, 1.98, 1.98, "")
+	infoDesc = UI:CreateText(self.defX+155, self.defY-22.5+330, 1.98, 1.98, "")
 end
 
 function Menu:Key(k)

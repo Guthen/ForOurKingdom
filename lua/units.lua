@@ -93,6 +93,7 @@ function Units:Add(typeUnit, x, y, scale)
 			onEnemyKilled = unit.onEnemyKilled,
 			beforeDraw = unit.beforeDraw,
 			spawnAtCursor = unit.spawnAtCursor,
+			fx = unit.fx,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -142,7 +143,7 @@ function Units:Add(typeUnit, x, y, scale)
 			TimerDestroy(self.timer)
 		end
 		if self.info.fxOnDead == true then
-			NewFX( Image["fx_dust_explosion"], self.x, self.y, .5, .125 )
+			NewFX( Image[self.info.fx or "fx_dust_explosion"], self.x, self.y, 0, .125 )
 		end
 		print(self.info.name .. " has been destroyed !")
 

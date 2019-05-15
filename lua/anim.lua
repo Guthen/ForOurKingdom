@@ -48,6 +48,7 @@ end
 ---------------------------------------------------------------------------]]
 
 function NewFX( img, x, y, s, animSpd )
+	if not img then return print( "FX: Failed because wrong image !" ) end
 	local fx = 
 	{
 		img = img,
@@ -55,6 +56,8 @@ function NewFX( img, x, y, s, animSpd )
 		y = y,
 		anim = NewAnim( img, img:getHeight(), img:getHeight(), animSpd )
 	}
+
+	if s == 0 then s = animSpd * img:getWidth()/32 - .1 end -- set the auto-remove when finished if s == 0 (-.1 for debug)
 
 	TimerAdd( s, false, function()
 		RemoveValueFromTable( FX, fx )
