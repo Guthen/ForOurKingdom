@@ -168,6 +168,7 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.info.deadImg == self.info.img then return end
 		self.hasTimerAttack = true
 		self.timer = TimerAdd(self.info.attackRate, true, function()
+			if Players.P1.isDestroyed or Players.P2.isDestroyed then return TimerDestroy( self.timer ) end -- if game is finished, don't attack
 			if self.target then
 				self.target.info.hp = self.target.info.hp - self.info.dmg
 				if self.target.info.hp <= 0 then
@@ -219,6 +220,7 @@ end
 
 function Units:Update(dt)
 	if #self.igUnits == 0 then return end
+	if Players.P1.isDestroyed or Players.P2.isDestroyed then return end -- if game is finished, don't attack
 	for k, v in pairs(self.igUnits) do
 		if v.canMove then
 			v.x = v.x + v.info.spd * v.scale -- move
@@ -230,6 +232,7 @@ function Units:Update(dt)
 				v.x = v.x + v.info.spd
 			end
 		end
+		--  > Tower Attack <  --
 		if v.x >= 13*Game.ImageSize and v.scale == 1 then -- si atteint 3 case avant la base
 			if not v.isTargetByTower and TowerTargets < 3 then
 				v.isTargetByTower = true
@@ -276,13 +279,14 @@ function Units:Update(dt)
 			end
 		end
 		if v.info.attackBase then
-			if v.x >= 16*Game.ImageSize and v.scale == 1 then 
+			local offX = v.info.range and v.info.range*Game.ImageSize*-v.scale or 0
+			if v.x >= 16*Game.ImageSize + offX and v.scale == 1 then 
 				v.attack = true 
 				v.target = Players.P2 
 				v:StopMove() 
 				if not v.hasTimerAttack then v:CreateTimerAttack() end
 			end -- stop to base 2
-			if v.x <= 3*Game.ImageSize and v.scale == -1 then 
+			if v.x <= 3*Game.ImageSize + offX and v.scale == -1 then 
 				v.attack = true 
 				v.target = Players.P1 
 				v:StopMove()  

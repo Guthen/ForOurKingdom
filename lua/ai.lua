@@ -81,7 +81,7 @@ function AI:Update( dt )
 				if can then			
 					self:GetCurUnit( u )
 					
-					print( "AI: Attempted to spawn : "..self.curUnit )
+					--print( "AI: Attempted to spawn : "..self.curUnit )
 					
 					if string.len( self.curUnit ) > 1 and Players.P2.gold - u.info.cost > 0 then 
 						local _x = Units.units[ self.curUnit ] and Units.units[ self.curUnit ].spawnAtCursor and Players.P2.x*Game.ImageSize or 17*Game.ImageSize

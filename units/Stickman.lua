@@ -4,10 +4,10 @@ return
 	img = Image["Stickman"], -- son nom d'image (sans l'extension)
 	name = "Stickman", -- son nom dans le jeu
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
-	hp = 75, -- ses points de vie
-	dmg = 50, -- ses points de dégats infligés
+	hp = 250, -- ses points de vie
+	dmg = 65, -- ses points de dégats infligés
 	spd = 1, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
-	attackRate = 1.5, -- en combien de secondes attaque t'il
+	attackRate = .75, -- en combien de secondes attaque t'il
 	cost = 10 , -- combien l'unité coûte
 	isFly = false, -- s'il vole 
 	targetFly = false, -- s'il peut attaquer les unités volantes

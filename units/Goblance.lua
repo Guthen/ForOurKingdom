@@ -4,7 +4,7 @@
 	name = "Goblance",
 	img = Image["Goblance_anim(marche)"],
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
-	hp = 50,
+	hp = 25,
 	dmg = 15,
 	spd = 1.75,
 	attackRate = .5,
@@ -13,5 +13,5 @@
 	targetFly = true,
 	targetGround = true,
 	followTarget = false,
-	range = 3
+	range = 2
 }

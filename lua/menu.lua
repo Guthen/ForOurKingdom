@@ -14,12 +14,12 @@ function Menu:Load()
 	self.MapLimit = #self.Maps*Game.Width
 	self.MapX = 0
 	self.MapY = 0
-	self.MapSpd = 75
+	self.MapSpd = 100
 end
 
-function Menu:Create()
+function Menu:Create( resetX )
 	UI:ResetObject()
-	self.MapX = 0
+	if resetX then self.MapX = 0 end
 
 	Game.MenuState = 1
 	
@@ -38,7 +38,7 @@ function Menu:Create()
 		  end
 
 	-- l'icône est ici pour être vu au premier-plan
-	local icon = UI:CreateImage( self.defX-130, self.defY-70, 3, 3, Image[ "devoggs" ] )
+	local icon = UI:CreateImage( self.defX-140, self.defY-80, 3, 3, Image[ "devoggs" ] )
 		  icon.isCenter = true
 		  icon.onDraw = function( self ) 
 				self.ang = math.sin( love.timer.getTime() ) * .2
