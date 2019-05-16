@@ -100,14 +100,7 @@ function Players:Draw()
         love.graphics.printf(self.P1.gold, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5, 200, "left", 0, 4, 4)
 
     end 
-    -- hp
-    if self.P1.info.hp <= Game.PlayersHealth/5 then
-        love.graphics.setColor(1, .1, .1)
-    else
-        
-    end
     love.graphics.printf(self.P1.info.hp, 6+Image["gold"]:getWidth()*4+8, Game.Height-Image["gold"]:getHeight()*4-6+5-50, 200, "left", 0, 4, 4)
-    love.graphics.draw(Image["heal"], 6, 6, 0, 4, 4)
 
     -- units
     local lastUnit
@@ -241,28 +234,29 @@ function Players:Draw()
 	end
 
     -- Health Bar
+    love.graphics.setColor( 1, 1, 1 )
 
     -- Player 1
 	hpP1 = Lerp( love.timer.getDelta()*10, hpP1, self.P1.info.hp/Game.PlayersHealth*301 )
+    love.graphics.rectangle("line", 20, 75, 34, 302)
 
-    love.graphics.rectangle("line", 18, 100, 34, 302)
+    love.graphics.setColor(1,0,0)
+    love.graphics.rectangle("fill", 21, 75, 32, Clamp( hpP1, 0, 301 ))
 
-    love.graphics.setColor(255,0,0)
-
-    love.graphics.rectangle("fill", 19, 100, 32, Clamp( hpP1, 0, 301 ))
-
+    -- hp
+    love.graphics.setColor( 1, 1, 1 )
+    if self.P1.info.hp <= Game.PlayersHealth/5 then
+        love.graphics.setColor(1, .1, .1)
+    end
+    love.graphics.draw(Image["heal"], 6, 6, 0, 4, 4)
 
 
     -- Player 2
 	hpP2 = Lerp( love.timer.getDelta()*10, hpP2, self.P2.info.hp/Game.PlayersHealth*301 )
+    love.graphics.rectangle("line", Game.Width-Image["heal"]:getWidth()*4+6, 75, 34, 302)
 
-    love.graphics.setColor(255,255,255)
-
-    love.graphics.rectangle("line", Game.Width-Image["heal"]:getWidth()*4-4.5, 100, 34, 302)
-
-    love.graphics.setColor(255,0,0)
-
-    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4-4, 100, 33, Clamp( hpP2, 0, 301 ))
+    love.graphics.setColor(1,0,0)
+    love.graphics.rectangle("fill", Game.Width-Image["heal"]:getWidth()*4+7, 75, 33, Clamp( hpP2, 0, 301 ))
 
 	-- hp
 	love.graphics.setColor( 1, 1, 1 )

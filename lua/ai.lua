@@ -34,7 +34,6 @@ function AI:GetCurUnit( trg )
 	local unit = ""
 	if trg.info.isFly then 
 		unit = self.units[ "Fly" ][ math.random( #self.units["Fly"] ) ]
-
 	elseif not trg.info.isFly then
 		if trg.info.hp <= 250 then
 			unit = self.units[ "Little" ][ math.random( #self.units["Little"] ) ]
@@ -69,7 +68,7 @@ function AI:Update( dt )
 					Units:Add( self.curUnit, _x, (y-1)*Game.ImageSize, Players.P2.scale )
 					
 					self.useUnit = false
-					TimerAdd( 1, false, function() self.useUnit = true end )
+					TimerAdd( .05, false, function() self.useUnit = true end )
 					
 					Players.P2.gold = Players.P2.gold - u.info.cost
 					

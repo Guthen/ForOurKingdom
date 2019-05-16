@@ -49,8 +49,10 @@ function Map:Load()
 	}
 
 	for k,v in pairs(self.MapImages) do
-		local s = v.img:getHeight() == 32 and 32 or 16
-		v.anim = NewAnim( v.img, s, s, k/2.5 )
+		if v.img:getWidth() > v.img:getHeight() then 
+			local s = v.img:getHeight() == 32 and 32 or 16
+			v.anim = NewAnim( v.img, s, s, .75 )
+		end
 	end
 
 	Map:LoadMaps()
@@ -84,7 +86,7 @@ function Map:Draw()
 					if not self.MapImages[vx].anim then
 						love.graphics.draw(self.MapImages[vx].img, (kx-1)*Game.ImageSize, (ky-1)*Game.ImageSize, 0, Game.ImageSize/self.MapImages[vx].img:getWidth(), Game.ImageSize/self.MapImages[vx].img:getHeight())
 					else
-						love.graphics.draw(self.MapImages[vx].img, self.MapImages[vx].anim.quads[self.MapImages[vx].anim.quad], (kx-1)*Game.ImageSize, (ky-1)*Game.ImageSize, 0, Game.ImageSize/self.MapImages[vx].img:getWidth()*Game.ImageSize/self.MapImages[vx].img:getWidth(), Game.ImageSize/self.MapImages[vx].img:getHeight())
+						love.graphics.draw(self.MapImages[vx].img, self.MapImages[vx].anim.quads[self.MapImages[vx].anim.quad], (kx-1)*Game.ImageSize, (ky-1)*Game.ImageSize, 0, Game.ImageSize/self.MapImages[vx].img:getHeight(), Game.ImageSize/self.MapImages[vx].img:getHeight())
 					end
 				end
 			end		

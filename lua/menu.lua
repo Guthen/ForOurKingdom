@@ -258,7 +258,7 @@ function Menu:Draw()
 					if not Map.MapImages[vx].anim then
 						love.graphics.draw(Map.MapImages[vx].img, ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
 					else
-						love.graphics.draw(Map.MapImages[vx].img, Map.MapImages[vx].anim.quads[Map.MapImages[vx].anim.quad], ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth()*Game.ImageSize/Map.MapImages[vx].img:getWidth()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
+						love.graphics.draw(Map.MapImages[vx].img, Map.MapImages[vx].anim.quads[Map.MapImages[vx].anim.quad], ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
 					end
 				end
 			end
