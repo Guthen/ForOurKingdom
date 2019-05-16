@@ -43,6 +43,7 @@ function Map:Load()
 		[24] = {img = Image["terrain_jungle 8"]},
 		[25] = {img = Image["terrain_jungle 9"]},
 		[26] = {img = Image["terrain_jungle 11"]},
+		--  > Tower <  --
 		[27] = {img = Image["Tour_d'archer"]},
 		[28] = {img = Image["tour_demon"]},
 		[29] = {img = Image["Tour_aquatique"]},
