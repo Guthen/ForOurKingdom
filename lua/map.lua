@@ -75,6 +75,26 @@ end
 
 function Map:RandomCurMap()
 	self.CurrentMap = self.MapsID[ math.random( #self.MapsID ) ]
+	-- play sound if exists
+	if Game.MenuState == 0 then
+		local snd = self.Maps[self.CurrentMap].sound 
+		if snd then
+			Sound:Play( snd, .5, true )
+		end
+	end
+end
+
+function Map:SetCurMap( curMap )
+	if self.Maps[ curMap ] then 
+		self.CurrentMap = curMap 
+		-- play sound if exists
+		if Game.MenuState == 0 then
+			local snd = self.Maps[self.CurrentMap].sound 
+			if snd then
+				Sound:Play( snd, .5, true )
+			end
+		end
+	end
 end
 
 function Map:Draw()

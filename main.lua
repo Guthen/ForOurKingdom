@@ -112,22 +112,22 @@ function love.keypressed(k)
 		Players:Key(k)
 		if k == "kp0" then
 			Reset()
-			Map.CurrentMap = "arena_01"
+			Map:SetCurMap( "arena_01" )
 		elseif k == "kp1" then
 			Reset()
-			Map.CurrentMap = "arena_02"
+			Map:SetCurMap( "arena_02" )
 		elseif k == "kp2" then
 			Reset()
-			Map.CurrentMap = "arena_03"
+			Map:SetCurMap( "arena_03" )
 		elseif k == "kp3" then
 			Reset()
-			Map.CurrentMap = "arena_04"
+			Map:SetCurMap( "arena_04" )
 		elseif k == "kp4" then
 		    Reset()
-		    Map.CurrentMap = "arena_05"
+		    Map:SetCurMap( "arena_05" )
       	elseif k == "kp5" then
       		Reset()
-      		Map.CurrentMap = "arena_06"
+      		Map:SetCurMap( "arena_06" )
     	end
 		
 		if k == "escape" then

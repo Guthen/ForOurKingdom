@@ -18,6 +18,8 @@ function Menu:Load()
 end
 
 function Menu:Create( resetX )
+	Sound:Play( "Menu Music", .5, true )
+
 	UI:ResetObject()
 	if resetX then self.MapX = 0 end
 
@@ -253,15 +255,19 @@ function Menu:Draw()
 	for kMap,vMap in pairs(self.Maps) do
 
 		for ky,vy in pairs(vMap) do
-			for kx,vx in pairs(vy) do
-				if vx > 0 and Map.MapImages[vx] then
-					if not Map.MapImages[vx].anim then
-						love.graphics.draw(Map.MapImages[vx].img, ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
-					else
-						love.graphics.draw(Map.MapImages[vx].img, Map.MapImages[vx].anim.quads[Map.MapImages[vx].anim.quad], ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
+			
+			if type( vy ) == "table" then
+				for kx,vx in pairs(vy) do
+					if vx > 0 and Map.MapImages[vx] then
+						if not Map.MapImages[vx].anim then
+							love.graphics.draw(Map.MapImages[vx].img, ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getWidth()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
+						else
+							love.graphics.draw(Map.MapImages[vx].img, Map.MapImages[vx].anim.quads[Map.MapImages[vx].anim.quad], ((kx-1)*Game.ImageSize+(#vy*Game.ImageSize*kMap-#vy)-self.MapX)*1.2, ((ky-1)*Game.ImageSize-self.MapY)*1.2, 0, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2, Game.ImageSize/Map.MapImages[vx].img:getHeight()*1.2)
+						end
 					end
 				end
 			end
+
 		end
 
 	end
