@@ -1,6 +1,6 @@
 return
 {
-	desc = "Attention a ne pas faire trop de \n bruit une avalanche pour s'abbatre sur vous",
+	desc = "Attention à ne pas faire trop de \nbruit, une avalanche pourrait s'abattre sur vous !",
 	img = Image["snowslide"], -- son nom d'image (sans l'extension)
 	name = "Avalanche", -- son nom dans le jeu
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
