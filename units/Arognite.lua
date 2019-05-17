@@ -4,9 +4,9 @@ return
 	img = Image["Arognite"], -- son nom d'image (sans l'extension)
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	name = "Arognite", -- son nom dans le jeu
-	hp = 650, -- ses points de vie
-	dmg = 150, -- ses points de dégats infligés
-	spd = 1.5, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
+	hp = 350, -- ses points de vie
+	dmg = 75, -- ses points de dégats infligés
+	spd = 1., -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0.25, -- en combien de secondes attaque t'il
 	cost = 15, -- combien l'unité coûte
 	isFly = false, -- s'il vole 

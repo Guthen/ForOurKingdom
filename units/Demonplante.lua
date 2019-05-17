@@ -1,6 +1,6 @@
 ﻿return
 {
-	desc = "Quand une plante se met à dévorer des humains, elle se transforme en plante démoniaque qui devore toutes vies présentes.",
+	desc = "Quand une plante se met à dévorer \n des humains, elle se transforme en \n plante démoniaque qui devore toutes vies \n présentes.",
 	img = Image["Demonplante"], -- son nom d'image (sans l'extension)
 	name = "Demonplante", -- son nom dans le jeu
 	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

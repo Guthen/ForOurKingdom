@@ -1,6 +1,6 @@
 ﻿return
 {
-	desc = "Devoggs est un dieu destructeur, rare sont les survivants de ses attaques. Il est décrit comme un géant sans tête, on raconte qu'il cherche sa tête perdue lors d'un de ses combats.",
+	desc = "Devoggs est un dieu destructeur,\nrare sont les survivants de ses attaques. \nIl est décrit comme un géant sans tête,\n on raconte qu'il cherche sa tête perdue lors \n d'un de ses combats.",
 	img = Image["devoggs"], -- son nom d'image (sans l'extension)
 	name = "Devoggs", -- son nom dans le jeu
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

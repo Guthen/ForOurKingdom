@@ -1,6 +1,6 @@
 ﻿return
 {
-	desc = "L'unité Goblance de la Grande Armée Goblin est l'unité qui s'occupe de jeter sur les ennemis leurs lances.",
+	desc = "L'unité Goblance de la \n Grande Armée Goblin est l'unité qui s'occupe \n de jeter sur les ennemis leurs lances.",
 	name = "Goblance",
 	img = Image["Goblance_anim(marche)"],
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
