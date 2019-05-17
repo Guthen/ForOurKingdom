@@ -12,7 +12,7 @@ function AI:Load()
 				["Little"] = { "Goblance", "goblattack", },
 				["Fly"] = { "Bat", "rockpose" },
 				["Attack"] = { "roco", "slapher", },
-				["Spell"] = { "Boule de feu", },
+				["Spell"] = { "Bouble de feu", },
 				["Combo"] = 
 					{
 						{
