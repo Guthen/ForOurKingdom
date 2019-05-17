@@ -24,6 +24,7 @@
 	end,
 	onDestroyed = function() -- fonction exécuté à la mort de l'unité
 		Sound:Stop("elevator_spawn_Jay_You", 0, false)
+		snd:stop()
 	end,
 }
 

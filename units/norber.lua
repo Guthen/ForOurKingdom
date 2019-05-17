@@ -1,6 +1,6 @@
 return
 {
-	desc = "",
+	desc = "A force deminer la pierre les \n hommes ont reveiller les golem,\n appeler Norber car l'homme qui les à réveiller \n s'appeler Norber",
 	img = Image["Norber"],
 	name = "Norber",
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

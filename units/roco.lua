@@ -1,6 +1,6 @@
 return
 {
-	desc = "",
+	desc = "La revanche des poulpes a \n sonner ils reprennent la surface en attaquent \n les hommes ",
 	img = Image["Roco"],
 	name = "Roco",
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
