@@ -40,7 +40,7 @@ function Menu:Create( resetX )
 		  end
 
 	-- l'icône est ici pour être vu au premier-plan
-	local icon = UI:CreateImage( self.defX-140, self.defY-80, 3, 3, Image[ "devoggs" ] )
+	local icon = UI:CreateImage( self.defX-140, self.defY-80, 3, 3, Image[ "Devoggs" ] )
 		  icon.isCenter = true
 		  icon.onDraw = function( self ) 
 				self.ang = math.sin( love.timer.getTime() ) * .2
@@ -224,7 +224,17 @@ function Menu:CreateInventory( ply )
 		  
 	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
 		  save.img = Image["save"]
-
+		  save.doClick = function()
+				Players:Save( ply, userName:GetText() )
+		  end
+		  
+	local _load = UI:CreateButton( self.defX+80, self.defY-22.5+296, 1.98, 1.98 )
+		  _load.img = Image["save"]
+		  _load.doClick = function()
+				Players:Load( ply, userName:GetText() )
+				Menu:CreateInventory( ply )
+		  end
+		  
 	local info = UI:CreateImage( self.defX+144, self.defY-22.5+194, 13.4, 10.4 )
 		  info.img = Image["black"]
 

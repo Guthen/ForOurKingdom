@@ -220,6 +220,7 @@ end
 function UI:Draw()
 	for _, v in pairs( self.Objects ) do
 		if v.draw then
+			if not v.color then v.color = { r = 1, g = 1, b = 1 } end
 			love.graphics.setColor( v.color.r or 1, v.color.g or 1, v.color.b or 1, v.color.a or .5 )
 			if v.onDraw then v.onDraw( v ) end
 			if v.img then

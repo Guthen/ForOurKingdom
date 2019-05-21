@@ -1,9 +1,9 @@
 ﻿return
 {
-	desc = "Ascensorreur, est un ascenseur \n qui amène vers  un monde inconnu toutes \nles personnes qui ont été dévorées et qui ne sont jamais \nrevenues.",
+	desc = "Ascensorreur, est un ascenseur \n qui amène vers  un monde inconnu toutes \nles personnes qui ont été dévorées et qui \nne sont jamais revenues.",
 	img = Image["Ascensorreur"], -- son nom d'image (sans l'extension)
 	deadImg = Image["Ascensorreur_dead"], -- son image à la mort de celui-ci (fonctionne seulement si dieToFirstKill = true)
-	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
+	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	name = "Ascensorreur", -- son nom dans le jeu
 	hp = 10000, -- ses points de vie
 	dmg = 10000, -- ses points de dégats infligés

@@ -75,7 +75,8 @@ end
 local hpP1 = 300
 local hpP2 = 300
 function Players:Draw()
-	if not self.img then return end
+	PrintTable( self )
+	if not self.img then return print("nop") end
     --[[-------------------------------------------------------------------------
         PLAYER 1 DRAW
     ---------------------------------------------------------------------------]]
@@ -337,21 +338,37 @@ function Players:Key(k)
     end
 end
 
-function Players:Save( ply )
-	if not ply then return end
+function Players:Save( ply, name )
+	if not ply or not name or string.len( name ) == 0 then return end
 
 	local dir = love.filesystem.getInfo( "users" )
-	if dir and dir.type == "directory" then
-	    love.filesystem.createDirectory( "DolphiLerhit" )
-	    love.filesystem.createDirectory( "Guthen" )
-	    love.filesystem.createDirectory( "TheFallen59" )
+	if not dir or not dir.type == "directory" then
+	    love.filesystem.createDirectory( "users" )
 	end
-	 
-	DolphiLerhit , users = love.filesystem.load (DolphiLerhit)
-	Guthen , users = love.filesystem.load (Guthen)
-	TheFallen59 , users = love.filesystem.load (TheFallen59)
 	
+	local dirName = love.filesystem.getInfo( "users/" .. name )
+	if not dirName or not dirName.type == "directory" then
+	    love.filesystem.createDirectory( "users/" .. name )
+	end
 	
+	love.filesystem.write( "users/" .. name .. "/units.sav", table.show( ply.units, "_Units" ) ) -- save current units
+end
+
+function Players:Load( ply, name )
+	if not ply or not name or string.len( name ) == 0 then return end
+	
+	local dir = love.filesystem.getInfo( "users" ) -- if no directory of users then do nothing
+	if not dir or not dir.type == "directory" then return end
+	
+	local dirName = love.filesystem.getInfo( "users/" .. name ) -- if no directory of his name then do nothing
+	if not dirName or not dirName.type == "directory" then return end
+	
+	local units = love.filesystem.read( "users/" .. name .. "/units.sav" ) -- load units
+	if units then 
+		local func = loadstring( units )
+		func()
+		ply.units = _Units 
+	end
 end
 
 Players:Load()
