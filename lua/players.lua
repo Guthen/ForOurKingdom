@@ -75,8 +75,7 @@ end
 local hpP1 = 300
 local hpP2 = 300
 function Players:Draw()
-	PrintTable( self )
-	if not self.img then return print("nop") end
+	if not self.img then return end
     --[[-------------------------------------------------------------------------
         PLAYER 1 DRAW
     ---------------------------------------------------------------------------]]
@@ -338,7 +337,7 @@ function Players:Key(k)
     end
 end
 
-function Players:Save( ply, name )
+function Players:SavePlayer( ply, name )
 	if not ply or not name or string.len( name ) == 0 then return end
 
 	local dir = love.filesystem.getInfo( "users" )
@@ -354,7 +353,7 @@ function Players:Save( ply, name )
 	love.filesystem.write( "users/" .. name .. "/units.sav", table.show( ply.units, "_Units" ) ) -- save current units
 end
 
-function Players:Load( ply, name )
+function Players:LoadPlayer( ply, name )
 	if not ply or not name or string.len( name ) == 0 then return end
 	
 	local dir = love.filesystem.getInfo( "users" ) -- if no directory of users then do nothing

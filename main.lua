@@ -55,7 +55,7 @@ function love.load()
     RequireFolder("lua")
     RequireFolder("libs", Libs)
 	
-	love.window.setIcon( love.image.newImageData( "images/units/devoggs.png" ) ) -- set game icon
+	love.window.setIcon( love.image.newImageData( "images/units/Devoggs.png" ) ) -- set game icon
 
 	LoadPreferences()
 

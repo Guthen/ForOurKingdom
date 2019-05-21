@@ -225,13 +225,13 @@ function Menu:CreateInventory( ply )
 	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
 		  save.img = Image["save"]
 		  save.doClick = function()
-				Players:Save( ply, userName:GetText() )
+				Players:SavePlayer( ply, userName:GetText() )
 		  end
 		  
 	local _load = UI:CreateButton( self.defX+80, self.defY-22.5+296, 1.98, 1.98 )
 		  _load.img = Image["save"]
 		  _load.doClick = function()
-				Players:Load( ply, userName:GetText() )
+				Players:LoadPlayer( ply, userName:GetText() )
 				Menu:CreateInventory( ply )
 		  end
 		  
