@@ -109,11 +109,19 @@ function Menu:CreatePVESelection()
 					Map:RandomCurMap()		
 					UI:ResetObject()
 		  	  end
+		  	  level.lvl = i
+		  	  level.onDraw = function()
+		  	  		if level.lvl == 11 then 
+		  	  			love.graphics.setColor( math.random(), math.random(), math.random() )
+		  	  		end
+		  	  end
 
 		x = x + 1
 		if i % 8 == 0 then y = y + 1 x = 1 end
 
 	end
+
+	local text = UI:CreateText( self.defX-125, self.defY-100, 3, 3, "Level Selection Menu" )
 
 	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
 		  back.removeOnClick = false
