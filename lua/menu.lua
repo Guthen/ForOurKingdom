@@ -50,11 +50,7 @@ function Menu:Create( resetX )
 		  pve.removeOnClick = true
 		  pve.img = Image[ "but_pve" ]
 		  pve.doClick = function( self )
-				Game.MenuState = 0
-				Reset()
-				AI.isPlaying = true
-				Map:RandomCurMap()		
-				UI:ResetObject()
+				Menu:CreatePVESelection()
 		  end
 
 	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1 )
@@ -96,6 +92,35 @@ function Menu:Create( resetX )
 				love.system.openURL( "https://github.com/Guthen/ForOurKingdom" )
 		  end
 
+end
+
+function Menu:CreatePVESelection()
+	UI:ResetObject()
+
+	local x, y = 1, 0
+	for i = 1, 11 do
+		
+		local level = UI:CreateButton( self.defX*.05 + x * 128, self.defY*.9 + y * 128, 1.4, 1.4 )
+		      level.img = Image[ "number_" .. tostring( i ) ]
+		      level.doClick = function( )
+			      	Game.MenuState = 0
+					Reset()
+					AI.isPlaying = true
+					Map:RandomCurMap()		
+					UI:ResetObject()
+		  	  end
+
+		x = x + 1
+		if i % 8 == 0 then y = y + 1 x = 1 end
+
+	end
+
+	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
+		  back.removeOnClick = false
+		  back.img = Image[ "but_back" ]
+		  back.doClick = function( self )
+		  	   	Menu:Create()
+		  end
 end
 
 function Menu:CreatePlayerInventory()
