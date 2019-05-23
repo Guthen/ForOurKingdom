@@ -145,7 +145,6 @@ function Menu:CreateInventory( ply )
 	local Buts = {}
 		  Buts.units = {}
 		  Buts.inv = {}
-		  Buts.void = {}
 
 	local _id = 1
 
@@ -166,7 +165,8 @@ function Menu:CreateInventory( ply )
 			if not self.draw then return end
 			RemoveValueFromTable( ply.units, v )
 			self.draw = false
-			table.insert( Buts.void, k )
+
+			Menu:CreateInventory( ply ) -- reload
 		end
 
 		_x = _x + 1
@@ -189,16 +189,10 @@ function Menu:CreateInventory( ply )
 		end
 		Buts.inv[_id].isUnit = true
 		Buts.inv[_id].doClick = function()
-			if #ply.units >= 7 or table.HasValue(ply.units, k) or not Buts.units[ Buts.void[1] ] then return end
+			if #ply.units >= 7 or table.HasValue( ply.units, k ) then return end
 			table.insert( ply.units, k )
 
-			Buts.units[ Buts.void[1] ].draw = true
-			if v.img then
-				Buts.units[ Buts.void[1] ].img = v.img
-				Buts.units[ Buts.void[1] ].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
-			end
-
-			table.remove( Buts.void, 1 )
+			Menu:CreateInventory( ply ) -- reload
 		end
 		Buts.inv[_id].doRightClick = function()
 			unit = Units.units[k]
