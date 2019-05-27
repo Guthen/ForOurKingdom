@@ -167,6 +167,7 @@ function Menu:CreateInventory( ply )
     local infoDmg
     local infoCost
     local infoDesc
+	local infoLVL
 
 	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
 		  back.removeOnClick = false
@@ -229,11 +230,12 @@ function Menu:CreateInventory( ply )
 		end
 		Buts.inv[_id].doRightClick = function()
 			unit = Units.units[k]
-			infoName.text = "Name: "..unit.name
-			infoHP.text = "Health: "..unit.hp
-			infoDmg.text = "Damage: "..unit.dmg
-			infoCost.text = "Cost: "..unit.cost
-			infoDesc.text = "Description: "..unit.desc
+			infoName.text = "Name: "..(unit.name or "N/A")
+			infoHP.text = "Health: "..(unit.hp or "N/A")
+			infoDmg.text = "Damage: "..(unit.dmg or "N/A")
+			infoCost.text = "Cost: "..(unit.cost or "N/A")
+			infoDesc.text = "Description: "..(unit.desc or "N/A")
+			infoLVL.text = "Level: "..(unit.lvl or 1)
 		end
 
 		_id = _id + 1
@@ -242,23 +244,27 @@ function Menu:CreateInventory( ply )
 		if _x > 10 then _y = _y + 1 _x = 0 end
 
 	end
+	
+	--	user info
+	userName = UI:CreateText(25, 25, 1.98, 1.98, "Name: "..ply.name)
+	userLVL = UI:CreateText(25, 50, 1.98, 1.98, "LVL: "..ply.lvl)
 
 	-- text entry
-	local userName = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
-		  userName.onEnter = function( self )
-		  		print( userName:GetText() ) -- print le texte écrit
+	local userNameTE = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
+		  userNameTE.onEnter = function( self )
+		  		print( userNameTE:GetText() ) -- print le texte écrit
 		  end
 		  
 	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
 		  save.img = Image["save"]
 		  save.doClick = function()
-				Players:SavePlayer( ply, userName:GetText() )
+				Players:SavePlayer( ply, userNameTE:GetText() )
 		  end
 		  
 	local _load = UI:CreateButton( self.defX+80, self.defY-22.5+296, 1.98, 1.98 )
 		  _load.img = Image["save"]
 		  _load.doClick = function()
-				Players:LoadPlayer( ply, userName:GetText() )
+				Players:LoadPlayer( ply, userNameTE:GetText() )
 				Menu:CreateInventory( ply )
 		  end
 		  
@@ -271,7 +277,7 @@ function Menu:CreateInventory( ply )
      	  	love.graphics.setColor(.1, .1, .1)
 		  end
 
-
+	infoLVL = UI:CreateText(self.defX+485, self.defY-22.5+210, 1.98, 1.98, "")
 	infoName = UI:CreateText(self.defX+155, self.defY-22.5+210, 1.98, 1.98, "")
 	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+240, 1.98, 1.98, "")
 	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+270, 1.98, 1.98, "")
