@@ -18,7 +18,7 @@ function Menu:Load()
 end
 
 function Menu:Create( resetX )
-	Sound:Play( "Menu Music", .5, true )
+	Sound:Play( "Menu Music", 1, true )
 
 	UI:ResetObject()
 	if resetX then self.MapX = 0 end

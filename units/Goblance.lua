@@ -13,5 +13,7 @@
 	targetFly = true,
 	targetGround = true,
 	followTarget = false,
-	range = 2
+	range = 2,
+	soundOnSpawn = "goblin_spawn",
+	soundOnDead = "goblin_hurt1",
 }

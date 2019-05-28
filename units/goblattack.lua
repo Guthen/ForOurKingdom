@@ -14,4 +14,6 @@
 	targetGround = true,
 	followTarget = false,
 	animSpd = .2,
+	soundOnSpawn = "goblin_spawn",
+	soundOnDead = "goblin_hurt2",
 }
