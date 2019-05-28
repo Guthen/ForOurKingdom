@@ -45,6 +45,25 @@ function AI:Load()
 						},
 					}
 			},
+			[11] = 
+			{
+				["Little"] = { "Elementaire de Feu", "Bloby", },
+				["Fly"] = { "Dragon", "Elementaire de Vent" },
+				["Attack"] = { "Devoggs", "Demonplante", },
+				["Spell"] = { "Trou noir","Ascensorreur" },
+				["Combo"] = 
+					{
+						{
+							"Trou noir",
+							"Devoggs",
+						},
+						{
+							"Dragon",
+							"Demonplante",
+							"Ascensorreur",
+						},
+					}
+			},
 	}
 	self.LVL = 1
 	self.units = {}
