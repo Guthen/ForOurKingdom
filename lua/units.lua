@@ -97,6 +97,7 @@ function Units:Add(typeUnit, x, y, scale)
 			onSpawn = unit.onSpawn,
 			onDestroyed = unit.onDestroyed,
 			onEnemyKilled = unit.onEnemyKilled,
+			onEnemyAttack = unit.onEnemyAttack,
 			beforeDraw = unit.beforeDraw,
 			spawnAtCursor = unit.spawnAtCursor,
 			fx = unit.fx,
@@ -176,6 +177,7 @@ function Units:Add(typeUnit, x, y, scale)
 		self.timer = TimerAdd(self.info.attackRate, true, function()
 			if Players.P1.isDestroyed or Players.P2.isDestroyed then return TimerDestroy( self.timer ) end -- if game is finished, don't attack
 			if self.target then
+				if self.info.onEnemyAttack then self.info.onEnemyAttack(self, self.target) end
 				self.target.info.hp = self.target.info.hp - self.info.dmg
 				if self.target.info.hp <= 0 then
 					local tType = self.target.info.type

@@ -69,6 +69,7 @@ function love.update(dt)
     	Players:Update( dt )
 		Units:Update( dt )
 		AI:Update( dt )
+		Effect:Update()
 	
     	UpdateAnims( dt )
     else

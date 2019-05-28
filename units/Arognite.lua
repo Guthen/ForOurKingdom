@@ -20,6 +20,9 @@ return
 	fxOnDead = true,
 	lvl = 2,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
+	onEnemyAttack = function( u, trg )
+		Effect:ApplyTo( "eff_heal", trg )
+	end,
 }
 
 -- Unit by Guthen (Image, Animation & Script) --

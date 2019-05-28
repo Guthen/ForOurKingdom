@@ -3,8 +3,15 @@
 ---------------------------------------------------------------------------]]
 local timers = {}
 
-function TimerAdd(s, loop, func)
-	local timer = {s = s, startS = s, func = func, loop = loop}
+function TimerAdd(s, times, func)
+	local times = 1
+	if type( loop ) == "number" then 
+		times = loop 
+		loop = false 
+	else
+		times = loop == true and 0 or 1
+	end
+	local timer = {s = s, startS = s, func = func, times = times}
 	table.insert(timers, timer)
 	print("TimerAdd() : New Timer with "..s.." seconds with id : "..#timers)
 	return timer
@@ -25,12 +32,13 @@ function TimerUpdate(dt)
 	for k, v in pairs(timers) do
 		if v.s <= 0 then
 			local f = v.func()
-			if v.loop then
+			if v.times == 0 then
 				v.s = v.startS
 			end
-			if not v.loop or f == true then
+			if v.times == 1 or f == true then
 				TimerDestroy(v)
 			end
+			v.times = v.times - 1
 		else
 			v.s = v.s - dt
 		end
