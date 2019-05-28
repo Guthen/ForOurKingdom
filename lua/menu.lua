@@ -106,6 +106,8 @@ function Menu:CreatePVESelection()
 			      	Game.MenuState = 0
 					Reset()
 					AI.isPlaying = true
+					AI:LoadUnits( i )
+					print(i)
 					Map:RandomCurMap()		
 					UI:ResetObject()
 		  	  end
@@ -192,8 +194,8 @@ function Menu:CreateInventory( ply )
 	for k, v in pairs( ply.units ) do
 
 		Buts.units[_id] = UI:CreateButton( self.defX*.58+76*_x, self.defY*.5+76*_y, 2, 2 )
-		Buts.units[_id].img = Units.units[v].img
-		Buts.units[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, Units.units[v].img:getWidth(), Units.units[v].img:getHeight() )
+		Buts.units[_id].img = Units.units[v] and Units.units[v].img or Image["Devoggs"]
+		Buts.units[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, Buts.units[_id].img:getWidth(), Buts.units[_id].img:getHeight() )
 		Buts.units[_id].isUnit = true
 		Buts.units[_id].doClick = function( self )
 			if not self.draw then return end
