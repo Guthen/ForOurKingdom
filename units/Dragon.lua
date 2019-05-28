@@ -4,8 +4,8 @@
 	img = Image["Dragon"], -- son nom d'image (sans l'extension)
 	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	name = "Dragon", -- son nom dans le jeu
-	hp = 1000, -- ses points de vie
-	dmg = 1000, -- ses points de dégats infligés
+	hp = 500, -- ses points de vie
+	dmg = 150, -- ses points de dégats infligés
 	spd = 2, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 1.3, -- en combien de secondes attaque t'il
 	cost = 20, -- combien l'unité coûte

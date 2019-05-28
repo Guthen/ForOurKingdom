@@ -1,8 +1,8 @@
 Players = {}
 Players.P1 = {}
 Players.P2 = {}
-Players.P1.units = {"greu" , "Bat" , "Stickman" , "Goblance", "goblattack", "Tinks", "rockpose"}
-Players.P2.units = {"greu" , "Bat" , "Stickman" , "Goblance", "goblattack", "Tinks", "rockpose"}
+Players.P1.units = {"Slapher" , "Bat" , "Stickman" , "Goblance", "goblattack", "Tinks", "rockpose"}
+Players.P2.units = {"Slapher" , "Bat" , "Stickman" , "Goblance", "goblattack", "Tinks", "rockpose"}
 
 
 function Players:StartCoin(s, g)
