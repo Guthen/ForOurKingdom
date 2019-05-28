@@ -63,7 +63,7 @@ function NewFX( img, x, y, s, animSpd )
 		RemoveValueFromTable( FX, fx )
 	end)
 
-	table.insert( FX, fx )
+	FX[#FX+1] = fx
 	return fx
 end
 

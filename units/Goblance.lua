@@ -16,4 +16,7 @@
 	range = 2,
 	soundOnSpawn = "goblin_spawn",
 	soundOnDead = "goblin_hurt1",
+	onEnemyAttack = function( u, trg )
+		Effect:ApplyTo( "eff_speed", trg )
+	end,
 }

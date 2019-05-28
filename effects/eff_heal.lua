@@ -1,10 +1,11 @@
 return 
 {
-	fx = "fx_heal",
+	fx = Image[ "fx_heal" ],
 	lifeTime = 5,
-	animSpd = .05,
+	animSpd = .2,
 	effect = function( u )
-		TimerAdd( 1, 5, function() 
+		TimerRepeat( 1, 5, function() 
+			if not u then return true end
 			u.info.hp = u.info.hp + 50		
 		end )
 	end
