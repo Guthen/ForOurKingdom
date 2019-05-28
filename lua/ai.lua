@@ -26,6 +26,25 @@ function AI:Load()
 						},
 					}
 			},
+		[2] = 
+			{
+				["Little"] = { "Tinks", "greu", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "norber", "Arognite", },
+				["Spell"] = { "snowslide", },
+				["Combo"] = 
+					{
+						{
+							"Norber",
+							"Tinks",
+						},
+						{
+							"greu",
+							"Ninou",
+							"snowslide",
+						},
+					}
+			},
 	}
 	self.LVL = 1
 	self.units = {}
@@ -38,7 +57,8 @@ function AI:Load()
 	
 end	
 
-function AI:LoadUnits()
+function AI:LoadUnits( lvl )
+	if lvl then self.LVL = lvl end
 	
 	self.units = self.LVLUnits[ self.LVL ]
 	self.curUnit = self.units["Little"][1]
@@ -111,7 +131,7 @@ function AI:Update( dt )
 			
 			local gold = 0
 			for k, v in pairs( self.units[ "Combo" ][ self.curCombo ] ) do -- get how many coins it should cost (€)
-				
+				if not Units.units[v] then error( 2, v .. " is not a valid unit !" ) end
 				gold = gold + Units.units[ v ].cost -- add gold per unit
 
 			end

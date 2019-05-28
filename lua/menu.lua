@@ -106,6 +106,8 @@ function Menu:CreatePVESelection()
 			      	Game.MenuState = 0
 					Reset()
 					AI.isPlaying = true
+					AI:LoadUnits( i )
+					print(i)
 					Map:RandomCurMap()		
 					UI:ResetObject()
 		  	  end
