@@ -50,11 +50,7 @@ function Menu:Create( resetX )
 		  pve.removeOnClick = true
 		  pve.img = Image[ "but_pve" ]
 		  pve.doClick = function( self )
-				Game.MenuState = 0
-				Reset()
-				AI.isPlaying = true
-				Map:RandomCurMap()		
-				UI:ResetObject()
+				Menu:CreatePVESelection()
 		  end
 
 	local inv = UI:CreateButton( self.defX-125, self.defY-37.5+180, 1, 1 )
@@ -98,6 +94,43 @@ function Menu:Create( resetX )
 
 end
 
+function Menu:CreatePVESelection()
+	UI:ResetObject()
+
+	local x, y = 1, 0
+	for i = 1, 11 do
+		
+		local level = UI:CreateButton( self.defX*.05 + x * 128, self.defY*.9 + y * 128, 1.4, 1.4 )
+		      level.img = Image[ "number_" .. tostring( i ) ]
+		      level.doClick = function( )
+			      	Game.MenuState = 0
+					Reset()
+					AI.isPlaying = true
+					Map:RandomCurMap()		
+					UI:ResetObject()
+		  	  end
+		  	  level.lvl = i
+		  	  level.onDraw = function()
+		  	  		if level.lvl == 11 then 
+		  	  			love.graphics.setColor( math.random(), math.random(), math.random() )
+		  	  		end
+		  	  end
+
+		x = x + 1
+		if i % 8 == 0 then y = y + 1 x = 1 end
+
+	end
+
+	local text = UI:CreateText( self.defX-125, self.defY-100, 3, 3, "Level Selection Menu" )
+
+	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
+		  back.removeOnClick = false
+		  back.img = Image[ "but_back" ]
+		  back.doClick = function( self )
+		  	   	Menu:Create()
+		  end
+end
+
 function Menu:CreatePlayerInventory()
 	UI:ResetObject()
 
@@ -134,6 +167,7 @@ function Menu:CreateInventory( ply )
     local infoDmg
     local infoCost
     local infoDesc
+	local infoLVL
 
 	local back = UI:CreateButton( self.defX*.1, self.defY*3.3, 1, 1 )
 		  back.removeOnClick = false
@@ -145,7 +179,6 @@ function Menu:CreateInventory( ply )
 	local Buts = {}
 		  Buts.units = {}
 		  Buts.inv = {}
-		  Buts.void = {}
 
 	local _id = 1
 
@@ -166,7 +199,8 @@ function Menu:CreateInventory( ply )
 			if not self.draw then return end
 			RemoveValueFromTable( ply.units, v )
 			self.draw = false
-			table.insert( Buts.void, k )
+
+			Menu:CreateInventory( ply ) -- reload
 		end
 
 		_x = _x + 1
@@ -189,24 +223,19 @@ function Menu:CreateInventory( ply )
 		end
 		Buts.inv[_id].isUnit = true
 		Buts.inv[_id].doClick = function()
-			if #ply.units >= 7 or table.HasValue(ply.units, k) or not Buts.units[ Buts.void[1] ] then return end
+			if #ply.units >= 7 or table.HasValue( ply.units, k ) then return end
 			table.insert( ply.units, k )
 
-			Buts.units[ Buts.void[1] ].draw = true
-			if v.img then
-				Buts.units[ Buts.void[1] ].img = v.img
-				Buts.units[ Buts.void[1] ].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
-			end
-
-			table.remove( Buts.void, 1 )
+			Menu:CreateInventory( ply ) -- reload
 		end
 		Buts.inv[_id].doRightClick = function()
 			unit = Units.units[k]
-			infoName.text = "Name: "..unit.name
-			infoHP.text = "Health: "..unit.hp
-			infoDmg.text = "Damage: "..unit.dmg
-			infoCost.text = "Cost: "..unit.cost
-			infoDesc.text = "Description: "..unit.desc
+			infoName.text = "Name: "..(unit.name or "N/A")
+			infoHP.text = "Health: "..(unit.hp or "N/A")
+			infoDmg.text = "Damage: "..(unit.dmg or "N/A")
+			infoCost.text = "Cost: "..(unit.cost or "N/A")
+			infoDesc.text = "Description: "..(unit.desc or "N/A")
+			infoLVL.text = "Level: "..(unit.lvl or 1)
 		end
 
 		_id = _id + 1
@@ -215,23 +244,27 @@ function Menu:CreateInventory( ply )
 		if _x > 10 then _y = _y + 1 _x = 0 end
 
 	end
+	
+	--	user info
+	userName = UI:CreateText(25, 25, 1.98, 1.98, "Name: "..ply.name)
+	userLVL = UI:CreateText(25, 50, 1.98, 1.98, "LVL: "..ply.lvl)
 
 	-- text entry
-	local userName = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
-		  userName.onEnter = function( self )
-		  		print( userName:GetText() ) -- print le texte écrit
+	local userNameTE = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
+		  userNameTE.onEnter = function( self )
+		  		print( userNameTE:GetText() ) -- print le texte écrit
 		  end
 		  
 	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
 		  save.img = Image["save"]
 		  save.doClick = function()
-				Players:SavePlayer( ply, userName:GetText() )
+				Players:SavePlayer( ply, userNameTE:GetText() )
 		  end
 		  
 	local _load = UI:CreateButton( self.defX+80, self.defY-22.5+296, 1.98, 1.98 )
 		  _load.img = Image["save"]
 		  _load.doClick = function()
-				Players:LoadPlayer( ply, userName:GetText() )
+				Players:LoadPlayer( ply, userNameTE:GetText() )
 				Menu:CreateInventory( ply )
 		  end
 		  
@@ -244,7 +277,7 @@ function Menu:CreateInventory( ply )
      	  	love.graphics.setColor(.1, .1, .1)
 		  end
 
-
+	infoLVL = UI:CreateText(self.defX+485, self.defY-22.5+210, 1.98, 1.98, "")
 	infoName = UI:CreateText(self.defX+155, self.defY-22.5+210, 1.98, 1.98, "")
 	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+240, 1.98, 1.98, "")
 	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+270, 1.98, 1.98, "")

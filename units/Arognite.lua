@@ -18,6 +18,7 @@ return
 	dieToFirstKill = false, -- s'il meurt à son premier "kill"
 	fx = "fx_acid_fall",
 	fxOnDead = true,
+	lvl = 2,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 }
 

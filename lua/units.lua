@@ -42,6 +42,9 @@ Units.Rarety =
 			}
 	}
 }
+Units.LVLUnits = {}
+for i = 1, 10 do Units.LVLUnits[i] = {} end -- create 10 levels
+
 local TowerTargets = 0
 
 function Units:Load()
@@ -58,8 +61,11 @@ function Units:LoadUnits()
 	for _, v in pairs(love.filesystem.getDirectoryItems("units")) do
 		if string.find(v, ".lua") then
 			local n = string.gsub(v, ".lua", "")
-			self.units[n] = require("units/"..n)
+			local u = require("units/"..n)
+			self.units[n] = u
 			self.units[n].anim = NewAnim( self.units[n].img, 32, 32, self.units[n].animSpd, self.units[n].animActive )
+			
+			table.insert( self.LVLUnits[ Clamp( u.lvl or 1, 1, 10 ) ], n ) -- add in lvl units table
 		end
 	end
 end

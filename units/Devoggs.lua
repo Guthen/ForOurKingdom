@@ -4,6 +4,7 @@
 	img = Image["Devoggs"], -- son nom d'image (sans l'extension)
 	name = "Devoggs", -- son nom dans le jeu
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
+	lvl = 11,
 	hp = 10000, -- ses points de vie
 	dmg = 500, -- ses points de dégats infligés
 	spd = 1.5, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)

@@ -18,6 +18,7 @@
 	canBeTarget = false, -- s'il peut être pris pour cible (optionnel)
 	dieToFirstKill = true, -- s'il meurt à son premier "kill"
 	fxOnDead = false,
+	lvl = 8,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 	onSpawn = function() -- fonction exécuté à l'appariton de l'unité
 		Sound:Play("elevator_spawn_Jay_You", 0.5, true)

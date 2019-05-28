@@ -1,9 +1,12 @@
 Players = {}
 Players.P1 = {}
 Players.P2 = {}
+
 Players.P1.units = {"Slapher" , "Bat" , "Stickman" , "Goblance", "goblattack", "Tinks", "rockpose"}
 Players.P2.units = {"Slapher" , "Bat" , "Stickman" , "Goblance", "goblattack", "Tinks", "rockpose"}
 
+Players.P1.lvl = 1
+Players.P2.lvl = 1
 
 function Players:StartCoin(s, g)
 	self.coinTimer = TimerAdd(s, true, function()
@@ -20,6 +23,7 @@ function Players:Load()
         type = "Player",
         hp = Game.PlayersHealth,
     }
+	self.P1.name = "Player 1"
     self.P1.x = 4
     self.P1.y = 0
     self.P1.curUnit = 1
@@ -37,6 +41,7 @@ function Players:Load()
         type = "Player",
         hp = Game.PlayersHealth,
     }
+	self.P2.name = "Player 2"
     self.P2.x = 18
     self.P2.y = 0
     self.P2.curUnit = 1
@@ -367,6 +372,7 @@ function Players:LoadPlayer( ply, name )
 		local func = loadstring( units )
 		func()
 		ply.units = _Units 
+		ply.name = name
 	end
 end
 
