@@ -19,14 +19,14 @@ function Effect:ApplyTo( eff, u )
 	local e = self.effects[eff]
 	local fx = NewFX( e.fx, u.x, u.y, e.lifeTime, e.animSpd )
 	e.effect( u )
-	table.insert( self.fx, {fx = fx, x = u.x, y = u.y} )
+	table.insert( self.fx, {fx = fx, u = u} )
 end
 
 function Effect:Update()
 	for _, v in pairs( self.fx ) do
 		if v.fx then
-			v.fx.x = v.x
-			v.fx.y = v.y
+			v.fx.x = v.u.x
+			v.fx.y = v.u.y
 		end
 	end
 end

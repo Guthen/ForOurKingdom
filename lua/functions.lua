@@ -42,7 +42,7 @@ function TimerUpdate(dt)
 					TimerDestroy(v)
 				end
 			else
-				if v.times-1 > 1 then
+				if v.times-1 >= 1 then
 					v.times = v.times - 1
 				end
 				if v.times == 1 or f == true then

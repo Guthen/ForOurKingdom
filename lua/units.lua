@@ -123,8 +123,8 @@ function Units:Add(typeUnit, x, y, scale)
 			name = unit.name,
 			hp = unit.hp,
 			dmg = unit.dmg,
+			dSpd = unit.spd,
 			spd = unit.spd,
-			spdY = unit.spdY,
 			attackRate = unit.attackRate,
 			cost = unit.cost,
 			isFly = unit.isFly,
@@ -244,7 +244,7 @@ function Units:Update(dt)
 	if Players.P1.isDestroyed or Players.P2.isDestroyed then return end -- if game is finished, don't attack
 	for k, v in pairs(self.igUnits) do
 		if v.canMove then
-			v.x = v.x + v.info.spd * v.scale -- move
+			v.x = v.x + (v.info.spd or .1) * v.scale -- move
 			--if v.info.spdY then v.y = v.y + v.info.spdY * v.scale end
 		elseif v.attack and v.info.followTarget and v.target and not v.target.info.followTarget and v.target.canMove then -- follow enemy
 			if not IsCollideX(v.x, v.target.x, v.w, v.target.w) and v.target.x < v.x then
