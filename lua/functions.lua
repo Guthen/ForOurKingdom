@@ -6,7 +6,15 @@ local timers = {}
 function TimerAdd(s, loop, func)
 	local timer = {s = s, startS = s, func = func, loop = loop}
 	table.insert(timers, timer)
-	print("TimerAdd() : New Timer with "..s.." seconds with id : "..#timers)
+	print("TimerAdd() : New Timer with "..s.." seconds")
+	return timer
+end
+
+function TimerRepeat(s, times, func)
+	times = times <= 0 and 0 or times
+	local timer = {s = s, startS = s, func = func, times = times, isRepeat = true}
+	table.insert(timers, timer)
+	print("TimerRepeat() : New Timer with "..s.." seconds")
 	return timer
 end
 
@@ -15,21 +23,32 @@ function TimerDestroy(timer)
 	for k, v in pairs(timers) do
 		if timer == v then
 			table.remove(timers, k)
-			print("TimerDestroy() : Destroy Timer with id : "..k.." !")
+			print("TimerDestroy() : Destroy Timer !")
+			break
 		end
 	end
 end
 
 function TimerUpdate(dt)
 	if #timers == 0 then return end
-	for k, v in pairs(timers) do
+	for _, v in pairs(timers) do
 		if v.s <= 0 then
 			local f = v.func()
-			if v.loop then
+			if not v.isRepeat then
+				if v.loop then
+					v.s = v.startS
+				end
+				if not v.loop or f == true then
+					TimerDestroy(v)
+				end
+			else
+				if v.times-1 >= 1 then
+					v.times = v.times - 1
+				end
+				if v.times == 1 or f == true then
+					TimerDestroy( v )
+				end
 				v.s = v.startS
-			end
-			if not v.loop or f == true then
-				TimerDestroy(v)
 			end
 		else
 			v.s = v.s - dt
@@ -69,6 +88,7 @@ function RemoveValueFromTable(_table, _value)
 	for k,v in pairs(_table) do
 		if v == _value then
 			table.remove(_table, k)
+			break
 		end
 	end
 end

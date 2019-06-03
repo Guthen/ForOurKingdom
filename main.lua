@@ -1,23 +1,26 @@
-function RequireFolder(folder, _table)
+
+function RequireFolder(folder, _table, noScripts)
     if love.filesystem.getDirectoryItems(folder) then 
         for _, v in pairs(love.filesystem.getDirectoryItems(folder)) do
             if string.find(v, ".lua") then
-            local n = string.gsub(v, ".lua", "")
-               if _table then 
-                   _table[n] = require(folder.."/"..n) 
-               else
-                   require(folder.."/"..n)
-               end
+            	if not noScripts or not noScripts[v] then 
+	            	local n = string.gsub(v, ".lua", "")
+	               	if _table then 
+	                   	_table[n] = require(folder.."/"..n) 
+	               	else
+	                   	require(folder.."/"..n)
+	               	end
+	            end
             else
                 for _, f in pairs(love.filesystem.getDirectoryItems(folder.."/"..v)) do
-                   if string.find(f, ".lua") then
-                       local n = string.gsub(f, ".lua", "")
-                      if _table then 
-                         _table[n] = require(folder.."/"..v.."/"..n) 
-                      else
-                         require(folder.."/"..v.."/"..n)
-                      end
-                   end
+                   	if string.find(f, ".lua") then
+                       	local n = string.gsub(f, ".lua", "")
+                      	if _table then 
+                         	_table[n] = require(folder.."/"..v.."/"..n) 
+                      	else
+                         	require(folder.."/"..v.."/"..n)
+                      	end
+                   	end
                end
             end
         end
@@ -52,7 +55,14 @@ function love.load()
 
     math.randomseed( os.time() )
 
-    RequireFolder("lua")
+    require( "lua/functions" )
+    require( "lua/image" )
+
+    RequireFolder("lua", nil, 
+    	{ -- no load them
+    		["functions.lua"] = true, 
+    		["image.lua"] = true,
+    	})
     RequireFolder("libs", Libs)
 	
 	love.window.setIcon( love.image.newImageData( "images/units/Devoggs.png" ) ) -- set game icon
@@ -69,6 +79,7 @@ function love.update(dt)
     	Players:Update( dt )
 		Units:Update( dt )
 		AI:Update( dt )
+		Effect:Update()
 	
     	UpdateAnims( dt )
     else

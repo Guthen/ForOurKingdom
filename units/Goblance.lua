@@ -13,5 +13,13 @@
 	targetFly = true,
 	targetGround = true,
 	followTarget = false,
-	range = 2
+	range = 2,
+	soundOnSpawn = "goblin_spawn",
+	soundOnDead = "goblin_hurt1",
+	onEnemyAttack = function( u, trg )
+		local rdn = math.random( 1, 10 )
+		if rdn == 1 then
+			Effect:ApplyTo( "eff_slow", trg )
+		end
+	end,
 }

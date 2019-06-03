@@ -97,9 +97,13 @@ function Units:Add(typeUnit, x, y, scale)
 			onSpawn = unit.onSpawn,
 			onDestroyed = unit.onDestroyed,
 			onEnemyKilled = unit.onEnemyKilled,
+			onEnemyAttack = unit.onEnemyAttack,
 			beforeDraw = unit.beforeDraw,
 			spawnAtCursor = unit.spawnAtCursor,
 			fx = unit.fx,
+			soundOnSpawn = unit.soundOnSpawn,
+			soundOnDead = unit.soundOnDead,
+			soundOnAttack = unit.soundOnAttack,
 		},
 		x = x, y = y, 
 		w = Game.ImageSize, 
@@ -115,27 +119,31 @@ function Units:Add(typeUnit, x, y, scale)
 	function u:getInfo()
 		self.info =
 		{
-			img = Units.units[typeUnit].img,
-			deadImg = Units.units[typeUnit].deadImg,
-			name = Units.units[typeUnit].name,
-			hp = Units.units[typeUnit].hp,
-			dmg = Units.units[typeUnit].dmg,
-			spd = Units.units[typeUnit].spd,
-			attackRate = Units.units[typeUnit].attackRate,
-			cost = Units.units[typeUnit].cost,
-			isFly = Units.units[typeUnit].isFly,
-			targetFly = Units.units[typeUnit].targetFly,
-			targetGround = Units.units[typeUnit].targetGround,
-			followTarget = Units.units[typeUnit].followTarget,
-			attackBase = Units.units[typeUnit].attackBase,
-			canBeTarget = Units.units[typeUnit].canBeTarget,
-			animSpd = Units.units[typeUnit].animSpd,
-			dieToFirstKill = Units.units[typeUnit].dieToFirstKill,
-			range = Units.units[typeUnit].range,
-			onSpawn = Units.units[typeUnit].onSpawn,
-			onDestroyed = Units.units[typeUnit].onDestroyed,
-			onEnemyKilled = Units.units[typeUnit].onEnemyKilled,
-			fxOnDead = Units.units[typeUnit].fxOnDead,
+			img = unit.img,
+			name = unit.name,
+			hp = unit.hp,
+			dmg = unit.dmg,
+			dSpd = unit.spd,
+			spd = unit.spd,
+			attackRate = unit.attackRate,
+			cost = unit.cost,
+			isFly = unit.isFly,
+			targetFly = unit.targetFly,
+			targetGround = unit.targetGround,
+			followTarget = unit.followTarget,
+			attackBase = unit.attackBase,
+			canBeTarget = unit.canBeTarget,
+			animSpd = unit.animSpd,
+			animActive = unit.animActive,
+			range = unit.range,
+			onSpawn = unit.onSpawn,
+			onDestroyed = unit.onDestroyed,
+			onEnemyKilled = unit.onEnemyKilled,
+			beforeDraw = unit.beforeDraw,
+			spawnAtCursor = unit.spawnAtCursor,
+			fx = unit.fx,
+			soundOnSpawn = unit.soundOnSpawn,
+			soundOnDead = unit.soundOnDead,
 		}
 	end
 	if u.info.attackBase == nil then u.info.attackBase = true end
@@ -151,7 +159,7 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.info.fxOnDead == true then
 			NewFX( Image[self.info.fx or "fx_dust_explosion"], self.x, self.y, 0, .125 )
 		end
-		print(self.info.name .. " has been destroyed !")
+		print( self.info.name .. " has been destroyed !" )
 
 		if self.info.onDestroyed then
 			self.info.onDestroyed()
@@ -161,6 +169,9 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.anim then
 			RemoveValueFromTable(Anims, self.anim)
 		end
+
+		if u.info.soundOnDead then Sound:Play( u.info.soundOnDead, .2, false ) end
+
 		RemoveValueFromTable(Units.igUnits, self)
 		RemoveValueFromTable(Units.yUnits[self.y/Game.ImageSize+1], self)
 	end
@@ -176,6 +187,8 @@ function Units:Add(typeUnit, x, y, scale)
 		self.timer = TimerAdd(self.info.attackRate, true, function()
 			if Players.P1.isDestroyed or Players.P2.isDestroyed then return TimerDestroy( self.timer ) end -- if game is finished, don't attack
 			if self.target then
+				if self.info.soundOnAttack then Sound:Play( self.info.soundOnAttack, .2, false ) end
+				if self.info.onEnemyAttack then self.info.onEnemyAttack(self, self.target) end
 				self.target.info.hp = self.target.info.hp - self.info.dmg
 				if self.target.info.hp <= 0 then
 					local tType = self.target.info.type
@@ -218,6 +231,8 @@ function Units:Add(typeUnit, x, y, scale)
 		u:getInfo()
 	end
 
+	if u.info.soundOnSpawn then Sound:Play( u.info.soundOnSpawn, .2, false ) end
+
 	u.info.Destroy = u.Destroy
 
 	table.insert(self.igUnits, u)
@@ -229,7 +244,7 @@ function Units:Update(dt)
 	if Players.P1.isDestroyed or Players.P2.isDestroyed then return end -- if game is finished, don't attack
 	for k, v in pairs(self.igUnits) do
 		if v.canMove then
-			v.x = v.x + v.info.spd * v.scale -- move
+			v.x = v.x + (v.info.spd or .1) * v.scale -- move
 			--if v.info.spdY then v.y = v.y + v.info.spdY * v.scale end
 		elseif v.attack and v.info.followTarget and v.target and not v.target.info.followTarget and v.target.canMove then -- follow enemy
 			if not IsCollideX(v.x, v.target.x, v.w, v.target.w) and v.target.x < v.x then

@@ -79,7 +79,7 @@ function Map:RandomCurMap()
 	if Game.MenuState == 0 then
 		local snd = self.Maps[self.CurrentMap].sound 
 		if snd then
-			Sound:Play( snd, .5, true )
+			Sound:Play( snd, 1, true )
 		end
 	end
 end
@@ -91,7 +91,7 @@ function Map:SetCurMap( curMap )
 		if Game.MenuState == 0 then
 			local snd = self.Maps[self.CurrentMap].sound 
 			if snd then
-				Sound:Play( snd, .5, true )
+				Sound:Play( snd, 1, true )
 			end
 		end
 	end

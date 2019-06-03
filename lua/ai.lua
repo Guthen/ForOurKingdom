@@ -35,7 +35,7 @@ function AI:Load()
 				["Combo"] = 
 					{
 						{
-							"Norber",
+							"norber",
 							"Tinks",
 						},
 						{
@@ -132,6 +132,7 @@ function AI:Update( dt )
 						Players.P2.gold = Players.P2.gold - u.info.cost
 						
 						print( "AI: Spawn "..self.curUnit )
+						print( "AI: Gold = "..Players.P2.gold )
 					end
 				end
 			
@@ -150,7 +151,7 @@ function AI:Update( dt )
 			
 			local gold = 0
 			for k, v in pairs( self.units[ "Combo" ][ self.curCombo ] ) do -- get how many coins it should cost (€)
-				if not Units.units[v] then error( 2, v .. " is not a valid unit !" ) end
+				if not Units.units[v] then error( v .. " is not a valid unit !", 2 ) end
 				gold = gold + Units.units[ v ].cost -- add gold per unit
 
 			end

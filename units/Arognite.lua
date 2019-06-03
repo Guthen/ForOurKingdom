@@ -20,6 +20,12 @@ return
 	fxOnDead = true,
 	lvl = 2,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
+	onEnemyAttack = function( u, trg )
+		local rdm = math.random( 1, 3 )
+		if rdm == 1 then
+			Effect:ApplyTo( "eff_poison", trg )
+		end
+	end,
 }
 
 -- Unit by Guthen (Image, Animation & Script) --

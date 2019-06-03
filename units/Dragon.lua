@@ -18,4 +18,5 @@
 	dieToFirstKill = false, -- s'il meurt à son premier "kill"
 	fxOnDead = false,
 	animSpd = .3, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
+	soundOnAttack = "dragon_attack",
 }
