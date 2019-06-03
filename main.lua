@@ -133,8 +133,6 @@ function love.keypressed(k)
 		if k == "escape" then
 			Reset()
 			Menu:Create()
-    	elseif k == "t" then
-      		Players:Save()
 		end
 	else
 		Menu:Key(k)
