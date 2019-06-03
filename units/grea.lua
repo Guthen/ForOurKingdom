@@ -9,6 +9,7 @@
 	spd = .60,
 	attackRate = 1.25,
 	cost = 15,
+	lvl = 3,
 	isFly = false,
 	targetFly = false,
 	targetGround = true,

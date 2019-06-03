@@ -217,7 +217,7 @@ function Menu:CreateInventory( ply )
 
 		local slot = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 1, 1, Image[ "slot" ] )
 			  slot.color = Units.Rarety[Units.units[k].rarety or 0].color
-
+			  
 		Buts.inv[_id] = UI:CreateButton( self.defX*.35+76*_x+_offX, self.defY*.5+76*_y+_offY, 2, 2 )
 		if v.img then
 			Buts.inv[_id].img = v.img
@@ -238,6 +238,11 @@ function Menu:CreateInventory( ply )
 			infoCost.text = "Cost: "..(unit.cost or "N/A")
 			infoDesc.text = "Description: "..(unit.desc or "N/A")
 			infoLVL.text = "Level: "..(unit.lvl or 1)
+		end
+		
+		if ply.lvl < ( v.lvl or 10 ) then
+			local unknow = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 2, 2, Image[ "unknow" ] )
+			Buts.inv[_id].color = { r = .8, g = .8, b = .8 }
 		end
 
 		_id = _id + 1

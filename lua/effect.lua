@@ -16,9 +16,10 @@ function Effect:ApplyTo( eff, u )
 	if not eff or not self.effects[eff] then return end
 	if not u then return end
 	
-	local e = self.effects[eff]
+	u.effect = self.effects[eff]
+	u.effect.effect( u )
+	
 	local fx = NewFX( e.fx, u.x, u.y, e.lifeTime, e.animSpd )
-	e.effect( u )
 	table.insert( self.fx, {fx = fx, u = u} )
 end
 

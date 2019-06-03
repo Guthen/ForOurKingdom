@@ -101,6 +101,7 @@ function Units:Add(typeUnit, x, y, scale)
 			beforeDraw = unit.beforeDraw,
 			spawnAtCursor = unit.spawnAtCursor,
 			fx = unit.fx,
+			lvl = unit.lvl,
 			soundOnSpawn = unit.soundOnSpawn,
 			soundOnDead = unit.soundOnDead,
 			soundOnAttack = unit.soundOnAttack,

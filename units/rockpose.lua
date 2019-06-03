@@ -9,6 +9,7 @@ return
 	spd = 1,
 	attackRate = .5,
 	cost = 9,
+	lvl = 1,
 	isFly = true,
 	targetFly = true,
 	targetGround = true,
