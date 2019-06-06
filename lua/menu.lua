@@ -253,9 +253,18 @@ function Menu:CreateInventory( ply )
 	end
 	
 	--	user info
-	userName = UI:CreateText(25, 25, 1.98, 1.98, "Name: "..ply.name)
-	userLVL = UI:CreateText(25, 50, 1.98, 1.98, "LVL: "..ply.lvl)
+	local userName = UI:CreateText(25, 20, 1.98, 1.98, "Name: "..ply.name)
 
+	UI:CreateImage( 25, 50, 2, 3, Image[ "Contoure barrre xp" ] )
+	UI:CreateImage( 25, 50, 2, 3, Image[ "Barre xp " ] )
+	local xpBar = UI:CreateImage( 25, 50, (ply.xp/ply.nxp or 0)*2, 3, Image[ "Barre xp " ] )
+		xpBar.color = { r = .1, g = .7, b = .1 }
+	
+	local lvl = UI:CreateText(35, 60, 1.98, 1.98, "LVL: "..ply.lvl)	
+		lvl.color = { r = 0, g = 0, b = 0 }
+	local xp = UI:CreateText(150, 60, 1.98, 1.98, "XP: "..ply.xp)
+		xp.color = { r = 0, g = 0, b = 0 }
+	
 	-- text entry
 	local userNameTE = UI:CreateTextEntry( self.defX-75, self.defY-22.5+350, 150, 45 )
 		  userNameTE.onEnter = function( self )

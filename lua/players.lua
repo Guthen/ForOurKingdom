@@ -7,12 +7,37 @@ Players.P2.units = {"slapher" , "Bat" , "Stickman" , "Goblance", "goblattack", "
 
 Players.P1.lvl = 1
 Players.P2.lvl = 1
+Players.P1.xp = 0
+Players.P2.xp = 0
+Players.P1.nxp = 0
+Players.P2.nxp = 0
 
 function Players:StartCoin(s, g)
 	self.coinTimer = TimerAdd(s, true, function()
 		self.P1.gold = Clamp(self.P1.gold + g, 0, Game.GoldLimit)
 		self.P2.gold = Clamp(self.P2.gold + g, 0, Game.GoldLimit)
 	end)
+end
+
+function Players:AddXP( ply, xp )
+	if not ply then return end
+	ply.xp = ply.xp + xp
+	if ply.xp > ply.nxp then
+		self:AddLVL( ply, 1 )
+		local _xp = ply.xp - ply.nxp
+		ply.xp = _xp
+		if _xp > 0 then self:AddXP( ply, _xp ) end
+	end
+end
+
+function Players:AddLVL( ply, lvl )
+	if not ply then return end
+	ply.lvl = ply.lvl + lvl
+end
+
+function Players:GetNXP( ply )
+	if not ply then return end
+	ply.nxp = ply.lvl * 500
 end
 
 function Players:Load()
@@ -62,6 +87,9 @@ function Players:Load()
     end
 
 	self:StartCoin(1, Game.GoldSecond)
+	
+	self:GetNXP( self.P1 )
+	self:GetNXP( self.P2 )
 end
 
 function Players:Update(dt)
@@ -356,6 +384,9 @@ function Players:SavePlayer( ply, name )
 	end
 	
 	love.filesystem.write( "users/" .. name .. "/units.sav", table.show( ply.units, "_Units" ) ) -- save current units
+	love.filesystem.write( "users/" .. name .. "/lvl.sav", table.show( {lvl = ply.lvl, xp = ply.xp}, "_LVL" ) ) -- save current units
+	
+	ply.name = name
 end
 
 function Players:LoadPlayer( ply, name )
@@ -369,9 +400,17 @@ function Players:LoadPlayer( ply, name )
 	
 	local units = love.filesystem.read( "users/" .. name .. "/units.sav" ) -- load units
 	if units then 
-		local func = loadstring( units )
-		func()
+		loadstring( units )()
 		ply.units = _Units 
+		ply.name = name
+	end
+	
+	local lvl = love.filesystem.read( "users/" .. name .. "/lvl.sav" ) -- load units
+	if lvl then
+		loadstring( lvl )()
+		ply.lvl = _LVL.lvl
+		ply.xp = _LVL.xp
+		self:GetNXP( ply )
 		ply.name = name
 	end
 end
