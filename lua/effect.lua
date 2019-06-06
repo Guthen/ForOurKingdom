@@ -15,11 +15,18 @@ end
 function Effect:ApplyTo( eff, u )
 	if not eff or not self.effects[eff] then return end
 	if not u then return end
+   if u.effect then return end
 	
-	local e = self.effects[eff]
-	local fx = NewFX( e.fx, u.x, u.y, e.lifeTime, e.animSpd )
-	e.effect( u )
-	table.insert( self.fx, {fx = fx, u = u} )
+	u.effect = self.effects[eff]
+	u.effect.effect( u )
+	
+	local fx = NewFX( u.effect.fx, u.x, u.y, u.effect.lifeTime, u.effect.animSpd )
+   local t = {fx = fx, u = u}
+TimerAdd( u.effect.lifeTime, false, function() 
+    u.effect = nil
+    RemoveValueFromTable( self.fx, t )
+   end )
+	table.insert( self.fx, t )
 end
 
 function Effect:Update()
