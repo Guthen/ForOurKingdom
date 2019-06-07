@@ -6,7 +6,7 @@
 	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	name = "Ascensorreur", -- son nom dans le jeu
 	hp = 10000, -- ses points de vie
-	dmg = 10000, -- ses points de dégats infligés
+	dmg = 1000, -- ses points de dégats infligés
 	spd = 1.4, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0, -- en combien de secondes attaque t'il
 	cost = 30, -- combien l'unité coûte
@@ -24,8 +24,7 @@
 		Sound:Play("elevator_spawn_Jay_You", 0.5, true)
 	end,
 	onDestroyed = function() -- fonction exécuté à la mort de l'unité
-		Sound:Stop("elevator_spawn_Jay_You", 0, false)
-		snd:stop()
+		Sound:Stop("elevator_spawn_Jay_You")
 	end,
 }
 

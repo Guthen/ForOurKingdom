@@ -1,4 +1,4 @@
-Units = {}
+﻿Units = {}
 Units.Rarety = 
 {
 	[0] = 
@@ -81,8 +81,8 @@ function Units:Add(typeUnit, x, y, scale)
 			name = unit.name,
 			hp = unit.hp,
 			dmg = unit.dmg,
+			dSpd = unit.spd,
 			spd = unit.spd,
-			spdY = unit.spdY,
 			attackRate = unit.attackRate,
 			cost = unit.cost,
 			isFly = unit.isFly,
@@ -98,15 +98,18 @@ function Units:Add(typeUnit, x, y, scale)
 			onDestroyed = unit.onDestroyed,
 			onEnemyKilled = unit.onEnemyKilled,
 			onEnemyAttack = unit.onEnemyAttack,
+			dieToFirstKill = unit.dieToFirstKill,
 			beforeDraw = unit.beforeDraw,
 			spawnAtCursor = unit.spawnAtCursor,
+			fxOnDead = unit.fxOnDead or true,
 			fx = unit.fx,
 			lvl = unit.lvl,
 			soundOnSpawn = unit.soundOnSpawn,
 			soundOnDead = unit.soundOnDead,
 			soundOnAttack = unit.soundOnAttack,
 		},
-		x = x, y = y, 
+		x = x, 
+		y = y, 
 		w = Game.ImageSize, 
 		h = Game.ImageSize, 
 		scale = scale, 
@@ -124,8 +127,8 @@ function Units:Add(typeUnit, x, y, scale)
 			name = unit.name,
 			hp = unit.hp,
 			dmg = unit.dmg,
-			dSpd = unit.spd,
 			spd = unit.spd,
+			dSpd = unit.spd,
 			attackRate = unit.attackRate,
 			cost = unit.cost,
 			isFly = unit.isFly,
@@ -140,11 +143,15 @@ function Units:Add(typeUnit, x, y, scale)
 			onSpawn = unit.onSpawn,
 			onDestroyed = unit.onDestroyed,
 			onEnemyKilled = unit.onEnemyKilled,
+			onEnemyAttack = unit.onEnemyAttack,
+			dieToFirstKill = unit.dieToFirstKill,
 			beforeDraw = unit.beforeDraw,
 			spawnAtCursor = unit.spawnAtCursor,
 			fx = unit.fx,
+			lvl = unit.lvl,
 			soundOnSpawn = unit.soundOnSpawn,
 			soundOnDead = unit.soundOnDead,
+			soundOnAttack = unit.soundOnAttack,
 		}
 	end
 	if u.info.attackBase == nil then u.info.attackBase = true end
@@ -208,7 +215,7 @@ function Units:Add(typeUnit, x, y, scale)
 								self.canChangeToDeadImg = false
 								self.info.img = self.info.deadImg
 								self.anim = NewAnim( self.info.img, 32, 32, self.info.animSpd, function() self:Destroy() return true end)
-								self.info.spd = 0
+								self.info.spd = 0 
 							elseif self.canChangeToDeadImg then
 								self:Destroy()
 							end
