@@ -9,6 +9,7 @@
 	spd = 1.5, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = .40, -- en combien de secondes attaque t'il
 	cost = 45, -- combien l'unité coûte
+	lvl = 6,
 	isFly = false, -- s'il vole 
 	targetFly = true, -- s'il peut attaquer les unités volantes
 	targetGround = true, -- s'il peut attaquer les unités terrestres

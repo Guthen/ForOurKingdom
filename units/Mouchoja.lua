@@ -1,22 +1,22 @@
-﻿return
+return
 {
 	desc = "",
-	img = Image["Elementaire de la Nature"], -- son nom d'image (sans l'extension)
+	img = Image["Mouchoja"], -- son nom d'image (sans l'extension)
+	deadImg = Image["Ascensorreur_dead"], -- son image à la mort de celui-ci (fonctionne seulement si dieToFirstKill = true)
 	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
-	name = "Ascensorreur", -- son nom dans le jeu
-	hp = 2500, -- ses points de vie
-	dmg = 500, -- ses points de dégats infligés
-	spd = 1., -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
+	name = "Mouchoja", -- son nom dans le jeu
+	hp = 175, -- ses points de vie
+	dmg = 175, -- ses points de dégats infligés
+	spd = 2., -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 1, -- en combien de secondes attaque t'il
-	cost = 25, -- combien l'unité coûte
-	lvl = 6,
+	cost = 10, -- combien l'unité coûte
+	lvl = 2,
 	isFly = false, -- s'il vole 
-	targetFly = true, -- s'il peut attaquer les unités volantes
+	targetFly = false, -- s'il peut attaquer les unités volantes
 	targetGround = true, -- s'il peut attaquer les unités terrestres
 	followTarget = true, -- s'il peut suivre sa cible
 	attackBase = true, -- s'il peut attaquer la base (optionnel)
 	canBeTarget = true, -- s'il peut être pris pour cible (optionnel)
-	dieToFirstKill = false, -- s'il meurt à son premier "kill"
-	fxOnDead = false,
+	lvl = 2,
 	animSpd = .07, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
 }
