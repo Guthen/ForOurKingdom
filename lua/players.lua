@@ -12,6 +12,11 @@ Players.P2.xp = 0
 Players.P1.nxp = 0
 Players.P2.nxp = 0
 
+Players.P1.PVElvl = 1
+
+Players.P1.name = "Player 1"
+Players.P2.name = "Player 2"
+
 function Players:StartCoin(s, g)
 	self.coinTimer = TimerAdd(s, true, function()
 		self.P1.gold = Clamp(self.P1.gold + g, 0, Game.GoldLimit)
@@ -48,8 +53,6 @@ function Players:Load()
         type = "Player",
         hp = Game.PlayersHealth,
     }
-	self.P1.name = "Player 1"
-	self.P1.PVElvl = 1
     self.P1.x = 4
     self.P1.y = 0
     self.P1.curUnit = 1
@@ -67,7 +70,6 @@ function Players:Load()
         type = "Player",
         hp = Game.PlayersHealth,
     }
-	self.P2.name = "Player 2"
     self.P2.x = 18
     self.P2.y = 0
     self.P2.curUnit = 1
@@ -384,8 +386,8 @@ function Players:SavePlayer( ply, name )
 	    love.filesystem.createDirectory( "users/" .. name )
 	end
 	
-	love.filesystem.write( "users/" .. name .. "/units.sav", table.show( ply.units, "_Units" ) ) -- save current units
-	love.filesystem.write( "users/" .. name .. "/lvl.sav", table.show( {lvl = ply.lvl, xp = ply.xp}, "_LVL" ) ) -- save current units
+	love.filesystem.write( "users/" .. name .. "/lvl.sav", table.show( {lvl = ply.lvl, xp = ply.xp}, "_LVL" ) ) -- save LVL
+	love.filesystem.write( "users/" .. name .. "/ply.sav", table.show( ply, "_Ply" ) ) -- save current units
 	
 	ply.name = name
 end
@@ -399,10 +401,11 @@ function Players:LoadPlayer( ply, name )
 	local dirName = love.filesystem.getInfo( "users/" .. name ) -- if no directory of his name then do nothing
 	if not dirName or not dirName.type == "directory" then return end
 	
-	local units = love.filesystem.read( "users/" .. name .. "/units.sav" ) -- load units
-	if units then 
-		loadstring( units )()
-		ply.units = _Units 
+	local _ply = love.filesystem.read( "users/" .. name .. "/ply.sav" ) -- load units
+	if _ply then 
+		loadstring( _ply )()
+		ply.units = _Ply.units
+		ply.PVElvl = _Ply.PVElvl
 		ply.name = name
 	end
 	

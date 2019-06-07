@@ -6,7 +6,7 @@ local timers = {}
 function TimerAdd(s, loop, func)
 	local timer = {s = s, startS = s, func = func, loop = loop}
 	table.insert(timers, timer)
-	print("TimerAdd() : New Timer with "..s.." seconds")
+	--print("TimerAdd() : New Timer with "..s.." seconds")
 	return timer
 end
 
@@ -14,7 +14,7 @@ function TimerRepeat(s, times, func)
 	times = times <= 0 and 0 or times
 	local timer = {s = s, startS = s, func = func, times = times, isRepeat = true}
 	table.insert(timers, timer)
-	print("TimerRepeat() : New Timer with "..s.." seconds")
+	--print("TimerRepeat() : New Timer with "..s.." seconds")
 	return timer
 end
 
@@ -23,7 +23,7 @@ function TimerDestroy(timer)
 	for k, v in pairs(timers) do
 		if timer == v then
 			table.remove(timers, k)
-			print("TimerDestroy() : Destroy Timer !")
+			--print("TimerDestroy() : Destroy Timer !")
 			break
 		end
 	end
@@ -141,15 +141,20 @@ function DestroyBase( ply )
 		maxX = 4
 		minY = 0
 		maxY = #Map.Maps[Map.CurrentMap]
-		if AI.isPlaying then Players:AddXP( Players.P1, AI.LVL * 25 ) end
+		if AI.isPlaying then Players:AddXP( Players.P1, AI.LVL * 50 ) end
 	else
 		minX = 18
 		maxX = #Map.Maps[Map.CurrentMap][1]
 		minY = 0
 		maxY = #Map.Maps[Map.CurrentMap]
 		if AI.isPlaying then
-			if Players.P1.PVElvl == AI.LVL then Players.P1.PVElvl = Players.P1.PVElvl + 1 end
-			Players:AddXP( Players.P1, AI.LVL * 50 ) 
+			print( Players.P1.PVElvl, AI.LVL, Players.P1.PVElvl == AI.LVL )
+			if Players.P1.PVElvl == AI.LVL then 
+				print( Players.P1.PVElvl )
+				Players.P1.PVElvl = Players.P1.PVElvl + 1 
+				print( Players.P1.PVElvl )
+			end
+			Players:AddXP( Players.P1, AI.LVL * 100 ) 
 		end
 	end
 	gameEnd = true
