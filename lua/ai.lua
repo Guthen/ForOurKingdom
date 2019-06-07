@@ -297,10 +297,10 @@ function AI:Update( dt )
 			
 			self.curCombo = math.random( #self.units[ "Combo" ] ) -- get one combo
 			
-			local gold = self:GetCurLVLVar.useGold or self:GetCurLVLVar.useGold == nil and 0 or 5
+			local gold = self:GetCurLVLVar().useGold or self:GetCurLVLVar().useGold == nil and 0 or 5
 			for k, v in pairs( self.units[ "Combo" ][ self.curCombo ] ) do -- get how many coins it should cost (€)
 				if not Units.units[v] then error( v .. " is not a valid unit !", 2 ) end
-				if self:GetCurLVLVar.useGold == true or self:GetCurLVLVar.useGold == nil then gold = gold + Units.units[ v ].cost end -- add gold per unit
+				if self:GetCurLVLVar().useGold == true or self:GetCurLVLVar().useGold == nil then gold = gold + Units.units[ v ].cost end -- add gold per unit
 			end
 			self.goldToCombo = gold
 
