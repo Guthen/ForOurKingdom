@@ -113,6 +113,7 @@ end
 --[[-------------------------------------------------------------------------
 	GAME CONTROL
 ---------------------------------------------------------------------------]]
+local gameEnd = false
 
 function Reset()
 	timers = {}
@@ -123,6 +124,8 @@ function Reset()
 	Players:Load()
 	
 	AI:Load()
+	
+	gameEnd = false
 
 	for _,v in pairs(Sound) do
 		if type(v) == "userdata" and v:isPlaying() then v:stop() end
@@ -131,18 +134,25 @@ end
 
 function DestroyBase( ply )
 	if not ply.info.type == "Player" then return end
+	if gameEnd then return end
 	local minX, minY, maxX, maxY
 	if ply == Players.P1 then
 		minX = 0
 		maxX = 4
 		minY = 0
 		maxY = #Map.Maps[Map.CurrentMap]
+		if AI.isPlaying then Players:AddXP( Players.P1, AI.LVL * 25 ) end
 	else
 		minX = 18
 		maxX = #Map.Maps[Map.CurrentMap][1]
 		minY = 0
 		maxY = #Map.Maps[Map.CurrentMap]
+		if AI.isPlaying then
+			if Players.P1.PVElvl == AI.LVL then Players.P1.PVElvl = Players.P1.PVElvl + 1 end
+			Players:AddXP( Players.P1, AI.LVL * 50 ) 
+		end
 	end
+	gameEnd = true
 	TimerAdd( .1, true, function()
 		NewFX( Image["fx_dust_explosion"], math.random( minX, maxX )*Game.ImageSize, math.random( minY, maxY )*Game.ImageSize, .5, .125 )
 	end)

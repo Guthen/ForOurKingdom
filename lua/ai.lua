@@ -127,7 +127,7 @@ function AI:Update( dt )
 						Units:Add( self.curUnit, _x, (y-1)*Game.ImageSize, Players.P2.scale )
 						
 						self.useUnit = false
-						TimerAdd( .05, false, function() self.useUnit = true end )
+						TimerAdd( .35, false, function() self.useUnit = true end )
 						
 						Players.P2.gold = Players.P2.gold - u.info.cost
 						

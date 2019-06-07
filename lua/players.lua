@@ -37,7 +37,7 @@ end
 
 function Players:GetNXP( ply )
 	if not ply then return end
-	ply.nxp = ply.lvl * 500
+	ply.nxp = ply.lvl > 0 and ply.lvl * 500 or 100
 end
 
 function Players:Load()
@@ -49,6 +49,7 @@ function Players:Load()
         hp = Game.PlayersHealth,
     }
 	self.P1.name = "Player 1"
+	self.P1.PVElvl = 1
     self.P1.x = 4
     self.P1.y = 0
     self.P1.curUnit = 1

@@ -103,17 +103,18 @@ function Menu:CreatePVESelection()
 		local level = UI:CreateButton( self.defX*.05 + x * 128, self.defY*.9 + y * 128, 1.4, 1.4 )
 		      level.img = Image[ "number_" .. tostring( i ) ]
 		      level.doClick = function( )
+					if Players.P1.PVElvl < i then return end
 			      	Game.MenuState = 0
 					Reset()
 					AI.isPlaying = true
 					AI:LoadUnits( i )
-					print(i)
 					Map:RandomCurMap()		
 					UI:ResetObject()
 		  	  end
+			  if Players.P1.PVElvl < i then level.color = { r = .3, g = .3, b = .3 } end
 		  	  level.lvl = i
 		  	  level.onDraw = function()
-		  	  		if level.lvl == 11 then 
+					if level.lvl == 11 then 
 		  	  			love.graphics.setColor( math.random(), math.random(), math.random() )
 		  	  		end
 		  	  end
@@ -224,25 +225,33 @@ function Menu:CreateInventory( ply )
 			Buts.inv[_id].quad = love.graphics.newQuad( 0, 0, 32, 32, v.img:getWidth(), v.img:getHeight() )
 		end
 		Buts.inv[_id].isUnit = true
+		
+		local secret, unknow
+		if v.secret then
+			secret = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 2, 2, Image[ "secret" ] )
+			Buts.inv[_id].color = { r = .2, g = .2, b = .2 }
+		elseif ( v.lvl or 10 ) > ply.lvl then
+			unknow = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 2, 2, Image[ "unknow" ] )
+			Buts.inv[_id].color = { r = .5, g = .5, b = .5 }
+		end
+		
 		Buts.inv[_id].doClick = function()
 			if #ply.units >= 7 or table.HasValue( ply.units, k ) then return end
+			if secret or unknow then return end
 			table.insert( ply.units, k )
 
 			Menu:CreateInventory( ply ) -- reload
 		end
 		Buts.inv[_id].doRightClick = function()
+			local show = secret or unknow
+			
 			unit = Units.units[k]
-			infoName.text = "Name: "..(unit.name or "N/A")
-			infoHP.text = "Health: "..(unit.hp or "N/A")
-			infoDmg.text = "Damage: "..(unit.dmg or "N/A")
-			infoCost.text = "Cost: "..(unit.cost or "N/A")
-			infoDesc.text = "Description: "..(unit.desc or "N/A")
-			infoLVL.text = "Level: "..(unit.lvl or 1)
-		end
-		
-		if ply.lvl < ( v.lvl or 10 ) then
-			local unknow = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 2, 2, Image[ "unknow" ] )
-			Buts.inv[_id].color = { r = .8, g = .8, b = .8 }
+			infoName.text = "Name: "..(not show and unit.name or "?")
+			infoHP.text = "Health: "..(not show and unit.hp or "?")
+			infoDmg.text = "Damage: "..(not show and unit.dmg or "?")
+			infoCost.text = "Cost: "..(not show and unit.cost or "?")
+			infoDesc.text = "Description: "..(not show and unit.desc or "?")
+			infoLVL.text = "Level: "..(not show and unit.lvl or "?")
 		end
 
 		_id = _id + 1
@@ -262,7 +271,7 @@ function Menu:CreateInventory( ply )
 	
 	local lvl = UI:CreateText(35, 60, 1.98, 1.98, "LVL: "..ply.lvl)	
 		lvl.color = { r = 0, g = 0, b = 0 }
-	local xp = UI:CreateText(150, 60, 1.98, 1.98, "XP: "..ply.xp)
+	local xp = UI:CreateText(130, 60, 1.98, 1.98, string.format( "XP: %s (%s)", ply.xp, tostring( math.floor( ply.xp/ply.nxp*100 ) .. "%" ) ))
 		xp.color = { r = 0, g = 0, b = 0 }
 	
 	-- text entry
