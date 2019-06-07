@@ -1,4 +1,4 @@
-return
+﻿return
 {
 	desc = "Attention à ne pas faire trop de \nbruit, une avalanche pourrait s'abattre sur vous !",
 	img = Image["snowslide"], -- son nom d'image (sans l'extension)
@@ -8,7 +8,8 @@ return
 	dmg = 500, -- ses points de dégats infligés
 	spd = 1.2, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0, -- en combien de secondes attaque t'il
-	cost = 60, -- combien l'unité coûte
+	cost = 25, -- combien l'unité coûte
+	lvl = 5,
 	isFly = true, -- s'il vole 
 	targetFly = true, -- s'il peut attaquer les unités volantes
 	targetGround = true, -- s'il peut attaquer les unités terrestres

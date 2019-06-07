@@ -28,24 +28,167 @@ function AI:Load()
 			},
 		[2] = 
 			{
-				["Little"] = { "Tinks", "greu", },
+				["Little"] = { "Tinks", },
 				["Fly"] = { "Ninou", "rockpose" },
-				["Attack"] = { "norber", "Arognite", },
-				["Spell"] = { "snowslide", },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
 				["Combo"] = 
 					{
 						{
-							"norber",
 							"Tinks",
 						},
 						{
-							"greu",
+						
 							"Ninou",
-							"snowslide",
+							"Bouble de feu",
 						},
 					}
 			},
-			[11] = 
+		[3] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[4] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[5] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[6] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[7] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[8] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[9] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[10] = 
+			{
+				["Little"] = { "Tinks", },
+				["Fly"] = { "Ninou", "rockpose" },
+				["Attack"] = { "Arognite", },
+				["Spell"] = { "Bouble de feu" },
+				["Combo"] = 
+					{
+						{
+							"Tinks",
+						},
+						{
+						
+							"Ninou",
+							"Bouble de feu",
+						},
+					}
+			},
+		[11] = 
 			{
 				["Little"] = { "Elementaire de Feu", "Bloby", },
 				["Fly"] = { "Dragon", "Elementaire de Vent" },
@@ -62,7 +205,8 @@ function AI:Load()
 							"Demonplante",
 							"Ascensorreur",
 						},
-					}
+					},
+				useGold = false,
 			},
 	}
 	self.LVL = 1
@@ -75,6 +219,10 @@ function AI:Load()
 	self:LoadUnits()
 	
 end	
+
+function AI:GetCurLVLVar()
+	return self.LVLUnits[self.LVL]
+end
 
 function AI:LoadUnits( lvl )
 	if lvl then self.LVL = lvl end
@@ -93,7 +241,7 @@ function AI:GetCurUnit( trg )
 	elseif not trg.info.isFly then
 		if trg.info.hp <= 250 then
 			unit = self.units[ "Little" ][ math.random( #self.units["Little"] ) ]
-		elseif trg.info.hp <= 2000 then
+		elseif trg.info.hp <= 200 then
 			unit = self.units[ "Attack" ][ math.random( #self.units["Attack"] ) ]
 		else
 			unit = self.units[ "Spell" ][ math.random( #self.units["Spell"] ) ]
@@ -149,11 +297,10 @@ function AI:Update( dt )
 			
 			self.curCombo = math.random( #self.units[ "Combo" ] ) -- get one combo
 			
-			local gold = 0
+			local gold = self:GetCurLVLVar.useGold or self:GetCurLVLVar.useGold == nil and 0 or 5
 			for k, v in pairs( self.units[ "Combo" ][ self.curCombo ] ) do -- get how many coins it should cost (€)
 				if not Units.units[v] then error( v .. " is not a valid unit !", 2 ) end
-				gold = gold + Units.units[ v ].cost -- add gold per unit
-
+				if self:GetCurLVLVar.useGold == true or self:GetCurLVLVar.useGold == nil then gold = gold + Units.units[ v ].cost end -- add gold per unit
 			end
 			self.goldToCombo = gold
 

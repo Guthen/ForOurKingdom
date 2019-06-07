@@ -1,4 +1,4 @@
-return
+﻿return
 {
 	desc = "Une Arognite est une aranéide \nmixtée avec une plante mortelle. Son venin \nacidigue se transmet dans le corps de l'ennemi\net le consumme, petit-à-petit.",
 	img = Image["Arognite"], -- son nom d'image (sans l'extension)
@@ -8,7 +8,8 @@ return
 	dmg = 75, -- ses points de dégats infligés
 	spd = 1., -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0.25, -- en combien de secondes attaque t'il
-	cost = 15, -- combien l'unité coûte
+	cost = 12, -- combien l'unité coûte
+	lvl = 2,
 	isFly = false, -- s'il vole 
 	targetFly = false, -- s'il peut attaquer les unités volantes
 	targetGround = true, -- s'il peut attaquer les unités terrestres
