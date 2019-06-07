@@ -167,7 +167,7 @@ function Units:Add(typeUnit, x, y, scale)
 		if self.info.fxOnDead == true then
 			NewFX( Image[self.info.fx or "fx_dust_explosion"], self.x, self.y, 0, .125 )
 		end
-		print( self.info.name .. " has been destroyed !" )
+		--print( self.info.name .. " has been destroyed !" )
 
 		if self.info.onDestroyed then
 			self.info.onDestroyed()
@@ -294,7 +294,7 @@ function Units:Update(dt)
 						v:StopMove()
 						v.target = e
 						v.attack = true
-						print(v.info.name .. " has " .. e.info.name .. " as target !")
+						--print(v.info.name .. " has " .. e.info.name .. " as target !")
 
 						if e and not v.hasTimerAttack then -- timer for attack
 							v:CreateTimerAttack()
