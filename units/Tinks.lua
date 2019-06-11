@@ -10,8 +10,8 @@ return
 	attackRate = .75,
 	cost = 10,
 	lvl = 2,
-	isFly = true,
-	targetFly = true,
+	isFly = false,
+	targetFly = false,
 	targetGround = true,
 	followTarget = true,
 }
