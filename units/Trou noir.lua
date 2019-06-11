@@ -1,6 +1,6 @@
 return
 {
-	desc = "A l'espace, si grand, si mysterieux,\n si puissant et destructeu.",
+	desc = "Ahh l'espace.. Si grand.. Si mysterieux.. Si puissant et destructeur.",
 	img = Image["Trou noir"], -- son nom d'image (sans l'extension)
 	name = "Trou Noir", -- son nom dans le jeu
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

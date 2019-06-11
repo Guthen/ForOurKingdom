@@ -1,6 +1,6 @@
 return
 {
-	desc = "D'où vient-il ? Qui est-il ? Personne \nne le sais. La seule chose dont nous sommes sûr à son \n sujet, est qu'il a une profonde haine envers les êtres \nvivants. Mais il est multicouleur, encore plus de \nquestions que de réponses.",
+	desc = "D'où vient-il ? Qui est-il ? Personne ne le sais. La seule chose dont nous sommes sûr à son sujet, c'est qu'il a une profonde haine envers les êtres \nvivants. Mais il est multicouleur, encore plus de questions que de réponses.",
 	img = Image["Rainbow Stickman"], -- son nom d'image (sans l'extension)
 	name = "Rainbow Stikman", -- son nom dans le jeu
 	rarety = 3, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

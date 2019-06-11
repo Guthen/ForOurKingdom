@@ -1,6 +1,6 @@
 ﻿return
 {
-	desc = "L'unité Goblattack de \n la Grande Armée Goblin est l'unité qui se bat \n au corps-à-corps avec leurs lances et leurs \n boucliers.",
+	desc = "L'unité Goblattack de la Grande Armée Goblin est l'unité qui se bat au corps-à-corps avec leurs lances et leurs boucliers.",
 	name = "Goblattack",
 	img = Image["Goblattack"],
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

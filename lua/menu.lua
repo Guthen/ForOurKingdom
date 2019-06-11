@@ -251,7 +251,7 @@ function Menu:CreateInventory( ply )
 			infoDmg.text = "Damage: "..(not show and unit.dmg or "?")
 			infoCost.text = "Cost: "..(not show and unit.cost or "?")
 			infoDesc.text = "Description: "..(not show and unit.desc or "?")
-			infoLVL.text = "Level: "..(not show and unit.lvl or "?")
+			infoLVL.text = "Level: ".. unit.lvl
 		end
 
 		_id = _id + 1
@@ -308,6 +308,7 @@ function Menu:CreateInventory( ply )
 	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+270, 1.98, 1.98, "")
 	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+300, 1.98, 1.98, "")
 	infoDesc = UI:CreateText(self.defX+155, self.defY-22.5+330, 1.98, 1.98, "")
+	infoDesc.limit = 210
 end
 
 function Menu:Key(k)

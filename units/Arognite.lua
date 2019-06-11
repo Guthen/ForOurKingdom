@@ -1,6 +1,6 @@
 ﻿return
 {
-	desc = "Une Arognite est une aranéide \nmixtée avec une plante mortelle. Son venin \nacidigue se transmet dans le corps de l'ennemi\net le consumme, petit-à-petit.",
+	desc = "Une Arognite est une aranéide mixtée avec une plante mortelle. Son venin acidigue se transmet dans le corps de l'ennemi et le consumme, petit-à-petit.",
 	img = Image["Arognite"], -- son nom d'image (sans l'extension)
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
 	name = "Arognite", -- son nom dans le jeu

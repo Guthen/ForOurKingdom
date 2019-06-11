@@ -1,6 +1,6 @@
 ﻿return
 {
-	desc = "Une plante qui vole, impossible et \n pourtant rockpose est-la ",
+	desc = "Une plante qui vole ? Impossible ! Et pourtant, Rockpose est-là !",
 	img = Image["Rockpose"],
 	name = "Rockpose",
 	rarety = 1, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique

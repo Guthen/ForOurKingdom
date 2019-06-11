@@ -1,6 +1,6 @@
 return 
 {
-	desc = "La reproduction d'une guepe et \n d'une mente vous donnera acoup sur un Thinks",
+	desc = "La reproduction d'une guêpe et d'une mente religieuse vous donnera à coup sûr, un Tinks.",
 	img = Image["Tinks"],
 	name = "Tinks",
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
