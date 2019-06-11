@@ -44,8 +44,14 @@ function love.load()
 
     Game.ShowFPS = false
 
-    love.window.setMode( Game.Width, Game.Height )
-    love.window.setTitle( Game.Title )
+	if not love.graphics.getWidth() == Game.Width or not love.graphics.getHeight() == Game.Height then
+		love.window.setMode( Game.Width, Game.Height )
+		print( ("Change window size to : %d/%d"):format( Game.Width, Game.Height ) )
+	end
+	if not love.window.getTitle() == Game.Title then
+		love.window.setTitle( Game.Title )
+		print( ("Change window title to : %s"):format( Game.Title ) )
+	end
 
     love.graphics.setDefaultFilter( "nearest" )
 
@@ -71,7 +77,7 @@ function love.load()
 
 	Menu:Create()
 
-	print( love.filesystem.getSaveDirectory() )
+	print( ( "Save directory located: %s" ):format( love.filesystem.getSaveDirectory() ) )
 end
 
 function love.update(dt)

@@ -280,14 +280,14 @@ function Menu:CreateInventory( ply )
 		  		print( userNameTE:GetText() ) -- print le texte écrit
 		  end
 		  
-	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 1.98, 1.98 )
+	local save = UI:CreateButton( self.defX+80, self.defY-22.5+350, 3, 3 )
 		  save.img = Image["save"]
 		  save.doClick = function()
 				Players:SavePlayer( ply, userNameTE:GetText() )
 		  end
 		  
-	local _load = UI:CreateButton( self.defX+80, self.defY-22.5+296, 1.98, 1.98 )
-		  _load.img = Image["save"]
+	local _load = UI:CreateButton( self.defX+80, self.defY-22.5+296, 3, 3 )
+		  _load.img = Image["load"]
 		  _load.doClick = function()
 				Players:LoadPlayer( ply, userNameTE:GetText() )
 				Menu:CreateInventory( ply )
