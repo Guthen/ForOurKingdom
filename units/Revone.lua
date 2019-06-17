@@ -1,9 +1,9 @@
 return
 {
 	desc = "",
-	img = Image["Revone"], -- son nom d'image (sans l'extension)
+	img = Image["Rivone"], -- son nom d'image (sans l'extension)
 	rarety = 0, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
-	name = "Revone", -- son nom dans le jeu
+	name = "Rivone", -- son nom dans le jeu
 	hp = 175, -- ses points de vie
 	dmg = 150, -- ses points de dégats infligés
 	spd = .75, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
