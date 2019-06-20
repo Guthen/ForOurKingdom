@@ -241,7 +241,7 @@ function AI:GetCurUnit( trg )
 	elseif not trg.info.isFly then
 		if trg.info.hp <= 250 then
 			unit = self.units[ "Little" ][ math.random( #self.units["Little"] ) ]
-		elseif trg.info.hp <= 200 then
+		elseif trg.info.hp <= 400 then
 			unit = self.units[ "Attack" ][ math.random( #self.units["Attack"] ) ]
 		else
 			unit = self.units[ "Spell" ][ math.random( #self.units["Spell"] ) ]
