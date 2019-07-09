@@ -41,7 +41,9 @@ function Menu:Create( resetX )
 
 	-- l'icône est ici pour être vu au premier-plan
 	local icon = UI:CreateImage( self.defX-140, self.defY-80, 3, 3, Image[ "Devoggs" ] )
-		  icon.isCenter = true
+		  icon.ox = 16
+		  icon.oy = 16
+		  icon.quad = love.graphics.newQuad( 0, 0, 32, 32, Image["Devoggs"]:getWidth(), Image["Devoggs"]:getHeight() )
 		  icon.onDraw = function( self ) 
 				self.ang = math.sin( love.timer.getTime() ) * .2
 		  end 
@@ -165,6 +167,8 @@ function Menu:CreateInventory( ply )
 	UI:ResetObject()
 
     local unit = Units.units["greu"]
+
+    local infoBackground, infoOutline
     local infoName
     local infoHP
     local infoDmg
@@ -245,6 +249,31 @@ function Menu:CreateInventory( ply )
 		Buts.inv[_id].doRightClick = function()
 			local show = secret or unknow
 			
+			infoOutline = UI:CreateImage( self.defX+144, self.defY-22.5+194, 13.4, 10.4 )
+				infoOutline.deleteOnRightClickRelease = true
+				infoOutline.img = Image["black"]
+
+			infoBackground = UI:CreateImage( self.defX+150, self.defY-22.5+200, 13, 10 )
+				infoBackground.deleteOnRightClickRelease = true
+				infoBackground.img = Image["blanc"]
+				infoBackground.onDraw = function()
+		     	  	love.graphics.setColor(.1, .1, .1)
+				end
+
+			infoLVL = UI:CreateText(self.defX+485, self.defY-22.5+210, 1.98, 1.98, "")
+				infoLVL.deleteOnRightClickRelease = true
+			infoName = UI:CreateText(self.defX+155, self.defY-22.5+210, 1.98, 1.98, "")
+				infoName.deleteOnRightClickRelease = true
+			infoHP = UI:CreateText(self.defX+155, self.defY-22.5+240, 1.98, 1.98, "")
+				infoHP.deleteOnRightClickRelease = true
+			infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+270, 1.98, 1.98, "")
+				infoDmg.deleteOnRightClickRelease = true
+			infoCost = UI:CreateText(self.defX+155, self.defY-22.5+300, 1.98, 1.98, "")
+				infoCost.deleteOnRightClickRelease = true
+			infoDesc = UI:CreateText(self.defX+155, self.defY-22.5+330, 1.98, 1.98, "")
+				infoDesc.deleteOnRightClickRelease = true
+			infoDesc.limit = 210
+
 			unit = Units.units[k]
 			infoName.text = "Name: "..(not show and unit.name or "?")
 			infoHP.text = "Health: "..(not show and unit.hp or "?")
@@ -291,24 +320,7 @@ function Menu:CreateInventory( ply )
 		  _load.doClick = function()
 				Players:LoadPlayer( ply, userNameTE:GetText() )
 				Menu:CreateInventory( ply )
-		  end
-		  
-	local info = UI:CreateImage( self.defX+144, self.defY-22.5+194, 13.4, 10.4 )
-		  info.img = Image["black"]
-
-	local info = UI:CreateImage( self.defX+150, self.defY-22.5+200, 13, 10 )
-		  info.img = Image["blanc"]
-		  info.onDraw = function()
-     	  	love.graphics.setColor(.1, .1, .1)
-		  end
-
-	infoLVL = UI:CreateText(self.defX+485, self.defY-22.5+210, 1.98, 1.98, "")
-	infoName = UI:CreateText(self.defX+155, self.defY-22.5+210, 1.98, 1.98, "")
-	infoHP = UI:CreateText(self.defX+155, self.defY-22.5+240, 1.98, 1.98, "")
-	infoDmg = UI:CreateText(self.defX+155, self.defY-22.5+270, 1.98, 1.98, "")
-	infoCost = UI:CreateText(self.defX+155, self.defY-22.5+300, 1.98, 1.98, "")
-	infoDesc = UI:CreateText(self.defX+155, self.defY-22.5+330, 1.98, 1.98, "")
-	infoDesc.limit = 210
+		  end	  
 end
 
 function Menu:Key(k)

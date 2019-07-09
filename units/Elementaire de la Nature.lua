@@ -3,7 +3,7 @@
 	desc = "",
 	img = Image["Elementaire de la Nature"], -- son nom d'image (sans l'extension)
 	rarety = 2, -- 0 : commun | 1 : rare | 2 : épique | 3 : mythique
-	name = "Ascensorreur", -- son nom dans le jeu
+	name = "Elementaire de la Nature", -- son nom dans le jeu
 	hp = 2500, -- ses points de vie
 	dmg = 500, -- ses points de dégats infligés
 	spd = 1., -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)

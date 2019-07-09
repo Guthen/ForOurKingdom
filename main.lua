@@ -65,13 +65,13 @@ function love.load()
     require( "lua/image" )
 
     RequireFolder("lua", nil, 
-    	{ -- no load them
+    	{ -- don't load them
     		["functions.lua"] = true, 
     		["image.lua"] = true,
     	})
     RequireFolder("libs", Libs)
 	
-	love.window.setIcon( love.image.newImageData( "images/units/Devoggs.png" ) ) -- set game icon
+	love.window.setIcon( love.image.newImageData( "images/ui/logo.png" ) ) -- set game icon
 
 	LoadPreferences()
 
@@ -159,6 +159,10 @@ end
 
 function love.mousepressed(x, y, but)
 	UI:OnClick(x, y, but)
+end
+
+function love.mousereleased( x, y, but )
+	UI:OnReleaseClick(x, y, but)
 end
 
 function love.wheelmoved(x, y)
