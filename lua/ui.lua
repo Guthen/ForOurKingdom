@@ -141,7 +141,7 @@ end
 function UI:ResetObject(id) 
 	if id then
 		for k, v in pairs( self.Objects ) do
-			if id and v.type == id then table.remove( self.Objects, k ) end
+			if v.type == id then table.remove( self.Objects, k ) end
 		end
 		return
 	end
@@ -151,13 +151,16 @@ end
 --	> Essential <  --
 
 function UI:Update(dt)
-	for _, v in pairs( self.Objects ) do
+	for k, v in pairs( self.Objects ) do
 		if v.type == "Button" then
 			if v.img then 
 				v.w = v.isUnit and 32*v.sx or v.img:getWidth()*v.sx 
 				v.h = v.isUnit and 32*v.sy or v.img:getHeight()*v.sy 
 			end
 			if v.onUpdate then v.onUpdate( v ) end
+		end
+		if v.deleteOnRightClickRelease then
+			if not love.mouse.isDown( 2 ) then table.remove( self.Objects, k ) end
 		end
 	end
 end
@@ -198,13 +201,29 @@ function UI:OnClick(x, y, clk)
 	end
 end
 
+function UI:OnReleaseClick( x, y, clk )
+-- 	for _, v in pairs( self.Objects ) do
+-- 		if v.doReleaseClick then
+-- 			if self.CanClick then
+-- 				if IsCollide( v.x, v.y, x, y, v.w, v.h, 1, 1 ) then
+-- 					v.doReleaseClick( v, clk )
+-- 					print( "click" )
+
+-- 					UI.CanClick = false
+-- 					TimerAdd( .2, false, function() self.CanClick = true end )
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+end
+
 function UI:Key( k )
 	for _, v in pairs( self.Objects ) do
 		if v.type == "TextEntry" then
 			if k == "return" then
 				v.canWrite = false
 				v.onEnter( v )
-			else
+			elseif v.canWrite then
 				if k == "space" then k = " " end
 				if string.find( k, "shift" ) then UI.TEUpper = true 
 				elseif string.find( k, "backspace" ) then v.text = string.RemoveLastChar( v.text ) 
@@ -224,8 +243,8 @@ function UI:Draw()
 			love.graphics.setColor( v.color.r or 1, v.color.g or 1, v.color.b or 1, v.color.a or .5 )
 			if v.onDraw then v.onDraw( v ) end
 			if v.img then
-				local ox = v.isCenter and v.img:getWidth()/2 or 0
-				local oy = v.isCenter and v.img:getHeight()/2 or 0
+				local ox = v.isCenter and v.img:getWidth()/2 or v.ox or 0
+				local oy = v.isCenter and v.img:getHeight()/2 or v.oy or 0
 				if v.quad then
 					love.graphics.draw( v.img, v.quad, v.x, v.y, v.ang or 0, v.sx, v.sy, ox, oy )
 				else
