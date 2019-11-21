@@ -28,14 +28,13 @@ function RequireFolder(folder, _table, noScripts)
 end
 
 function love.load()
-    io.stdout:setvbuf("no")
+    --io.stdout:setvbuf("no")
 
     Game = {}
-    Game.Width = 1280
-    Game.Height = 704
+    Game.Width = love.graphics.getWidth()
+    Game.Height = love.graphics.getHeight()
     Game.ImageSize = 64
 	Game.MenuState = 0
-    Game.Title = "ForOurKingdom"
 
     Game.PlayersHealth = 10000
     Game.GoldLimit = 75
@@ -44,14 +43,14 @@ function love.load()
 
     Game.ShowFPS = false
 
-	if not love.graphics.getWidth() == Game.Width or not love.graphics.getHeight() == Game.Height then
+	--[[if not love.graphics.getWidth() == Game.Width or not love.graphics.getHeight() == Game.Height then
 		love.window.setMode( Game.Width, Game.Height )
 		print( ("Change window size to : %d/%d"):format( Game.Width, Game.Height ) )
 	end
 	if not love.window.getTitle() == Game.Title then
 		love.window.setTitle( Game.Title )
 		print( ("Change window title to : %s"):format( Game.Title ) )
-	end
+	end--]]
 
     love.graphics.setDefaultFilter( "nearest" )
 
@@ -71,13 +70,13 @@ function love.load()
     	})
     RequireFolder("libs", Libs)
 	
-	love.window.setIcon( love.image.newImageData( "images/ui/logo.png" ) ) -- set game icon
+	--love.window.setIcon( love.image.newImageData( "images/ui/logo.png" ) ) -- set game icon
 
 	LoadPreferences()
 
 	Menu:Create()
 
-	print( ( "Save directory located: %s" ):format( love.filesystem.getSaveDirectory() ) )
+	--print( ( "Save directory located: %s" ):format( love.filesystem.getSaveDirectory() ) )
 end
 
 function love.update(dt)

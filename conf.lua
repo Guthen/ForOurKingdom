@@ -1,6 +1,7 @@
 
 function love.conf( t )
 	t.window.title = "ForOurKingdom"
+	t.window.icon = "images/units/Devoggs.png"
 	t.window.width = 1280
 	t.window.height = 704
 	
