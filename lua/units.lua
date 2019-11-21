@@ -75,7 +75,20 @@ function Units:Add(typeUnit, x, y, scale)
 	local unit = self.units[typeUnit]
 	local u = 
 	{
-		info = 
+		x = x, 
+		y = y, 
+		w = Game.ImageSize, 
+		h = Game.ImageSize, 
+		scale = scale, 
+		canMove = true,
+		attack = false,
+		hasTimerAttack = false,
+		anim = NewAnim( unit.img, 32, 32, unit.animSpd ),
+		colx = (unit.range or 0)*Game.ImageSize*scale,
+		canChangeToDeadImg = true,
+	}
+	function u:getInfo()
+		self.info =
 		{
 			img = unit.img,
 			name = unit.name,
@@ -107,53 +120,10 @@ function Units:Add(typeUnit, x, y, scale)
 			soundOnSpawn = unit.soundOnSpawn,
 			soundOnDead = unit.soundOnDead,
 			soundOnAttack = unit.soundOnAttack,
-		},
-		x = x, 
-		y = y, 
-		w = Game.ImageSize, 
-		h = Game.ImageSize, 
-		scale = scale, 
-		canMove = true,
-		attack = false,
-		hasTimerAttack = false,
-		anim = NewAnim( unit.img, 32, 32, unit.animSpd ),
-		colx = (unit.range or 0)*Game.ImageSize*scale,
-		canChangeToDeadImg = true,
-	}
-	function u:getInfo()
-		self.info =
-		{
-			img = unit.img,
-			name = unit.name,
-			hp = unit.hp,
-			dmg = unit.dmg,
-			spd = unit.spd,
-			dSpd = unit.spd,
-			attackRate = unit.attackRate,
-			cost = unit.cost,
-			isFly = unit.isFly,
-			targetFly = unit.targetFly,
-			targetGround = unit.targetGround,
-			followTarget = unit.followTarget,
-			attackBase = unit.attackBase,
-			canBeTarget = unit.canBeTarget,
-			animSpd = unit.animSpd,
-			animActive = unit.animActive,
-			range = unit.range,
-			onSpawn = unit.onSpawn,
-			onDestroyed = unit.onDestroyed,
-			onEnemyKilled = unit.onEnemyKilled,
-			onEnemyAttack = unit.onEnemyAttack,
-			dieToFirstKill = unit.dieToFirstKill,
-			beforeDraw = unit.beforeDraw,
-			spawnAtCursor = unit.spawnAtCursor,
-			fx = unit.fx,
-			lvl = unit.lvl,
-			soundOnSpawn = unit.soundOnSpawn,
-			soundOnDead = unit.soundOnDead,
-			soundOnAttack = unit.soundOnAttack,
 		}
 	end
+	u:getInfo()
+	
 	if u.info.attackBase == nil then u.info.attackBase = true end
 	if u.info.fxOnDead == nil then u.info.fxOnDead = true end
 	if u.info.canBeTarget == nil then u.info.canBeTarget = true end
@@ -207,7 +177,7 @@ function Units:Add(typeUnit, x, y, scale)
 						self.hasTimerAttack = false
 						self:StartMove()
 						if self.info.onEnemyKilled then
-							self.info.onEnemyKilled()
+							self.info.onEnemyKilled( self )
 							self:getInfo()
 						end
 						if self.info.dieToFirstKill then

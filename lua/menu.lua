@@ -209,6 +209,7 @@ function Menu:CreateInventory( ply )
 
 			Menu:CreateInventory( ply ) -- reload
 		end
+		if Units.units[v].beforeDraw then Buts.units[_id].onDraw = Units.units[v].beforeDraw end
 
 		_x = _x + 1
 		_id = _id + 1
@@ -237,6 +238,8 @@ function Menu:CreateInventory( ply )
 		elseif ( v.lvl or 10 ) > ply.lvl then
 			unknow = UI:CreateImage( self.defX*.35+76*_x-2+_offX, self.defY*.5+76*_y-2+_offY, 2, 2, Image[ "unknow" ] )
 			Buts.inv[_id].color = { r = .5, g = .5, b = .5 }
+		else
+			if v.beforeDraw then Buts.inv[_id].onDraw = v.beforeDraw end
 		end
 		
 		Buts.inv[_id].doClick = function()

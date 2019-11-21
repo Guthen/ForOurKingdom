@@ -8,7 +8,7 @@
 	lvl = 1,
 	fx = "fx_fire_explosion",
 	hp = 10, -- ses points de vie
-	dmg = 1000, -- ses points de dégats infligés
+	dmg = 550, -- ses points de dégats infligés
 	spd = 8, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 0, -- en combien de secondes attaque t'il
 	cost = 15, -- combien l'unité coûte

@@ -18,4 +18,12 @@
 	canBeTarget = false, -- s'il peut être pris pour cible (optionnel)
 	spawnAtCursor = false, -- s'il spawn à l'emplacement du curseur
 	animSpd = .15, -- temps en secondes avant de changer de passer à la prochaine image si vous avez une animation (optionnel)
+	onEnemyKilled = function( self )
+		if not self.kills then self.kills = 0 end
+		self.kills = self.kills + 1
+		
+		if self.kills > 3 then
+			self:Destroy()
+		end	
+	end,
 }

@@ -7,7 +7,7 @@ return
 	hp = 500, -- ses points de vie
 	dmg = 400, -- ses points de dégats infligés
 	spd = .75, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
-	attackRate = .50, -- en combien de secondes attaque t'il
+	attackRate = 1.5, -- en combien de secondes attaque t'il
 	cost = 20, -- combien l'unité coûte
 	lvl = 4,
 	isFly = false, -- s'il vole 

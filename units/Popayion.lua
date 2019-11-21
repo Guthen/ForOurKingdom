@@ -6,7 +6,7 @@ return
 	name = "Popayion", -- son nom dans le jeu
 	hp = 175, -- ses points de vie
 	dmg = 100, -- ses points de dégats infligés
-	spd = .50, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
+	spd = .9, -- sa vitesse (1 = normal, inférieur à 1 = lent, supérieur à 1 = rapide)
 	attackRate = 1, -- en combien de secondes attaque t'il
 	cost = 10, -- combien l'unité coûte
 	lvl = 2,
