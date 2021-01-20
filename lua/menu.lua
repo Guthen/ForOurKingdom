@@ -25,7 +25,7 @@ function Menu:Create( resetX )
 
 	Game.MenuState = 1
 	
-	local title = UI:CreateText( self.defX-90, self.defY-100, 2.5, 2.5, Game.Title )
+	local title = UI:CreateText( self.defX-90, self.defY-100, 2.5, 2.5, love.window.getTitle() )
 	local P1control = UI:CreateImage( self.defX*.02, self.defY*2.4, 2, 2, Image[ "P1control" ] )
 	local P2control = UI:CreateImage( self.defX*1.6, self.defY*2.4, 2, 2, Image[ "P2control" ] )
 

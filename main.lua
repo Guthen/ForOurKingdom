@@ -56,7 +56,7 @@ function love.load()
 
     Libs = {}
 
-    love.graphics.setFont( love.graphics.newFont("fonts/blacc.TTF") )
+    love.graphics.setFont( love.graphics.newFont("fonts/blacc.TTF", 14) )
 
     math.randomseed( os.time() )
 
